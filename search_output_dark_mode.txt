@@ -1,0 +1,28 @@
+124:     document.body.classList.add('dark-mode');
+133:             hamburger.classList.toggle('active');
+134:             navMenu.classList.toggle('active');
+140:             if (hamburger) hamburger.classList.remove('active');
+141:             if (navMenu) navMenu.classList.remove('active');
+144:             navLinks.forEach(l => l.classList.remove('active'));
+145:             link.classList.add('active');
+154:                 navbar.classList.add('scrolled');
+156:                 navbar.classList.remove('scrolled');
+246:         cards.forEach(c => c.classList.remove('active'));
+247:         cards[index].classList.add('active');
+352:             <div class="card-body">
+372:             document.querySelectorAll('.menu-card').forEach(c => c.classList.remove('active'));
+373:             card.classList.add('active');
+443:             if (sliderViewport) sliderViewport.classList.remove('grid-layout');
+444:             if (sliderWrapper) sliderWrapper.classList.remove('grid-active');
+449:             if (sliderViewport) sliderViewport.classList.add('grid-layout');
+450:             if (sliderWrapper) sliderWrapper.classList.add('grid-active');
+487:             if (sliderViewport) sliderViewport.classList.remove('grid-layout');
+488:             if (sliderWrapper) sliderWrapper.classList.remove('grid-active');
+542:                 categoryTabBtns.forEach(b => b.classList.remove('active'));
+543:                 btn.classList.add('active');
+586:                 lightboxModal.classList.add('open');
+587:                 document.body.style.overflow = 'hidden';
+593:                 lightboxModal.classList.remove('open');
+594:                 document.body.style.overflow = 'auto';
+600:                 lightboxModal.classList.remove('open');
+601:                 document.body.style.overflow = 'auto';

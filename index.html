@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Lab | Sip of Pure Vitality</title>
+    <meta name="description" content="Welcome to Fruit Lab. Re-vitalize, energize, and harmonize with our premium, 100% cold pressed juices, smoothies, and oat bowls. No added sugar.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=70">
+</head>
+<body class="home-page">
+
+    <!-- Premium Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="logo-img">
+            </a>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="index.html#menu-section" class="nav-link ">Menu</a></li>
+                <li class="nav-item"><a href="subscriptions.html" class="nav-link ">Subscriptions</a></li>
+                <li class="nav-item dropdown">
+                    <a href="about.html" class="nav-link dropdown-toggle ">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="franchises.html" class="dropdown-link"><i class="fa-solid fa-store dropdown-link-icon"></i> Franchises</a></li>
+                        <li><a href="contact.html" class="dropdown-link"><i class="fa-solid fa-paper-plane dropdown-link-icon"></i> Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search Fruit Lab...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <button class="nav-cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">2</span>
+                </button>
+                <a href="login.html" class="nav-link " id="nav-auth-link">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Main Focus) -->
+    <header class="hero-section" id="home">
+        <!-- Dynamic Dithered Gradient Background Canvas -->
+        <canvas id="hero-gradient-canvas"></canvas>
+
+        <div class="hero-container">
+            <div class="hero-text-content">
+                <div class="hero-rating animate-text">
+                    <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                    <span class="rating-text">100+ 5-Star Reviews | 100% Raw Vitality</span>
+                </div>
+                <h1 class="hero-title animate-text">
+                    Sip of Happy Delights
+                </h1>
+                <div class="hero-subtitle-tag animate-text">Revitalize. Energize. Harmonize.</div>
+                <p class="hero-desc animate-text">
+                    Cold-pressed wellness that blends effortlessly into your life. No added sugar. 100% raw vitality.
+                </p>
+                <div class="hero-cta animate-text">
+                    <a href="#menu-section" class="btn btn-noka magnetic" id="no-sugar-btn">No Sugar</a>
+                    <a href="#menu-section" class="btn btn-transparent-highlight magnetic" id="cold-pressed-btn">100% Cold Pressed</a>
+                </div>
+            </div>
+
+            <!-- Dynamic Hero Bottle & Particle System (Noka style dual bottle + fruits) -->
+            <div class="hero-visual" id="hero-visual">
+                <div class="visual-particles-container" id="visual-particles">
+                    <!-- Spawns via JS: fruit slices, leaves, splashes, bubbles -->
+                </div>
+
+                <!-- Trio Bottle Wrapper -->
+                <div class="dual-product-wrapper" id="dual-product-wrapper">
+                    <div class="bottle-container bottle-left-container" id="bottle-left-wrap">
+                        <img src="assets/orange_bottle_transparent.png?v=70" alt="Fruit Lab Orange Bottle" class="hero-product-img bottle-left" id="hero-bottle-left">
+                        <div class="product-shadow shadow-left"></div>
+                    </div>
+                    <div class="bottle-container bottle-right-container" id="bottle-right-wrap">
+                        <img src="assets/yellow_bottle_transparent.png?v=70" alt="Fruit Lab Yellow Bottle" class="hero-product-img bottle-right" id="hero-bottle-right">
+                        <div class="product-shadow shadow-right"></div>
+                    </div>
+                    <div class="bottle-container bottle-center-container" id="bottle-center-wrap">
+                        <img src="assets/red_bottle_transparent.png?v=70" alt="Fruit Lab Red Bottle" class="hero-product-img bottle-center" id="hero-bottle-center">
+                        <div class="product-shadow shadow-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span>Scroll to Explore</span>
+            <div class="mouse-icon">
+                <div class="wheel"></div>
+            </div>
+        </div>
+
+        <!-- Ambient Floating Blur Overlays (Removed to prevent duplication) -->
+        <!-- <div class="floating-blurred-fruit" id="blurred-strawberry"></div> -->
+
+        <!-- Static Layered Fruits - 10 unique ingredients, no repeats -->
+        <div class="floating-fruit-layer" id="hero-floating-fruits">
+            <!-- Right Side -->
+            <div class="fruit-layer-item fl-1" data-depth="0.3"></div><!-- nuts -->
+            <div class="fruit-layer-item fl-3" data-depth="0.2"></div><!-- mango -->
+            <div class="fruit-layer-item fl-4" data-depth="0.8"></div><!-- coffee -->
+            <div class="fruit-layer-item fl-10" data-depth="0.5"></div><!-- blueberry -->
+            <div class="fruit-layer-item fl-11" data-depth="0.3"></div><!-- beetroot -->
+            <!-- Left Side -->
+            <div class="fruit-layer-item fl-5" data-depth="0.4"></div><!-- banana -->
+            <div class="fruit-layer-item fl-6" data-depth="0.5"></div><!-- strawberry -->
+            <div class="fruit-layer-item fl-2" data-depth="0.6"></div><!-- cherry -->
+            <div class="fruit-layer-item fl-12" data-depth="0.7"></div><!-- pistachio -->
+            
+            <!-- 3 New Fruit Assets -->
+            <div class="fruit-layer-item fl-7" data-depth="0.3"></div><!-- coconut -->
+            <div class="fruit-layer-item fl-8" data-depth="0.5"></div><!-- pineapple -->
+            <div class="fruit-layer-item fl-9" data-depth="0.4"></div><!-- watermelon -->
+
+        </div>
+    </header>
+
+    <!-- Menu Section (Directly Below Hero) -->
+    <section class="menu-section-container" id="menu-section">
+        <!-- Floating Reels (Tilted and floating like hero fruits) -->
+        <div class="floating-reel-container left-float-reel-container">
+            <div class="reel-card" data-video="assets/Video-700.mp4" data-caption="Fruit Lab">
+                <div class="reel-video-wrapper">
+                    <video src="assets/Video-700.mp4" loop muted playsinline autoplay preload="auto"></video>
+                    <div class="play-overlay">
+                        <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                </div>
+                <div class="reel-card-caption">Fruit Lab</div>
+            </div>
+        </div>
+
+        <div class="floating-reel-container right-float-reel-container">
+            <div class="reel-card" data-video="assets/Video-789.mp4" data-caption="Fruit Lab">
+                <div class="reel-video-wrapper">
+                    <video src="assets/Video-789.mp4" loop muted playsinline autoplay preload="auto"></video>
+                    <div class="play-overlay">
+                        <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                </div>
+                <div class="reel-card-caption">Fruit Lab</div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Crafted Beverages</span>
+                <h2 class="section-title">Our Featured Menu</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- Category Navigation Bar -->
+            <div class="category-navigation-bar">
+                <button class="category-tab-btn active" data-category="juices-smoothies">Juices & Smoothies</button>
+                <button class="category-tab-btn" data-category="dear-self">Dear Self (Detox)</button>
+                <button class="category-tab-btn" data-category="bowls-puddings">Bowls & Puddings</button>
+                <button class="category-tab-btn" data-category="healthy-bites">Healthy Bites</button>
+            </div>
+
+            <!-- Menu Search Bar -->
+            <div class="menu-section-search">
+                <div class="menu-search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="menu-search-input" placeholder="Search juices, smoothies, ingredients...">
+                </div>
+                <!-- View Original Menu Card Button -->
+                <button class="view-board-btn-inline" id="open-board-btn">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Original Menu Cards</span>
+                </button>
+            </div>
+
+            <!-- Featured Slider (Dynamic Menu Carousel) -->
+            <div class="featured-slider-wrapper">
+                <button class="slider-btn prev-btn" id="slider-prev"><i class="fa-solid fa-arrow-left"></i></button>
+
+                <div class="slider-viewport" id="slider-viewport">
+                    <div class="slider-track" id="slider-track">
+                        <!-- Cards are dynamically spawned by script.js?v=70 -->
+                    </div>
+                </div>
+
+                <button class="slider-btn next-btn" id="slider-next"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Subscriptions Spotlight Banner -->
+    <section class="subs-spotlight-banner" id="subscription-cta">
+        <div class="container">
+            <div class="subs-spotlight-inner">
+                <div class="subs-spotlight-left">
+                    <span class="subs-spotlight-eyebrow"><i class="fa-solid fa-repeat"></i> Subscribe & Save</span>
+                    <h2 class="subs-spotlight-title">Get Fresh Juices &amp; Bowls<br>Delivered Every Day</h2>
+                    <p class="subs-spotlight-desc">Save 10% on every order. Cancel anytime with 24-hour notice. No hidden fees.</p>
+                    <div class="subs-spotlight-perks">
+                        <span><i class="fa-solid fa-check-circle"></i> 24 or 48 pack plans</span>
+                        <span><i class="fa-solid fa-check-circle"></i> Free delivery</span>
+                        <span><i class="fa-solid fa-check-circle"></i> Pause anytime</span>
+                    </div>
+                    <a href="subscriptions.html" class="subs-spotlight-btn">View Subscription Plans <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="subs-spotlight-right">
+                    <div class="subs-badge-ring">
+                        <div class="subs-badge-inner">
+                            <span class="subs-badge-pct">10%</span>
+                            <span class="subs-badge-label">OFF every order</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Original Menu Image Lightbox Modal -->
+
+    <div class="lightbox-modal" id="lightbox-modal">
+        <div class="lightbox-close" id="lightbox-close"><i class="fa-solid fa-xmark"></i></div>
+        <div class="lightbox-content">
+            <img src="assets/menu_1.png" alt="Menu Board Image" class="lightbox-img" id="lightbox-img">
+            <div class="lightbox-caption">Original Fruit Lab Menu Board</div>
+        </div>
+    </div>
+
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                                <!-- Col 1: About -->
+                <div class="footer-col footer-about">
+                    <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="footer-logo">
+                    <p class="footer-desc">Crafting the science of pure vitality. We serve 100% cold-pressed raw juices, active smoothies, and clean wellness bowls with zero sugar, zero additives, and maximum nutrients.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-partners">
+                        <h4 class="partner-title">Order & Dine</h4>
+                        <div class="partner-grid">
+                            <a href="https://www.swiggy.com/city/hyderabad/fruit-lab-manikonda-rest879626" target="_blank" rel="noopener noreferrer" class="partner-link swiggy-partner">Swiggy</a>
+                            <a href="http://zoma.to/r/21187495" target="_blank" rel="noopener noreferrer" class="partner-link zomato-partner">Zomato</a>
+                            <a href="https://www.district.in/dining/hyderabad/fruit-lab-narsingi" target="_blank" rel="noopener noreferrer" class="partner-link district-partner">District</a>
+                            <a href="https://magicpin.in/Hyderabad/Puppalaguda/Restaurant/Fruit-Lab/store/1685699?srsltid=AfmBOoqYAHvDbG200MtRlV8aRiWFD3CBIN0pWFLi0cCI0IJhMi8UE6sz" target="_blank" rel="noopener noreferrer" class="partner-link magicpin-partner">Magicpin</a>
+                        </div>
+                    </div>
+                </div>
+<!-- Col 2: Quick Links -->
+                <div class="footer-col footer-links-col">
+                    <h3 class="footer-title">Explore</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu-board">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="franchises.html">Franchises</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Contact & Details -->
+                <div class="footer-col footer-contact">
+                    <h3 class="footer-title">Visit The Lab</h3>
+                    <div class="footer-contact-info">
+                        <p><i class="fa-solid fa-location-dot"></i> <span>Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, Telangana 500089</span></p>
+                        <p><i class="fa-solid fa-phone"></i> <span>+91 98859 91989</span></p>
+                        <p><i class="fa-solid fa-envelope"></i> <span>contact@fruitlab.com</span></p>
+                        <p><i class="fa-solid fa-clock"></i> <span>Mon - Sun: 8:00 AM - 10:00 PM</span></p>
+                    </div>
+                </div>
+                <!-- Col 4: Map -->
+                <div class="footer-col footer-map">
+                    <h3 class="footer-title">Our Location</h3>
+                    <div class="footer-map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Fruit Lab Location Map">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fruit Lab India. All rights reserved. | Re-vitalize. Energize. Harmonize.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Instagram Reels Lightbox Modal -->
+    <div class="reels-modal" id="reels-modal">
+        <div class="reels-modal-close" id="reels-modal-close"><i class="fa-solid fa-xmark"></i></div>
+        <div class="reels-modal-container">
+            <div class="reels-modal-video-pane">
+                <video id="reels-modal-video" loop controls autoplay muted></video>
+            </div>
+            <div class="reels-modal-details-pane">
+                <div class="reels-user-header">
+                    <img src="assets/new_logo_1.png" alt="Fruit Lab Profile" class="reels-avatar">
+                    <div class="reels-user-info">
+                        <div class="reels-username">fruitlab_hyd</div>
+                        <div class="reels-location">Manikonda, Hyderabad</div>
+                    </div>
+                    <button class="reels-follow-btn">Follow</button>
+                </div>
+                <div class="reels-caption-section">
+                    <p><strong>fruitlab_hyd</strong> <span id="reels-modal-caption-text"></span></p>
+                    <p class="reels-hashtags">#fruitlab #coldpressed #healthy #hyderabad #organic #juice #vitality</p>
+                </div>
+                <div class="reels-comments-list" id="reels-comments-list">
+                    <!-- Dynamic comments populated by JS -->
+                </div>
+                <div class="reels-action-bar">
+                    <div class="reels-actions-icons">
+                        <button class="reels-action-icon-btn" id="reels-like-btn">
+                            <i class="fa-regular fa-heart" id="reels-like-icon"></i>
+                        </button>
+                        <button class="reels-action-icon-btn"><i class="fa-regular fa-comment"></i></button>
+                        <button class="reels-action-icon-btn"><i class="fa-regular fa-paper-plane"></i></button>
+                    </div>
+                    <div class="reels-likes-count"><span id="reels-likes-count-num">124</span> likes</div>
+                    <div class="reels-time">July 6, 2026</div>
+                </div>
+                <div class="reels-comment-input-bar">
+                    <input type="text" id="reels-comment-input" placeholder="Add a comment...">
+                    <button id="reels-comment-post-btn">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP Libraries (Local) -->
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <!-- Main JS Code -->
+    <script src="script.js?v=70"></script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franchises | Fruit Lab</title>
+    <meta name="description" content="Partner with Fruit Lab. Bring the premium cold-pressed juice experience to your city with our proven business model.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=70">
+    <style>
+        .franchise-page-hero {
+            padding: 160px 0 100px 0;
+            background-color: var(--color-bg-dark);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .franchise-page-hero .section-title {
+            color: #fff;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .franchise-page-hero .fran-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(246, 195, 0, 0.12) 0%, rgba(0,0,0,0) 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .franchise-page-content {
+            padding: 80px 0;
+            background-color: var(--color-bg-dark);
+        }
+        .why-partner-section {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+        .why-partner-text h3 {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+        .why-partner-text p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        .partner-visuals {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .partner-visuals .glow-bg {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 79, 121, 0.15) 0%, rgba(0,0,0,0) 75%);
+            filter: blur(20px);
+        }
+        .partner-visuals img {
+            height: 380px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+            animation: floatPartner 5s ease-in-out infinite;
+            z-index: 2;
+        }
+        @keyframes floatPartner {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(-2deg); }
+        }
+        .benefits-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 100px;
+        }
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            backdrop-filter: var(--glass-blur);
+        }
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            border-color: #f6c300;
+            box-shadow: 0 15px 30px rgba(246, 195, 0, 0.05);
+        }
+        .benefit-card .icon {
+            font-size: 36px;
+            color: #f6c300;
+            margin-bottom: 24px;
+        }
+        .benefit-card h4 {
+            font-size: 20px;
+            color: #fff;
+            font-family: var(--font-sans);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .benefit-card p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        .roi-calculator-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 32px;
+            padding: 48px;
+            text-align: center;
+        }
+        .roi-calculator-box h3 {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .roi-calculator-box p {
+            font-size: 16px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 32px auto;
+        }
+        .roi-calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .calc-group label {
+            color: #ccc;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .calc-input-wrapper {
+            position: relative;
+        }
+        .calc-input-wrapper input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+        }
+        .calc-result {
+            background: rgba(246, 195, 0, 0.05);
+            border: 1px dashed rgba(246, 195, 0, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .calc-val {
+            font-size: 36px;
+            font-weight: 800;
+            color: #f6c300;
+        }
+        .calc-lbl {
+            font-size: 14px;
+            color: #aaa;
+        }
+        @media (max-width: 991px) {
+            .why-partner-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .partner-visuals {
+                order: -1;
+            }
+            .benefits-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .roi-calculator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 576px) {
+            .benefits-cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <!-- Premium Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="index.html#menu-section" class="nav-link ">Menu</a></li>
+                <li class="nav-item"><a href="subscriptions.html" class="nav-link ">Subscriptions</a></li>
+                <li class="nav-item dropdown">
+                    <a href="about.html" class="nav-link dropdown-toggle active">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="franchises.html" class="dropdown-link active"><i class="fa-solid fa-store dropdown-link-icon"></i> Franchises</a></li>
+                        <li><a href="contact.html" class="dropdown-link"><i class="fa-solid fa-paper-plane dropdown-link-icon"></i> Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">2</span>
+                </button>
+                <a href="login.html" class="nav-link " id="nav-auth-link">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="franchise-page-hero">
+        <div class="fran-glow"></div>
+        <div class="container">
+            <span class="section-subtitle">Partner Opportunities</span>
+            <h1 class="section-title">Franchise Program</h1>
+            <div class="section-divider"></div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="franchise-page-content">
+        <div class="container">
+            
+            <!-- Why Partner -->
+            <section class="why-partner-section">
+                <div class="why-partner-text">
+                    <h3>Bring Vitality to Your City</h3>
+                    <p>
+                        The premium retail wellness market is expanding rapidly. Modern urban populations are actively seeking nutrient-dense, clean biological refreshments. Fruit Lab provides the ultimate cold-pressed concept to fill this demand.
+                    </p>
+                    <p>
+                        As a franchise partner, you will receive our full biotech manufacturing standards, raw fruit supply connections, and premium storefront configurations to establish immediate luxury market dominance.
+                    </p>
+                    <a href="contact.html" class="btn btn-primary magnetic" style="margin-top: 20px;">Contact Franchise Team</a>
+                </div>
+                <div class="partner-visuals">
+                    <div class="glow-bg"></div>
+                    <img src="assets/yellow_bottle_transparent.png" alt="Fruit Lab Yellow Bottle">
+                </div>
+            </section>
+
+            <!-- Benefits -->
+            <section style="margin-bottom: 100px;">
+                <div class="section-header">
+                    <span class="section-subtitle">Franchise Owner Benefits</span>
+                    <h2 class="section-title" style="color: #fff;">Why Own a Fruit Lab?</h2>
+                    <div class="section-divider"></div>
+                    <p style="font-size: 16px; color: #ccc; max-width: 800px; margin: 20px auto 0 auto; text-align: center; line-height: 1.8;">
+                        Partnering with Fruit Lab means more than owning a business—you gain a complete support system that allows you to focus on growing your outlet while we take care of the essentials.
+                    </p>
+                </div>
+
+                <div class="benefits-cards-grid">
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fa-solid fa-apple-whole"></i></div>
+                        <h4>Fresh Fruit Supply</h4>
+                        <p>We source and deliver premium-quality fruits directly from our trusted farmer network, so you never have to worry about finding reliable suppliers.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <h4>Staff Recruitment Support</h4>
+                        <p>Need skilled staff? Our team will help you recruit and onboard trained employees for your Fruit Lab outlet.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h4>Complete Equipment Setup</h4>
+                        <p>All essential equipment required to operate a Fruit Lab store will be provided and installed according to our brand standards.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fa-solid fa-store"></i></div>
+                        <h4>Premium Store Design & Interior</h4>
+                        <p>From layout planning to interior design, we provide a professionally designed store concept that reflects the Fruit Lab brand identity.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive ROI calc -->
+            <section class="roi-calculator-box">
+                <h3>ROI Estimator</h3>
+                <p>Calculate your estimated monthly revenues based on your target daily bottle sales volumes.</p>
+                
+                <div class="roi-calculator-container">
+                    <div class="calc-group">
+                        <label for="bottle-sales">Target Daily Bottle Sales</label>
+                        <div class="calc-input-wrapper">
+                            <input type="number" id="bottle-sales" value="150" min="50" max="1000">
+                        </div>
+                        <label for="avg-price">Average Price per Bottle</label>
+                        <div class="calc-input-wrapper">
+                            <input type="number" id="avg-price" value="159" min="50" max="300">
+                        </div>
+                    </div>
+                    <div class="calc-result">
+                        <div class="calc-val" id="monthly-revenue">₹7,15,500</div>
+                        <div class="calc-lbl">Estimated Monthly Revenue</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                                <!-- Col 1: About -->
+                <div class="footer-col footer-about">
+                    <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="footer-logo">
+                    <p class="footer-desc">Crafting the science of pure vitality. We serve 100% cold-pressed raw juices, active smoothies, and clean wellness bowls with zero sugar, zero additives, and maximum nutrients.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-partners">
+                        <h4 class="partner-title">Order & Dine</h4>
+                        <div class="partner-grid">
+                            <a href="https://www.swiggy.com/city/hyderabad/fruit-lab-manikonda-rest879626" target="_blank" rel="noopener noreferrer" class="partner-link swiggy-partner">Swiggy</a>
+                            <a href="http://zoma.to/r/21187495" target="_blank" rel="noopener noreferrer" class="partner-link zomato-partner">Zomato</a>
+                            <a href="https://www.district.in/dining/hyderabad/fruit-lab-narsingi" target="_blank" rel="noopener noreferrer" class="partner-link district-partner">District</a>
+                            <a href="https://magicpin.in/Hyderabad/Puppalaguda/Restaurant/Fruit-Lab/store/1685699?srsltid=AfmBOoqYAHvDbG200MtRlV8aRiWFD3CBIN0pWFLi0cCI0IJhMi8UE6sz" target="_blank" rel="noopener noreferrer" class="partner-link magicpin-partner">Magicpin</a>
+                        </div>
+                    </div>
+                </div>
+<!-- Col 2: Quick Links -->
+                <div class="footer-col footer-links-col">
+                    <h3 class="footer-title">Explore</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu-board">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="franchises.html">Franchises</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Contact & Details -->
+                <div class="footer-col footer-contact">
+                    <h3 class="footer-title">Visit The Lab</h3>
+                    <div class="footer-contact-info">
+                        <p><i class="fa-solid fa-location-dot"></i> <span>Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, Telangana 500089</span></p>
+                        <p><i class="fa-solid fa-phone"></i> <span>+91 98859 91989</span></p>
+                        <p><i class="fa-solid fa-envelope"></i> <span>contact@fruitlab.com</span></p>
+                        <p><i class="fa-solid fa-clock"></i> <span>Mon - Sun: 8:00 AM - 10:00 PM</span></p>
+                    </div>
+                </div>
+                <!-- Col 4: Map -->
+                <div class="footer-col footer-map">
+                    <h3 class="footer-title">Our Location</h3>
+                    <div class="footer-map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Fruit Lab Location Map">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fruit Lab India. All rights reserved. | Re-vitalize. Energize. Harmonize.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Libraries (Local) -->
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <!-- Main JS Code -->
+    <script src="script.js?v=70"></script>
+    <script>
+        // Page specific entrance animation
+        if (typeof gsap !== 'undefined') {
+            gsap.from('.why-partner-text', {
+                opacity: 0,
+                x: -100,
+                duration: 1.2,
+                ease: 'power3.out'
+            });
+            gsap.from('.partner-visuals', {
+                opacity: 0,
+                x: 100,
+                duration: 1.2,
+                ease: 'power3.out',
+                delay: 0.2
+            });
+            gsap.utils.toArray('.benefit-card').forEach((card, index) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 90%'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            });
+        }
+
+        // Live ROI calculator logic
+        const salesInput = document.getElementById('bottle-sales');
+        const priceInput = document.getElementById('avg-price');
+        const revenueOutput = document.getElementById('monthly-revenue');
+
+        function calculateRevenue() {
+            const sales = parseFloat(salesInput.value) || 0;
+            const price = parseFloat(priceInput.value) || 0;
+            const monthlyRevenue = sales * price * 30; // 30 days
+            
+            // Format currency
+            const formatter = new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            });
+            revenueOutput.innerText = formatter.format(monthlyRevenue).replace('INR', '₹');
+        }
+
+        salesInput.addEventListener('input', calculateRevenue);
+        priceInput.addEventListener('input', calculateRevenue);
+    </script>
+</body>
+</html>

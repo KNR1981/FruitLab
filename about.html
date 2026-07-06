@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Fruit Lab</title>
+    <meta name="description" content="Discover the story behind Fruit Lab. Re-vitalize, energize, and harmonize with our premium, cold-pressed vitality science.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=70">
+    <style>
+        .about-page-hero {
+            padding: 160px 0 100px 0;
+            background-color: var(--color-bg-dark);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .about-page-hero .section-title {
+            color: #fff;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .about-page-hero .about-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 79, 121, 0.12) 0%, rgba(0,0,0,0) 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .about-page-content {
+            padding: 80px 0;
+            background-color: var(--color-bg-dark);
+        }
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+        .story-img-container {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .story-img-container .glow-bg {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 123, 0, 0.15) 0%, rgba(0,0,0,0) 75%);
+            filter: blur(20px);
+        }
+        .story-img-container img {
+            height: 380px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+            animation: floatStory 5s ease-in-out infinite;
+            z-index: 2;
+        }
+        @keyframes floatStory {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .story-text h3 {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+        .story-text p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        .lab-philosophy {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 100px;
+            backdrop-filter: var(--glass-blur);
+        }
+        .lab-philosophy h3 {
+            font-size: 36px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .phi-card {
+            text-align: center;
+        }
+        .phi-icon {
+            font-size: 40px;
+            color: #ff4f79;
+            margin-bottom: 20px;
+        }
+        .phi-card h4 {
+            font-size: 20px;
+            color: #fff;
+            font-family: var(--font-sans);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .phi-card p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        @media (max-width: 991px) {
+            .story-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .philosophy-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+        @media (max-width: 576px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== FLOATING FRUITS (full page) ===== */
+        .about-fruits-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .af {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.55;
+            filter: drop-shadow(0 12px 24px rgba(0,0,0,0.18));
+            will-change: transform;
+        }
+        /* Individual fruit positions & sizes — 12 fruits spread across the full page */
+        .af-1  { width:110px;height:110px; top:8%;  left:3%;   background-image:url('assets/real_strawberry.png'); animation: afloat1 7s   ease-in-out infinite; }
+        .af-2  { width:120px;height:120px; top:5%;  right:5%;  background-image:url('assets/real_mango.png');       animation: afloat2 8.5s ease-in-out infinite; }
+        .af-3  { width:95px; height:95px;  top:22%; left:1%;   background-image:url('assets/real_cherry.png');      animation: afloat3 6.5s ease-in-out infinite; }
+        .af-4  { width:105px;height:105px; top:18%; right:2%;  background-image:url('assets/real_blueberry.png');   animation: afloat1 9s   ease-in-out infinite 1s; }
+        .af-5  { width:115px;height:115px; top:38%; left:2%;   background-image:url('assets/real_banana.png');      animation: afloat2 7.8s ease-in-out infinite 0.5s; }
+        .af-6  { width:100px;height:100px; top:42%; right:3%;  background-image:url('assets/real_watermelon.png'); animation: afloat3 8s   ease-in-out infinite 2s; }
+        .af-7  { width:110px;height:110px; top:58%; left:1%;   background-image:url('assets/real_coconut.png');     animation: afloat1 9.2s ease-in-out infinite 1.5s; }
+        .af-8  { width:120px;height:120px; top:55%; right:2%;  background-image:url('assets/real_pineapple.png');   animation: afloat2 7.2s ease-in-out infinite 0.8s; }
+        .af-9  { width:100px;height:100px; top:72%; left:3%;   background-image:url('assets/real_nuts.png');        animation: afloat3 8.8s ease-in-out infinite 0.3s; }
+        .af-10 { width:105px;height:105px; top:70%; right:4%;  background-image:url('assets/real_beetroot.png');    animation: afloat1 7.5s ease-in-out infinite 1.2s; }
+        .af-11 { width:95px; height:95px;  top:85%; left:5%;   background-image:url('assets/real_coffee.png');      animation: afloat2 9.5s ease-in-out infinite 0.6s; }
+        .af-12 { width:110px;height:110px; top:88%; right:6%;  background-image:url('assets/real_strawberry.png'); animation: afloat3 6.8s ease-in-out infinite 1.8s; }
+        /* Extra mid-screen fruits for density */
+        .af-13 { width:80px; height:80px;  top:30%; left:7%;   background-image:url('assets/real_watermelon.png'); animation: afloat1 10s  ease-in-out infinite 2.5s; opacity:0.35; }
+        .af-14 { width:85px; height:85px;  top:65%; right:8%;  background-image:url('assets/real_mango.png');       animation: afloat2 8s   ease-in-out infinite 3s;   opacity:0.35; }
+        @keyframes afloat1 {
+            0%,100% { transform: translateY(0px)   rotate(-4deg);  }
+            50%      { transform: translateY(-22px) rotate(4deg);   }
+        }
+        @keyframes afloat2 {
+            0%,100% { transform: translateY(0px)   rotate(5deg);   }
+            50%      { transform: translateY(-16px) rotate(-3deg);  }
+        }
+        @keyframes afloat3 {
+            0%,100% { transform: translateY(0px)   rotate(-2deg);  }
+            50%      { transform: translateY(-20px) rotate(6deg);   }
+        }
+        /* Make sure all page content sits above the fruit layer */
+        .about-page-hero, .about-page-content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <!-- Full-page Floating Fruits Background Layer -->
+    <div class="about-fruits-layer" aria-hidden="true">
+        <div class="af af-1"></div>
+        <div class="af af-2"></div>
+        <div class="af af-3"></div>
+        <div class="af af-4"></div>
+        <div class="af af-5"></div>
+        <div class="af af-6"></div>
+        <div class="af af-7"></div>
+        <div class="af af-8"></div>
+        <div class="af af-9"></div>
+        <div class="af af-10"></div>
+        <div class="af af-11"></div>
+        <div class="af af-12"></div>
+        <div class="af af-13"></div>
+        <div class="af af-14"></div>
+    </div>
+
+    <!-- Premium Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="index.html#menu-section" class="nav-link ">Menu</a></li>
+                <li class="nav-item"><a href="subscriptions.html" class="nav-link ">Subscriptions</a></li>
+                <li class="nav-item dropdown">
+                    <a href="about.html" class="nav-link dropdown-toggle active">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="franchises.html" class="dropdown-link"><i class="fa-solid fa-store dropdown-link-icon"></i> Franchises</a></li>
+                        <li><a href="contact.html" class="dropdown-link"><i class="fa-solid fa-paper-plane dropdown-link-icon"></i> Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">2</span>
+                </button>
+                <a href="login.html" class="nav-link " id="nav-auth-link">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="about-page-hero">
+        <div class="about-glow"></div>
+        <div class="container">
+            <span class="section-subtitle">Nature's Biotech</span>
+            <h1 class="section-title">About Fruit Lab</h1>
+            <div class="section-divider"></div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="about-page-content">
+        <div class="container">
+            
+            <!-- Story Grid -->
+            <section class="story-section">
+                <div class="story-img-container">
+                    <div class="glow-bg"></div>
+                    <img src="assets/orange_bottle_transparent.png" alt="Fruit Lab Bio Bottle">
+                </div>
+                <div class="story-text">
+                    <h3>The Science of Pure Vitality</h3>
+                    <p>
+                        Fruit Lab was created with one simple belief—nature already provides the perfect nutrition. Every bottle we produce is crafted using 100% cold-pressed technology, preserving the natural taste, vitamins, and nutrients of fresh fruits without compromising their goodness. Cold-pressing minimizes heat and oxidation, which is why it is widely used by premium juice brands to help retain freshness and flavor.
+                    </p>
+                    <p>
+                        Unlike conventional beverages, our juices and smoothies contain no added sugar, no artificial additives, no preservatives, and no unnecessary ingredients. Every sip delivers the authentic taste of real fruit—just as nature intended.
+                    </p>
+                    <p>
+                        We work directly with trusted local farmers, sourcing only fresh, carefully selected fruits at their peak quality. By building strong relationships with farming communities, we ensure every ingredient meets our standards for freshness, purity, and consistency.
+                    </p>
+                    <p>
+                        At Fruit Lab, we are passionate about redefining healthy beverages in India. Our mission is to offer premium cold-pressed juices and smoothies that combine exceptional taste with uncompromising quality. Every bottle reflects our promise of honesty, freshness, and originality—because when it comes to nutrition, nothing beats real fruit.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Philosophy Grid -->
+            <section class="lab-philosophy">
+                <h3>Our Core Pillars</h3>
+                <div class="philosophy-grid">
+                    <div class="phi-card">
+                        <div class="phi-icon"><i class="fa-solid fa-flask"></i></div>
+                        <h4>100% Cold-Pressed</h4>
+                        <p>We extract juice under pressure without producing heat or oxidation. This preserves 100% of the live enzymes, minerals, and vitamin content.</p>
+                    </div>
+                    <div class="phi-card">
+                        <div class="phi-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <h4>Biomedical Balance</h4>
+                        <p>Each flavor combination is carefully coordinated to boost target biometrics: strength, immunity, cellular hydration, and clean detoxification.</p>
+                    </div>
+                    <div class="phi-card">
+                        <div class="phi-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <h4>Zero Additives</h4>
+                        <p>No added sugar. No preservatives. No pasteurization. Only pure, raw nature in a premium glass bottle.</p>
+                    </div>
+                    <div class="phi-card">
+                        <div class="phi-icon"><i class="fa-solid fa-leaf"></i></div>
+                        <h4>No Artificial Additives</h4>
+                        <p>Real fruits transformed into premium juices and smoothies with complete transparency. No preservatives, artificial colors, flavors, or chemicals.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                                <!-- Col 1: About -->
+                <div class="footer-col footer-about">
+                    <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="footer-logo">
+                    <p class="footer-desc">Crafting the science of pure vitality. We serve 100% cold-pressed raw juices, active smoothies, and clean wellness bowls with zero sugar, zero additives, and maximum nutrients.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-partners">
+                        <h4 class="partner-title">Order & Dine</h4>
+                        <div class="partner-grid">
+                            <a href="https://www.swiggy.com/city/hyderabad/fruit-lab-manikonda-rest879626" target="_blank" rel="noopener noreferrer" class="partner-link swiggy-partner">Swiggy</a>
+                            <a href="http://zoma.to/r/21187495" target="_blank" rel="noopener noreferrer" class="partner-link zomato-partner">Zomato</a>
+                            <a href="https://www.district.in/dining/hyderabad/fruit-lab-narsingi" target="_blank" rel="noopener noreferrer" class="partner-link district-partner">District</a>
+                            <a href="https://magicpin.in/Hyderabad/Puppalaguda/Restaurant/Fruit-Lab/store/1685699?srsltid=AfmBOoqYAHvDbG200MtRlV8aRiWFD3CBIN0pWFLi0cCI0IJhMi8UE6sz" target="_blank" rel="noopener noreferrer" class="partner-link magicpin-partner">Magicpin</a>
+                        </div>
+                    </div>
+                </div>
+<!-- Col 2: Quick Links -->
+                <div class="footer-col footer-links-col">
+                    <h3 class="footer-title">Explore</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu-board">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="franchises.html">Franchises</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Contact & Details -->
+                <div class="footer-col footer-contact">
+                    <h3 class="footer-title">Visit The Lab</h3>
+                    <div class="footer-contact-info">
+                        <p><i class="fa-solid fa-location-dot"></i> <span>Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, Telangana 500089</span></p>
+                        <p><i class="fa-solid fa-phone"></i> <span>+91 98859 91989</span></p>
+                        <p><i class="fa-solid fa-envelope"></i> <span>contact@fruitlab.com</span></p>
+                        <p><i class="fa-solid fa-clock"></i> <span>Mon - Sun: 8:00 AM - 10:00 PM</span></p>
+                    </div>
+                </div>
+                <!-- Col 4: Map -->
+                <div class="footer-col footer-map">
+                    <h3 class="footer-title">Our Location</h3>
+                    <div class="footer-map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Fruit Lab Location Map">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fruit Lab India. All rights reserved. | Re-vitalize. Energize. Harmonize.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Libraries (Local) -->
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <!-- Main JS Code -->
+    <script src="script.js?v=70"></script>
+    <script>
+        // Page specific entrance animation
+        if (typeof gsap !== 'undefined') {
+            gsap.from('.story-img-container', {
+                opacity: 0,
+                x: -100,
+                duration: 1.2,
+                ease: 'power3.out'
+            });
+            gsap.from('.story-text', {
+                opacity: 0,
+                x: 100,
+                duration: 1.2,
+                ease: 'power3.out',
+                delay: 0.2
+            });
+            gsap.from('.phi-card', {
+                scrollTrigger: {
+                    trigger: '.lab-philosophy',
+                    start: 'top 80%'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriptions | Fruit Lab</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Base Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=70">
+    
+    <style>
+        /* Ticker Banner */
+        .promo-ticker-container {
+            width: 100%;
+            background-color: var(--color-primary-orange);
+            color: #ffffff;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(246, 36, 64, 0.15);
+            z-index: 999;
+            position: sticky;
+            top: 80px;
+            margin-top: 80px;
+        }
+        .promo-ticker-wrapper {
+            display: inline-block;
+            animation: tickerScroll 25s linear infinite;
+        }
+        .promo-ticker-item {
+            display: inline-block;
+            padding: 0 20px;
+        }
+        .promo-ticker-item span {
+            color: #FFE5BF;
+            margin-left: 10px;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        /* Subscriptions Hero */
+        .sub-hero {
+            padding: 120px 20px 60px;
+            text-align: center;
+            position: relative;
+            background-color: var(--color-bg-light);
+            overflow: hidden;
+        }
+        .sub-hero-glow {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(246, 36, 64, 0.08) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .sub-hero-container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .sub-hero-title {
+            font-size: 56px;
+            color: #38000A;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        .sub-hero-subtitle {
+            font-size: 18px;
+            color: #56363a;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        /* Floating Fruits Animation Containers */
+        .floating-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .floating-element {
+            position: absolute;
+            opacity: 0.15;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Why Subscribe Section */
+        .why-sub-section {
+            padding: 60px 0;
+            background-color: #fffaf3;
+            border-top: 1px solid rgba(246, 36, 64, 0.05);
+            border-bottom: 1px solid rgba(246, 36, 64, 0.05);
+        }
+        .why-sub-title {
+            text-align: center;
+            font-size: 32px;
+            color: #38000A;
+            margin-bottom: 45px;
+            font-weight: 800;
+        }
+        .why-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        @media (max-width: 991px) {
+            .why-sub-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 576px) {
+            .why-sub-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .why-sub-card {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(246, 36, 64, 0.06);
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            backdrop-filter: var(--glass-blur);
+        }
+        .why-sub-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary-orange);
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(246, 36, 64, 0.08);
+        }
+        .why-sub-card .icon {
+            font-size: 32px;
+            color: var(--color-primary-orange);
+            margin-bottom: 15px;
+        }
+        .why-sub-card h4 {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            color: #38000A;
+            line-height: 1.4;
+        }
+
+        /* Choose Your Subscription section */
+        .choose-plan-header {
+            text-align: center;
+            margin: 30px auto 25px;
+        }
+        .choose-plan-title {
+            font-size: 32px;
+            color: #38000A;
+            font-weight: 800;
+            margin-bottom: 0px;
+        }
+        .tabs-container {
+            display: flex;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        @media (max-width: 768px) {
+            .tabs-container {
+                flex-direction: column;
+            }
+        }
+        .tab-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(246, 36, 64, 0.15);
+            border-radius: 50px;
+            padding: 18px 30px;
+            color: #38000A;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+        }
+        .tab-btn.active {
+            background-color: var(--color-primary-orange);
+            border-color: var(--color-primary-orange);
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(246, 36, 64, 0.25);
+        }
+        body.dark-mode .tab-btn {
+            color: #38000A !important;
+            border-color: rgba(246, 36, 64, 0.25) !important;
+            background: rgba(255, 255, 255, 0.6) !important;
+        }
+        body.dark-mode .tab-btn.active {
+            color: #ffffff !important;
+            background-color: var(--color-primary-orange) !important;
+            border-color: var(--color-primary-orange) !important;
+        }
+
+        /* Detailed Plan Visualizer - Premium Noka Layout */
+        .sub-details-wrapper {
+            max-width: 1100px;
+            margin: 0 auto 100px;
+            position: relative;
+            padding: 0 20px;
+        }
+        .details-card {
+            display: none;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 50px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: var(--shadow-premium);
+            align-items: start;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .details-card.active {
+            display: grid;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 991px) {
+            .details-card {
+                grid-template-columns: 1fr;
+                padding: 30px;
+                gap: 40px;
+            }
+        }
+
+        /* Left Column: Bold Colored Card (Noka style) */
+        .showcase-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .noka-bg-card {
+            width: 100%;
+            height: 480px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+        }
+        .noka-bg-card.detox-theme {
+            background-color: #1a0005;
+        }
+        .noka-bg-card.bowls-theme {
+            background-color: #0d1f16;
+        }
+        .main-prod-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Left Column Circular Benefits (Noka style) */
+        .card-benefit-icons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        .benefit-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+        }
+        .b-circle-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #38000A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #38000A;
+            margin-bottom: 10px;
+            transition: var(--transition-fast);
+            background: #fff;
+        }
+        .benefit-icon-item span {
+            font-size: 11px;
+            font-weight: 700;
+            color: #56363a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+        .view-ingredients-link {
+            font-size: 14px;
+            font-weight: 700;
+            color: #F62440;
+            text-decoration: underline;
+            margin-top: 25px;
+            cursor: pointer;
+            font-family: var(--font-sans);
+        }
+
+        /* Right Column: Premium Selectors & Pricing (Noka style) */
+        .showcase-right {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding-top: 10px;
+        }
+        .prod-category-tag {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #F62440;
+            text-transform: uppercase;
+        }
+        .prod-title-noka {
+            font-size: 48px;
+            color: #38000A;
+            font-family: var(--font-sans);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-top: -10px;
+        }
+        
+        /* Price block */
+        .price-row-noka {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .noka-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: #38000A;
+            font-family: var(--font-sans);
+        }
+        .noka-old-price {
+            font-size: 20px;
+            color: #999;
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+        .noka-save-badge {
+            background-color: #F62440;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .noka-unit-price {
+            font-size: 14px;
+            color: #666;
+            margin-top: -15px;
+            font-weight: 500;
+        }
+
+        /* Row selectors */
+        .selector-row-noka {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .selector-label-noka {
+            font-size: 13px;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Option selectors (Flavor circles) */
+        .option-circles-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .option-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            padding: 2px;
+            background: #fff;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+        .option-circle:hover {
+            border-color: #38000A;
+            transform: scale(1.08);
+        }
+        .option-circle.active {
+            border-color: #38000A;
+            border-width: 3px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .option-circle-fill {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .option-circle-fill img {
+            width: auto;
+            height: 90%;
+            object-fit: contain;
+        }
+
+        /* Pill Selectors */
+        .pill-selectors-container {
+            display: flex;
+            gap: 12px;
+        }
+        .pill-selector-item {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 14px 20px;
+            cursor: pointer;
+            background: #fff;
+            text-align: center;
+            transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: var(--shadow-soft);
+        }
+        #details-detox .pill-selector-item:hover {
+            border-color: #F62440;
+            background-color: #FFF5F6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(246, 36, 64, 0.08);
+        }
+        #details-bowls .pill-selector-item:hover {
+            border-color: #2D6A4F;
+            background-color: #F0F9F4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(45, 106, 79, 0.08);
+        }
+        #details-detox .pill-selector-item.active {
+            border: 2px solid #F62440;
+            padding: 13px 19px;
+            background-color: #FFF5F6;
+        }
+        #details-bowls .pill-selector-item.active {
+            border: 2px solid #2D6A4F;
+            padding: 13px 19px;
+            background-color: #F0F9F4;
+        }
+        .pill-title-main {
+            font-size: 16px;
+            font-weight: 800;
+            color: #38000A;
+            margin-bottom: 2px;
+        }
+        .pill-subtitle-sub {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Checkmarks List */
+        .checkmarks-list-noka {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .checkmarks-list-noka li {
+            font-size: 14px;
+            color: #38000A;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .checkmarks-list-noka li i {
+            color: #2ed573;
+            font-size: 16px;
+        }
+
+        /* Massive Add-to-Cart Button */
+        .btn-subscribe-noka {
+            width: 100%;
+            background-color: #F62440;
+            color: #ffffff;
+            border-radius: 50px;
+            height: 60px;
+            font-size: 18px;
+            font-weight: 800;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            box-shadow: 0 10px 25px rgba(246, 36, 64, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-subscribe-noka:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(246, 36, 64, 0.35);
+        }
+        .btn-subscribe-noka.bowls-btn {
+            background-color: #2D6A4F;
+            box-shadow: 0 10px 25px rgba(45, 106, 79, 0.25);
+        }
+        .btn-subscribe-noka.bowls-btn:hover {
+            box-shadow: 0 15px 30px rgba(45, 106, 79, 0.35);
+        }
+        .free-shipping-note {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            font-weight: 500;
+            margin-top: -12px;
+        }
+
+        /* Modal styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-box {
+            background: #fff;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 90%;
+            padding: 35px;
+            box-shadow: var(--shadow-premium);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+        }
+        .modal-title {
+            font-size: 24px;
+            color: #38000A;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .modal-content {
+            font-size: 15px;
+            color: #56363a;
+            line-height: 1.6;
+        }
+
+        /* Bottom CTA Section */
+        .bottom-cta-sub {
+            background: linear-gradient(135deg, rgba(255, 242, 219, 0.4) 0%, rgba(255, 229, 191, 0.2) 100%);
+            border-top: 1px solid rgba(246, 36, 64, 0.05);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .bottom-cta-sub-title {
+            font-size: 42px;
+            color: #38000A;
+            margin-bottom: 35px;
+            font-weight: 800;
+        }
+        .cta-buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 5;
+        }
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: #fff;
+            border: 1px solid #25d366;
+        }
+        .btn-whatsapp:hover {
+            background-color: #20ba5a;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.25);
+        }
+        /* Contact CTA button - clearly visible */
+        .btn-contact-cta {
+            background-color: #38000A;
+            color: #ffffff;
+            border: 2px solid #38000A;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .btn-contact-cta:hover {
+            background-color: #F62440;
+            border-color: #F62440;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(246, 36, 64, 0.3);
+            color: #fff;
+        }
+        /* Login button in nav-actions */
+        .nav-login-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 20px;
+            background: #F62440;
+            color: #fff !important;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .nav-login-btn:hover {
+            background: #d41a35;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(246, 36, 64, 0.3);
+        }
+        /* Navbar dropdown */
+        .nav-item-dropdown {
+            position: relative;
+        }
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            min-width: 190px;
+            padding: 8px 0;
+            list-style: none;
+            z-index: 9999;
+            border: 1px solid rgba(246, 36, 64, 0.08);
+        }
+        .nav-item-dropdown:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-dropdown-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #38000A;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .nav-dropdown-link:hover,
+        .nav-dropdown-link.active {
+            background: rgba(246, 36, 64, 0.06);
+            color: #F62440;
+        }
+        .nav-dropdown-trigger {
+            cursor: pointer;
+        }
+        
+        /* Philosophy Grid & Cards */
+        .lab-philosophy {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 48px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            backdrop-filter: var(--glass-blur);
+        }
+        .lab-philosophy h3 {
+            font-size: 36px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .phi-card {
+            text-align: center;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 16px;
+            border: 1px solid transparent;
+        }
+        .phi-card:hover {
+            transform: translateY(-8px);
+            background-color: rgba(255, 255, 255, 0.6);
+            border-color: rgba(246, 36, 64, 0.1);
+            box-shadow: 0 15px 30px rgba(56, 0, 10, 0.04);
+        }
+        .phi-icon {
+            font-size: 40px;
+            color: #ff4f79;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: inline-block;
+        }
+        .phi-card:hover .phi-icon {
+            transform: scale(1.15) rotate(3deg);
+            color: #ff2a55;
+        }
+        .phi-card h4 {
+            font-size: 20px;
+            color: #fff;
+            font-family: var(--font-sans);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .phi-card p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        @media (max-width: 991px) {
+            .philosophy-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+        @media (max-width: 576px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Bundle Showcase Hover Interactions */
+        .bundle-img-item {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+        }
+        .bundle-img-item:hover {
+            transform: scale(1.18) translateY(-15px) !important;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3)) !important;
+            z-index: 10 !important;
+        }
+        .bundle-img-container {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .bundle-img-container:hover {
+            transform: scale(1.22) translateY(-12px) !important;
+            z-index: 10 !important;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <!-- Premium Banner Ticker -->
+    <div class="promo-ticker-container">
+        <div class="promo-ticker-wrapper">
+            <div class="promo-ticker-item">SUBSCRIBE & SAVE 10% <span>•</span></div>
+            <div class="promo-ticker-item">FRESH MADE DAILY <span>•</span></div>
+            <div class="promo-ticker-item">SUBSCRIBE & SAVE 10% <span>•</span></div>
+            <div class="promo-ticker-item">SHOP NOW <span>•</span></div>
+            <div class="promo-ticker-item">SUBSCRIBE & SAVE 10% <span>•</span></div>
+            <div class="promo-ticker-item">FRESH MADE DAILY <span>•</span></div>
+            <div class="promo-ticker-item">SUBSCRIBE & SAVE 10% <span>•</span></div>
+            <div class="promo-ticker-item">SHOP NOW <span>•</span></div>
+        </div>
+    </div>
+
+    <!-- Premium Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="index.html#menu-section" class="nav-link ">Menu</a></li>
+                <li class="nav-item"><a href="subscriptions.html" class="nav-link active">Subscriptions</a></li>
+                <li class="nav-item dropdown">
+                    <a href="about.html" class="nav-link dropdown-toggle ">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="franchises.html" class="dropdown-link"><i class="fa-solid fa-store dropdown-link-icon"></i> Franchises</a></li>
+                        <li><a href="contact.html" class="dropdown-link"><i class="fa-solid fa-paper-plane dropdown-link-icon"></i> Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <a href="login.html" class="nav-link " id="nav-auth-link">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Why Subscribe Us Section -->
+    <section class="container" style="padding-top: 100px; margin-bottom: 50px; text-align: center;">
+        <h3 style="font-size: 32px; color: #38000A; margin-bottom: 25px; font-weight: 800; font-family: var(--font-sans);">Why Subscribe Us?</h3>
+        <div class="philosophy-grid" style="margin-bottom: 0;">
+            <div class="phi-card">
+                <div class="phi-icon" style="font-size: 32px; margin-bottom: 12px; color: #F62440;"><i class="fa-solid fa-flask"></i></div>
+                <h4 style="font-size: 16px; color: #38000A; font-weight: 700; margin-bottom: 0;">100% Cold-Pressed</h4>
+            </div>
+            <div class="phi-card">
+                <div class="phi-icon" style="font-size: 32px; margin-bottom: 12px; color: #F62440;"><i class="fa-solid fa-heart-pulse"></i></div>
+                <h4 style="font-size: 16px; color: #38000A; font-weight: 700; margin-bottom: 0;">Biomedical Balance</h4>
+            </div>
+            <div class="phi-card">
+                <div class="phi-icon" style="font-size: 32px; margin-bottom: 12px; color: #F62440;"><i class="fa-solid fa-seedling"></i></div>
+                <h4 style="font-size: 16px; color: #38000A; font-weight: 700; margin-bottom: 0;">Zero Additives</h4>
+            </div>
+            <div class="phi-card">
+                <div class="phi-icon" style="font-size: 32px; margin-bottom: 12px; color: #F62440;"><i class="fa-solid fa-leaf"></i></div>
+                <h4 style="font-size: 16px; color: #38000A; font-weight: 700; margin-bottom: 0;">No Artificial Additives</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Tabs -->
+    <section class="choose-plan-header" id="subscription-selector" style="margin-top: 10px;">
+        
+        <div class="tabs-container">
+            <button class="tab-btn active" id="tab-detox" onclick="switchPlan('detox')">
+                <i class="fa-solid fa-bottle-droplet" style="margin-right:8px;"></i> Fruit Lab - Detox Juices Subscription
+            </button>
+            <button class="tab-btn" id="tab-bowls" onclick="switchPlan('bowls')">
+                <i class="fa-solid fa-bowl-food" style="margin-right:8px;"></i> Fruit Lab - Fruit Bowl Subscription (Premium)
+            </button>
+        </div>
+    </section>
+
+    <!-- Detailed Plan Visualizer - Same-To-Same Noka Re-creation -->
+    <div class="sub-details-wrapper">
+        
+        <!-- CARD 1: DETOX JUICES -->
+        <div class="details-card active" id="details-detox">
+            <!-- Left Side: Solid Background Card containing the active bottle preview -->
+            <div class="showcase-left">
+                <div class="noka-bg-card detox-theme">
+                    <!-- Main image (real 5 bottles group) - full bleed -->
+                    <img id="detox-main-img" src="assets/all_five_bottles_real.jpg" alt="All Five Bottles" class="main-prod-img" title="All 5 bottles">
+                </div>
+                
+                <!-- Benefit Circles Below Card -->
+                <div class="card-benefit-icons">
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <span>100% natural</span>
+                    </div>
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-ban"></i></div>
+                        <span>no sugar added</span>
+                    </div>
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-pills"></i></div>
+                        <span>vitamins & minerals</span>
+                    </div>
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-shield-heart"></i></div>
+                        <span>great for detox</span>
+                    </div>
+                </div>
+
+                <div class="view-ingredients-link" onclick="openModal('detox')">View Details & Ingredients</div>
+            </div>
+
+            <!-- Right Side: Product Details & Selectors -->
+            <div class="showcase-right">
+                <span class="prod-category-tag">Subscribe & Save 10%</span>
+                <h3 class="prod-title-noka">Detox Juices Subscription</h3>
+                
+                <!-- Pricing Block -->
+                <div class="price-row-noka">
+                    <span class="noka-price" id="price-val-detox">₹3,435</span>
+                    <span class="noka-old-price" id="old-price-val-detox">₹3,816</span>
+                    <span class="noka-save-badge">Save 10%</span>
+                </div>
+                <div class="noka-unit-price" id="unit-price-detox">₹143 / bottle</div>
+
+                <!-- Select Flavor circles -->
+                <div class="selector-row-noka">
+                    <span class="selector-label-noka">Select Bottle Flavor / Type</span>
+                    <div class="option-circles-container">
+                        <!-- All 5 Bottles Group Circle (Active Default) -->
+                        <div class="option-circle active" id="default-detox-circle" onclick="changePreview('detox', 'bundle', 'assets/all_five_bottles_real.jpg')">
+                            <div class="option-circle-fill" style="background-color: #ffd2d2; border: 1px solid rgba(246, 36, 64, 0.1);"><img src="assets/all_five_bottles_real.jpg" alt="All 5" style="object-fit: cover; width: 100%; height: 100%; border-radius: 50%;"></div>
+                        </div>
+                        <!-- Yellow Bottle Circle -->
+                        <div class="option-circle" onclick="changePreview('detox', 'yellow', 'assets/card_new_yellow_bottle.png')">
+                            <div class="option-circle-fill" style="background-color: #ffd699;"><img src="assets/card_new_yellow_bottle.png" alt="Yellow"></div>
+                        </div>
+                        <!-- Orange Bottle Circle -->
+                        <div class="option-circle" onclick="changePreview('detox', 'orange', 'assets/card_new_orange_bottle.png')">
+                            <div class="option-circle-fill" style="background-color: #ff9933;"><img src="assets/card_new_orange_bottle.png" alt="Orange"></div>
+                        </div>
+                        <!-- Red Bottle Circle -->
+                        <div class="option-circle" onclick="changePreview('detox', 'red', 'assets/card_new_red_bottle.png')">
+                            <div class="option-circle-fill" style="background-color: #ff5050;"><img src="assets/card_new_red_bottle.png" alt="Red"></div>
+                        </div>
+                        <!-- Dark Orange Bottle Circle -->
+                        <div class="option-circle" onclick="changePreview('detox', 'dark_orange', 'assets/card_new_dark_orange_bottle.png')">
+                            <div class="option-circle-fill" style="background-color: #cc6600;"><img src="assets/card_new_dark_orange_bottle.png" alt="Dark Orange"></div>
+                        </div>
+                        <!-- Smoothie Bottle Circle -->
+                        <div class="option-circle" onclick="changePreview('detox', 'smoothie', 'assets/card_smoothie_bottle.png')">
+                            <div class="option-circle-fill" style="background-color: #e6b8a2;"><img src="assets/card_smoothie_bottle.png" alt="Smoothie"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Size (Pill Selector) -->
+                <div class="selector-row-noka">
+                    <span class="selector-label-noka">Select Pack Size</span>
+                    <div class="pill-selectors-container">
+                        <div class="pill-selector-item active" id="size-detox-24" onclick="updatePrice('detox', 24)">
+                            <div class="pill-title-main">24 pack</div>
+                            <div class="pill-subtitle-sub">24 x 250ml bottles</div>
+                        </div>
+                        <div class="pill-selector-item" id="size-detox-48" onclick="updatePrice('detox', 48)">
+                            <div class="pill-title-main">48 pack</div>
+                            <div class="pill-subtitle-sub">48 x 250ml bottles</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Frequency -->
+                <div class="selector-row-noka">
+                    <span class="selector-label-noka">Select Delivery Frequency</span>
+                    <div class="pill-selectors-container">
+                        <div class="pill-selector-item active" id="freq-detox-1" onclick="updateFreq('detox', 1)">
+                            <div class="pill-title-main">1 month</div>
+                            <div class="pill-subtitle-sub">deliveries for 4 weeks</div>
+                        </div>
+                        <div class="pill-selector-item" id="freq-detox-2" onclick="updateFreq('detox', 2)">
+                            <div class="pill-title-main">2 months</div>
+                            <div class="pill-subtitle-sub">deliveries for 8 weeks</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkmarks list -->
+                <ul class="checkmarks-list-noka">
+                    <li><i class="fa-solid fa-check"></i> Save 10% on first-month subscription</li>
+                    <li><i class="fa-solid fa-check"></i> No commitments, cancel or pause anytime</li>
+                    <li><i class="fa-solid fa-check"></i> Monday to Saturday deliveries included</li>
+                </ul>
+
+                <!-- Massive Action Button -->
+                <button class="btn-subscribe-noka" id="btn-sub-detox" onclick="handleSubscribe('Detox Juices')">Add to Subscription — ₹3,435</button>
+                <div class="free-shipping-note">Free shipping on all subscription plans</div>
+            </div>
+        </div>
+
+        <!-- CARD 2: FRUIT BOWLS & CHIA -->
+        <div class="details-card" id="details-bowls">
+            <!-- Left Side: Solid Background Card containing active bowl preview -->
+            <div class="showcase-left">
+                <div class="noka-bg-card bowls-theme">
+                    <!-- Main image (real 5 bowls/trays group) - full bleed -->
+                    <img id="bowls-main-img" src="assets/all_five_bowls_real.jpg" alt="All Five Bowls" class="main-prod-img" title="All 5 bowls">
+                </div>
+                
+                <!-- Benefit Circles Below Card -->
+                <div class="card-benefit-icons">
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-apple-whole"></i></div>
+                        <span>premium fruits</span>
+                    </div>
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <span>no preservatives</span>
+                    </div>
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-wheat-awn"></i></div>
+                        <span>rich in fiber</span>
+                    </div>
+                    <div class="benefit-icon-item">
+                        <div class="b-circle-icon"><i class="fa-solid fa-clock"></i></div>
+                        <span>prepared daily</span>
+                    </div>
+                </div>
+
+                <div class="view-ingredients-link" onclick="openModal('bowls')">View Details & Ingredients</div>
+            </div>
+
+            <!-- Right Side: Details & Selectors -->
+            <div class="showcase-right">
+                <span class="prod-category-tag">Subscribe & Save 10%</span>
+                <h3 class="prod-title-noka">Fruit Bowl Subscription</h3>
+                
+                <!-- Pricing Block -->
+                <div class="price-row-noka">
+                    <span class="noka-price" id="price-val-bowls">₹3,219</span>
+                    <span class="noka-old-price" id="old-price-val-bowls">₹3,576</span>
+                    <span class="noka-save-badge">Save 10%</span>
+                </div>
+                <div class="noka-unit-price" id="unit-price-bowls">₹134 / serving</div>
+
+                <!-- Select Bowl circles -->
+                <div class="selector-row-noka">
+                    <span class="selector-label-noka">Select Bowl Style</span>
+                    <div class="option-circles-container">
+                        <!-- All 5 Bowls Group Circle (Active Default) -->
+                        <div class="option-circle active" id="default-bowls-circle" onclick="changePreview('bowls', 'bundle', 'assets/all_five_bowls_real.jpg')">
+                            <div class="option-circle-fill" style="background-color: #f0f9f4; border: 1px solid rgba(45, 106, 79, 0.1);"><img src="assets/all_five_bowls_real.jpg" alt="All 5" style="object-fit: cover; width: 100%; height: 100%; border-radius: 50%;"></div>
+                        </div>
+                        <!-- Special Bowl Circle -->
+                        <div class="option-circle" onclick="changePreview('bowls', 'special', 'assets/fruit_lab_special_bowl.jpg')">
+                            <div class="option-circle-fill" style="background-color: #74c69d;"><img src="assets/fruit_lab_special_bowl.jpg" alt="Special"></div>
+                        </div>
+                        <!-- Weight Loss Bowl Circle -->
+                        <div class="option-circle" onclick="changePreview('bowls', 'weight_loss', 'assets/weight_loss_fruit_bowl.png')">
+                            <div class="option-circle-fill" style="background-color: #a3b18a;"><img src="assets/weight_loss_fruit_bowl.png" alt="Weight Loss"></div>
+                        </div>
+                        <!-- Weight Gain Bowl Circle -->
+                        <div class="option-circle" onclick="changePreview('bowls', 'weight_gain', 'assets/weight_gain_fruit_bowl.jpg')">
+                            <div class="option-circle-fill" style="background-color: #ffb703;"><img src="assets/weight_gain_fruit_bowl.jpg" alt="Weight Gain"></div>
+                        </div>
+                        <!-- Coffee Chia Circle -->
+                        <div class="option-circle" onclick="changePreview('bowls', 'coffee_chia', 'assets/coffee_chia_pudding.png')">
+                            <div class="option-circle-fill" style="background-color: #dda15e;"><img src="assets/coffee_chia_pudding.png" alt="Coffee Chia"></div>
+                        </div>
+                        <!-- Cocoa Chia Circle -->
+                        <div class="option-circle" onclick="changePreview('bowls', 'cocoa_chia', 'assets/raw_cocoa_chia_pudding.jpg')">
+                            <div class="option-circle-fill" style="background-color: #7f5539;"><img src="assets/raw_cocoa_chia_pudding.jpg" alt="Cocoa Chia"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Size (Pill Selector) -->
+                <div class="selector-row-noka">
+                    <span class="selector-label-noka">Select Pack Size</span>
+                    <div class="pill-selectors-container">
+                        <div class="pill-selector-item active" id="size-bowls-24" onclick="updatePrice('bowls', 24)">
+                            <div class="pill-title-main">24 pack</div>
+                            <div class="pill-subtitle-sub">24 servings (500g each)</div>
+                        </div>
+                        <div class="pill-selector-item" id="size-bowls-48" onclick="updatePrice('bowls', 48)">
+                            <div class="pill-title-main">48 pack</div>
+                            <div class="pill-subtitle-sub">48 servings (500g each)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Frequency -->
+                <div class="selector-row-noka">
+                    <span class="selector-label-noka">Select Delivery Frequency</span>
+                    <div class="pill-selectors-container">
+                        <div class="pill-selector-item active" id="freq-bowls-1" onclick="updateFreq('bowls', 1)">
+                            <div class="pill-title-main">1 month</div>
+                            <div class="pill-subtitle-sub">deliveries for 4 weeks</div>
+                        </div>
+                        <div class="pill-selector-item" id="freq-bowls-2" onclick="updateFreq('bowls', 2)">
+                            <div class="pill-title-main">2 months</div>
+                            <div class="pill-subtitle-sub">deliveries for 8 weeks</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkmarks list -->
+                <ul class="checkmarks-list-noka">
+                    <li><i class="fa-solid fa-check"></i> Save 10% on first-month subscription</li>
+                    <li><i class="fa-solid fa-check"></i> Pause or resume anytime with prior notice</li>
+                    <li><i class="fa-solid fa-check"></i> Freshly cut 6-8 varieties of fruits in every bowl</li>
+                </ul>
+
+                <!-- Massive Action Button -->
+                <button class="btn-subscribe-noka bowls-btn" id="btn-sub-bowls" onclick="handleSubscribe('Fruit Bowl Premium')">Add to Subscription — ₹3,219</button>
+                <div class="free-shipping-note">Free shipping on all subscription plans</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modals for details & ingredients -->
+    <div class="modal-overlay" id="modal-detox">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeModal('detox')">&times;</span>
+            <h3 class="modal-title">Detox Juices Details</h3>
+            <div class="modal-content">
+                <p>Choose any of our premium Fruit Blends, Smoothies, and Dear Self juices. Prepared daily using clinical cold-press methods to ensure full live enzymes.</p>
+                <br>
+                <strong>What's Included:</strong>
+                <ul>
+                    <li>All standard fruit cold-pressed juices</li>
+                    <li>All basic green & energy juices</li>
+                    <li>Standard high-vitality smoothies</li>
+                </ul>
+                <br>
+                <strong>Exclusions:</strong>
+                <ul>
+                    <li>Nutty Joy</li>
+                    <li>Blueberry Detox</li>
+                    <li>Brain Boosting</li>
+                    <li>Whey Protein Shakes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-bowls">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeModal('bowls')">&times;</span>
+            <h3 class="modal-title">Fruit Bowl & Chia Details</h3>
+            <div class="modal-content">
+                <p>A complete nutrients, carbs, fibers and healthy fats packed serving of freshly prepared cut bowls or chia puddings.</p>
+                <br>
+                <strong>What's Included:</strong>
+                <ul>
+                    <li>Watermelon, Muskmelon, Papaya, Apple, Pineapple, Banana, Dragon Fruit, Avocado</li>
+                    <li>Toppings: Sunflower seeds & Pumpkin seeds</li>
+                    <li>Each bowl offers 6-8 varieties of premium fresh cut fruits</li>
+                    <li>Portion size: Approx. 500-550 grams per serving</li>
+                </ul>
+                <br>
+                <strong>Policy:</strong>
+                <p>You can pause or resume your subscription with a 24-hour prior notice to our support team.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom CTA Section -->
+    <section class="bottom-cta-sub">
+        <div class="container">
+            <h2 class="bottom-cta-sub-title">Ready to Start Your Healthy Journey?</h2>
+            
+            <div class="cta-buttons-container">
+                <a href="contact.html" class="btn btn-contact-cta">Contact FruitLab</a>
+                <a href="https://wa.me/919885991989" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp" style="font-size:18px; margin-right:8px;"></i> WhatsApp Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Col 1: About -->
+                <div class="footer-col footer-about">
+                    <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="footer-logo">
+                    <p class="footer-desc">Crafting the science of pure vitality. We serve 100% cold-pressed raw juices, active smoothies, and clean wellness bowls with zero sugar, zero additives, and maximum nutrients.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-partners">
+                        <h4 class="partner-title">Order & Dine</h4>
+                        <div class="partner-grid">
+                            <a href="https://www.swiggy.com/city/hyderabad/fruit-lab-manikonda-rest879626" target="_blank" rel="noopener noreferrer" class="partner-link swiggy-partner">Swiggy</a>
+                            <a href="http://zoma.to/r/21187495" target="_blank" rel="noopener noreferrer" class="partner-link zomato-partner">Zomato</a>
+                            <a href="https://www.district.in/dining/hyderabad/fruit-lab-narsingi" target="_blank" rel="noopener noreferrer" class="partner-link district-partner">District</a>
+                            <a href="https://magicpin.in/Hyderabad/Puppalaguda/Restaurant/Fruit-Lab/store/1685699?srsltid=AfmBOoqYAHvDbG200MtRlV8aRiWFD3CBIN0pWFLi0cCI0IJhMi8UE6sz" target="_blank" rel="noopener noreferrer" class="partner-link magicpin-partner">Magicpin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="footer-col footer-links">
+                    <h3 class="footer-title">Navigation</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu-section">Our Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="franchises.html">Franchises</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div class="footer-col footer-contact">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="footer-contact-details">
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, 500089</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+91 98859 91989</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>info@fruitlab.in</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Daily: 06:00 AM - 11:30 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Map -->
+                <div class="footer-col footer-map">
+                    <h3 class="footer-title">Our Location</h3>
+                    <div class="footer-map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Fruit Lab Location Map">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fruit Lab India. All rights reserved. | Re-vitalize. Energize. Harmonize.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Libraries (Local) -->
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <!-- Main JS Code -->
+    <script src="script.js?v=70"></script>
+    
+    <script>
+        // Check session auth for navbar link state
+        fetch('/api/auth/session')
+            .then(res => res.json())
+            .then(data => {
+                const authLink = document.getElementById('nav-auth-link');
+                if (authLink) {
+                    if (data.loggedIn) {
+                        authLink.href = 'profile.html';
+                        authLink.innerText = 'My Profile';
+                    } else {
+                        authLink.href = 'login.html';
+                        authLink.innerText = 'Login';
+                    }
+                }
+            })
+            .catch(err => console.error("Session check failed:", err));
+
+        // Scroll to tab selector
+        function scrollToSelector() {
+            const selector = document.getElementById('subscription-selector');
+            if (selector) {
+                selector.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Switch subscription plans tabs
+        function switchPlan(planType) {
+            const tabDetox = document.getElementById('tab-detox');
+            const tabBowls = document.getElementById('tab-bowls');
+            const detailsDetox = document.getElementById('details-detox');
+            const detailsBowls = document.getElementById('details-bowls');
+
+            if (planType === 'detox') {
+                tabDetox.classList.add('active');
+                tabBowls.classList.remove('active');
+                resetPreview('detox');
+            } else {
+                tabDetox.classList.remove('active');
+                tabBowls.classList.add('active');
+                resetPreview('bowls');
+            }
+
+            if (typeof gsap !== 'undefined') {
+                const outCard = planType === 'detox' ? detailsBowls : detailsDetox;
+                const inCard = planType === 'detox' ? detailsDetox : detailsBowls;
+
+                gsap.to(outCard, {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.3,
+                    onComplete: () => {
+                        outCard.classList.remove('active');
+                        inCard.classList.add('active');
+                        gsap.fromTo(inCard, 
+                            { opacity: 0, y: -20 },
+                            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+                        );
+                    }
+                });
+            } else {
+                detailsDetox.classList.toggle('active', planType === 'detox');
+                detailsBowls.classList.toggle('active', planType === 'bowls');
+            }
+        }
+
+        function resetPreview(type) {
+            // Remove active borders from all circle selectors for this option
+            const circles = document.querySelectorAll(`#details-${type} .option-circle`);
+            circles.forEach(c => c.classList.remove('active'));
+
+            // Set first circle active (bundle)
+            const defaultCircle = document.getElementById(`default-${type}-circle`);
+            if (defaultCircle) defaultCircle.classList.add('active');
+
+            const mainImg = document.getElementById(`${type}-main-img`);
+            if (mainImg) {
+                mainImg.style.display = 'block';
+                const defaultSrc = type === 'detox' ? 'assets/all_five_bottles_real.jpg' : 'assets/all_five_bowls_real.jpg';
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(mainImg, {
+                        opacity: 0,
+                        scale: 0.8,
+                        duration: 0.1,
+                        onComplete: () => {
+                            mainImg.src = defaultSrc;
+                            gsap.to(mainImg, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.2)' });
+                        }
+                    });
+                } else {
+                    mainImg.src = defaultSrc;
+                }
+            }
+
+            // Reset background card color to default theme
+            const bgCard = document.querySelector(`#details-${type} .noka-bg-card`);
+            if (bgCard) {
+                bgCard.style.backgroundColor = type === 'detox' ? '#F62440' : '#2D6A4F';
+            }
+        }
+
+        // Active State pricing configurations
+        const prices = {
+            detox: {
+                base24: 3816,
+                pay24: 3435,
+                unit24: 143,
+                base48: 7632,
+                pay48: 6870,
+                unit48: 143
+            },
+            bowls: {
+                base24: 3576,
+                pay24: 3219,
+                unit24: 134,
+                base48: 7152,
+                pay48: 6438,
+                unit48: 134
+            }
+        };
+
+        let activeSizes = { detox: 24, bowls: 24 };
+
+        function updatePrice(type, size, shouldSync = true) {
+            activeSizes[type] = size;
+            
+            // Toggle pill active classes
+            const sizes = [24, 48];
+            sizes.forEach(s => {
+                const element = document.getElementById(`size-${type}-${s}`);
+                if (element) {
+                    element.classList.toggle('active', s === size);
+                }
+            });
+
+            // Calculate values
+            const data = prices[type];
+            const pay = size === 24 ? data.pay24 : data.pay48;
+            const base = size === 24 ? data.base24 : data.base48;
+            const unit = size === 24 ? data.unit24 : data.unit48;
+
+            // Update DOM
+            const priceVal = document.getElementById(`price-val-${type}`);
+            const oldPriceVal = document.getElementById(`old-price-val-${type}`);
+            const unitPriceVal = document.getElementById(`unit-price-${type}`);
+            const btnSub = document.getElementById(`btn-sub-${type}`);
+
+            if (priceVal) priceVal.innerText = `₹${pay.toLocaleString('en-IN')}`;
+            if (oldPriceVal) oldPriceVal.innerText = `₹${base.toLocaleString('en-IN')}`;
+            if (unitPriceVal) {
+                const label = type === 'detox' ? 'bottle' : 'serving';
+                unitPriceVal.innerText = `₹${unit} / ${label}`;
+            }
+            if (btnSub) btnSub.innerText = `Add to Subscription — ₹${pay.toLocaleString('en-IN')}`;
+
+            if (shouldSync) {
+                updateFreq(type, size === 24 ? 1 : 2, false);
+            }
+        }
+
+        function updateFreq(type, freqVal, shouldSync = true) {
+            const freqs = [1, 2];
+            freqs.forEach(f => {
+                const element = document.getElementById(`freq-${type}-${f}`);
+                if (element) {
+                    element.classList.toggle('active', f === freqVal);
+                }
+            });
+
+            if (shouldSync) {
+                updatePrice(type, freqVal === 1 ? 24 : 48, false);
+            }
+        }
+
+        // Change Preview and swap colors dynamically
+        function changePreview(type, flavor, imagePath) {
+            // Update active state in circle selectors
+            const circles = document.querySelectorAll(`#details-${type} .option-circle`);
+            circles.forEach(c => c.classList.remove('active'));
+            
+            event.currentTarget.classList.add('active');
+
+            const bundleView = document.getElementById(`${type}-bundle-view`);
+            const mainImg = document.getElementById(`${type}-main-img`);
+
+            if (mainImg) {
+                if (bundleView) {
+                    bundleView.style.display = 'none';
+                }
+                mainImg.style.display = 'block';
+
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(mainImg, {
+                        opacity: 0,
+                        scale: 0.8,
+                        duration: 0.1,
+                        onComplete: () => {
+                            mainImg.src = imagePath;
+                            gsap.to(mainImg, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.2)' });
+                        }
+                    });
+                } else {
+                    mainImg.src = imagePath;
+                }
+            }
+
+            // Optional theme color adjustments
+            const bgCard = document.querySelector(`#details-${type} .noka-bg-card`);
+            if (bgCard && type === 'detox') {
+                const themeColors = {
+                    bundle: '#F62440',
+                    yellow: '#FFAA00',
+                    orange: '#F65a10',
+                    red: '#F62440',
+                    dark_orange: '#D04E00',
+                    smoothie: '#E78C73'
+                };
+                if (themeColors[flavor]) {
+                    bgCard.style.backgroundColor = themeColors[flavor];
+                }
+            }
+        }
+
+        // Modal triggers
+        function openModal(type) {
+            const modal = document.getElementById(`modal-${type}`);
+            if (modal) modal.classList.add('active');
+        }
+        function closeModal(type) {
+            const modal = document.getElementById(`modal-${type}`);
+            if (modal) modal.classList.remove('active');
+        }
+
+        // Floating fruits generator
+        function initFloatingFruits() {
+            const container = document.getElementById('hero-floating-fruits');
+            if (!container) return;
+
+            const fruitAssets = [
+                'assets/real_strawberry.png',
+                'assets/real_blueberry.png',
+                'assets/real_orange.png',
+                'assets/real_mint.png'
+            ];
+
+            for (let i = 0; i < 10; i++) {
+                const img = document.createElement('img');
+                img.src = fruitAssets[i % fruitAssets.length];
+                img.className = 'floating-element';
+                
+                const size = Math.floor(Math.random() * 30) + 20;
+                img.style.width = `${size}px`;
+                img.style.left = `${Math.random() * 90 + 5}%`;
+                img.style.top = `${Math.random() * 80 + 10}%`;
+                
+                container.appendChild(img);
+
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(img, {
+                        y: `+=${Math.random() * 40 - 20}`,
+                        x: `+=${Math.random() * 30 - 15}`,
+                        rotation: Math.random() * 360,
+                        duration: Math.random() * 4 + 3,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut'
+                    });
+                }
+            }
+        }
+
+        // Subscribe Now button handler
+        function handleSubscribe(planName) {
+            alert(`Thank you for choosing the ${planName}! Redirecting to customer support...`);
+            window.location.href = "contact.html?subject=" + encodeURIComponent(`Subscription Request: ${planName}`);
+        }
+
+        // Initialize page
+        window.addEventListener('DOMContentLoaded', () => {
+            initFloatingFruits();
+
+            // Circles left inactive initially since the main image shows all 5 items by default
+
+            // GSAP animations removed for benefits cards to prevent fading issues
+        });
+    </script>
+</body>
+</html>

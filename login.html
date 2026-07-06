@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Access | Fruit Lab</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Base Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=70">
+    
+    <style>
+        .auth-container {
+            min-height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, #1a0005 0%, #38000A 40%, #6B0015 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .auth-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 79, 121, 0.1) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.97);
+            border: none;
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: var(--glass-blur);
+            z-index: 2;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+        .auth-brand-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .auth-brand-header img {
+            height: 60px;
+            margin: 0 auto 8px;
+            display: block;
+        }
+        .auth-brand-header p {
+            color: #888;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(56, 0, 10, 0.15);
+            margin-bottom: 32px;
+        }
+        .auth-tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 17px;
+            font-weight: 700;
+            padding: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .auth-tab-btn.active {
+            color: #38000A;
+        }
+        .auth-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #F62440;
+        }
+        .auth-form-group {
+            margin-bottom: 20px;
+        }
+        .auth-form-group label {
+            display: block;
+            font-size: 14px;
+            color: #38000A;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .auth-input-wrapper {
+            position: relative;
+        }
+        .auth-input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #F62440;
+            font-size: 16px;
+        }
+        .auth-input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            background: rgba(246,36,64,0.05);
+            border: 1.5px solid rgba(246,36,64,0.2);
+            border-radius: 12px;
+            color: #38000A;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        .auth-input::placeholder {
+            color: #bbb;
+        }
+        .auth-input:focus {
+            border-color: #F62440;
+            box-shadow: 0 0 0 3px rgba(246,36,64,0.1);
+        }
+        .auth-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #F62440, #d41a35);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+        .auth-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(246,36,64,0.4);
+        }
+        .auth-error-msg {
+            background-color: rgba(226, 55, 68, 0.15);
+            border: 1px solid rgba(226, 55, 68, 0.3);
+            color: #ff6b76;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        .auth-success-msg {
+            background-color: rgba(46, 213, 115, 0.15);
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            color: #2ed573;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        .auth-switch-prompt {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 20px;
+        }
+        .auth-switch-prompt span {
+            color: #F62440;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <!-- Premium Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="index.html#menu-section" class="nav-link ">Menu</a></li>
+                <li class="nav-item"><a href="subscriptions.html" class="nav-link ">Subscriptions</a></li>
+                <li class="nav-item dropdown">
+                    <a href="about.html" class="nav-link dropdown-toggle ">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="franchises.html" class="dropdown-link"><i class="fa-solid fa-store dropdown-link-icon"></i> Franchises</a></li>
+                        <li><a href="contact.html" class="dropdown-link"><i class="fa-solid fa-paper-plane dropdown-link-icon"></i> Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <a href="login.html" class="nav-link active" id="nav-auth-link">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="auth-container">
+        <div class="auth-glow"></div>
+        
+        <div class="auth-card">
+            <div class="auth-brand-header">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab">
+                <p>Sign in to your Fruit Lab account</p>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+                <button class="auth-tab-btn" id="tab-register" onclick="switchTab('register')">Register</button>
+            </div>
+            
+            <!-- Error Notification -->
+            <div class="auth-error-msg" id="auth-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="error-text">An error occurred.</span>
+            </div>
+            
+            <!-- Success Notification -->
+            <div class="auth-success-msg" id="auth-success">
+                <i class="fa-solid fa-circle-check"></i>
+                <span id="success-text">Registration successful!</span>
+            </div>
+
+            <!-- Login Form -->
+            <form id="form-login" onsubmit="handleAuth(event, 'login')">
+                <div class="auth-form-group">
+                    <label for="login-username">Username</label>
+                    <div class="auth-input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="login-username" class="auth-input" placeholder="Enter your username" required>
+                    </div>
+                </div>
+                <div class="auth-form-group">
+                    <label for="login-password">Password</label>
+                    <div class="auth-input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="login-password" class="auth-input" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                <button type="submit" class="auth-submit-btn">Login to Account</button>
+                <p class="auth-switch-prompt">Don't have an account? <span onclick="switchTab('register')">Register here</span></p>
+            </form>
+
+            <!-- Register Form -->
+            <form id="form-register" onsubmit="handleAuth(event, 'register')" style="display: none;">
+                <div class="auth-form-group">
+                    <label for="register-username">Choose Username</label>
+                    <div class="auth-input-wrapper">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <input type="text" id="register-username" class="auth-input" placeholder="Min. 3 characters" required>
+                    </div>
+                </div>
+                <div class="auth-form-group">
+                    <label for="register-phone">Phone Number</label>
+                    <div class="auth-input-wrapper">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" id="register-phone" class="auth-input" placeholder="+91 98XXX XXXXX">
+                    </div>
+                </div>
+                <div class="auth-form-group">
+                    <label for="register-password">Create Password</label>
+                    <div class="auth-input-wrapper">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <input type="password" id="register-password" class="auth-input" placeholder="Min. 4 characters" required>
+                    </div>
+                </div>
+                <button type="submit" class="auth-submit-btn">Create Account</button>
+                <p class="auth-switch-prompt">Already have an account? <span onclick="switchTab('login')">Sign In here</span></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Col 1: About -->
+                <div class="footer-col footer-about">
+                    <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="footer-logo">
+                    <p class="footer-desc">Crafting the science of pure vitality. We serve 100% cold-pressed raw juices, active smoothies, and clean wellness bowls with zero sugar, zero additives, and maximum nutrients.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-partners">
+                        <h4 class="partner-title">Order & Dine</h4>
+                        <div class="partner-grid">
+                            <a href="https://www.swiggy.com/city/hyderabad/fruit-lab-manikonda-rest879626" target="_blank" rel="noopener noreferrer" class="partner-link swiggy-partner">Swiggy</a>
+                            <a href="http://zoma.to/r/21187495" target="_blank" rel="noopener noreferrer" class="partner-link zomato-partner">Zomato</a>
+                            <a href="https://www.district.in/dining/hyderabad/fruit-lab-narsingi" target="_blank" rel="noopener noreferrer" class="partner-link district-partner">District</a>
+                            <a href="https://magicpin.in/Hyderabad/Puppalaguda/Restaurant/Fruit-Lab/store/1685699?srsltid=AfmBOoqYAHvDbG200MtRlV8aRiWFD3CBIN0pWFLi0cCI0IJhMi8UE6sz" target="_blank" rel="noopener noreferrer" class="partner-link magicpin-partner">Magicpin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="footer-col footer-links">
+                    <h3 class="footer-title">Navigation</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu-section">Our Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="franchises.html">Franchises</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div class="footer-col footer-contact">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="footer-contact-details">
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, 500089</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+91 98859 91989</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>info@fruitlab.in</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Daily: 06:00 AM - 11:30 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Map -->
+                <div class="footer-col footer-map">
+                    <h3 class="footer-title">Our Location</h3>
+                    <div class="footer-map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Fruit Lab Location Map">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fruit Lab India. All rights reserved. | Re-vitalize. Energize. Harmonize.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Check current session
+        fetch('/api/auth/session')
+            .then(res => res.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    window.location.href = 'profile.html';
+                }
+            });
+
+        // Switch Tabs logic
+        function switchTab(mode) {
+            const tabLogin = document.getElementById('tab-login');
+            const tabRegister = document.getElementById('tab-register');
+            const formLogin = document.getElementById('form-login');
+            const formRegister = document.getElementById('form-register');
+            
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+            
+            if (mode === 'login') {
+                tabLogin.classList.add('active');
+                tabRegister.classList.remove('active');
+                formLogin.style.display = 'block';
+                formRegister.style.display = 'none';
+            } else {
+                tabLogin.classList.remove('active');
+                tabRegister.classList.add('active');
+                formLogin.style.display = 'none';
+                formRegister.style.display = 'block';
+            }
+        }
+
+        // Form Handler
+        function handleAuth(event, mode) {
+            event.preventDefault();
+            const errDiv = document.getElementById('auth-error');
+            const successDiv = document.getElementById('auth-success');
+            errDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            const username = document.getElementById(`${mode}-username`).value;
+            const password = document.getElementById(`${mode}-password`).value;
+
+            const endpoint = mode === 'login' ? '/api/auth/login' : '/api/auth/register';
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(res => res.json().then(data => ({ status: res.status, body: data })))
+            .then(resObj => {
+                if (resObj.status !== 200) {
+                    document.getElementById('error-text').innerText = resObj.body.error || 'Request failed';
+                    errDiv.style.display = 'flex';
+                } else {
+                    if (mode === 'register') {
+                        document.getElementById('success-text').innerText = 'Registration successful! Redirecting...';
+                        successDiv.style.display = 'flex';
+                        setTimeout(() => {
+                            window.location.href = 'profile.html';
+                        }, 1000);
+                    } else {
+                        window.location.href = 'profile.html';
+                    }
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('error-text').innerText = 'Connection lost. Please try again.';
+                errDiv.style.display = 'flex';
+            });
+        }
+    </script>
+</body>
+</html>

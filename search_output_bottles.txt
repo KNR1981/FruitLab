@@ -1,0 +1,92 @@
+133:             hamburger.classList.toggle('active');
+134:             navMenu.classList.toggle('active');
+140:             if (hamburger) hamburger.classList.remove('active');
+141:             if (navMenu) navMenu.classList.remove('active');
+143:             // Set active class
+144:             navLinks.forEach(l => l.classList.remove('active'));
+145:             link.classList.add('active');
+161:     // --- Hero Section 3D Mouse Parallax (Dual Bottles & Fruits) ---
+163:     const bottleLeftImg = document.getElementById('hero-bottle-left');
+164:     const bottleRightImg = document.getElementById('hero-bottle-right');
+173:             // Left/back bottle image (subtle depth translation & rotation)
+174:             if (bottleLeftImg) {
+175:                 gsap.to(bottleLeftImg, {
+185:             // Right/front bottle image (larger translation & rotation for 3D depth)
+186:             if (bottleRightImg) {
+187:                 gsap.to(bottleRightImg, {
+241:     let activeCardIndex = 1; // Start with center card active
+243:     function updateActiveCard(index) {
+246:         cards.forEach(c => c.classList.remove('active'));
+247:         cards[index].classList.add('active');
+248:         activeCardIndex = index;
+252:         // Determine contrasting/secondary flavor for the back/left bottle
+262:         const primaryBottleSrc = `assets/${flavor}_bottle_transparent.png`;
+263:         const secondaryBottleSrc = `assets/${secondaryFlavor}_bottle_transparent.png`;
+265:         // 1. Swap Front/Right Bottle with cinematic animation
+266:         if (bottleRightImg) {
+267:             gsap.to(bottleRightImg, {
+273:                     bottleRightImg.src = primaryBottleSrc;
+274:                     gsap.to(bottleRightImg, {
+285:         // 2. Swap Back/Left Bottle with animation
+286:         if (bottleLeftImg) {
+287:             gsap.to(bottleLeftImg, {
+293:                     bottleLeftImg.src = secondaryBottleSrc;
+294:                     gsap.to(bottleLeftImg, {
+305:         // 3. Change ambient background glow behind the bottles
+330:     function createCardElement(item, isActive) {
+332:         card.className = `menu-card card-${item.bottle} ${isActive ? 'active' : ''}`;
+333:         card.setAttribute('data-flavor', item.bottle);
+335:         // Build fruit particles background behind the bottle in the card
+349:                 <img src="assets/${item.bottle}_bottle_transparent.png" alt="${item.name}" class="card-product-image">
+370:         // Click handler to select and update active card & hero theme
+372:             document.querySelectorAll('.menu-card').forEach(c => c.classList.remove('active'));
+373:             card.classList.add('active');
+377:             if (item.bottle === 'orange') {
+379:             } else if (item.bottle === 'red') {
+381:             } else if (item.bottle === 'yellow') {
+385:             // Swap hero bottles
+386:             if (bottleRightImg) {
+387:                 gsap.to(bottleRightImg, {
+390:                         bottleRightImg.src = `assets/${item.bottle}_bottle_transparent.png`;
+391:                         gsap.to(bottleRightImg, { scale: 1, rotation: 10, opacity: 1, duration: 0.6, ease: 'back.out(1.4)' });
+395:             if (bottleLeftImg) {
+396:                 gsap.to(bottleLeftImg, {
+399:                         bottleLeftImg.src = `assets/${secondaryFlavor}_bottle_transparent.png`;
+400:                         gsap.to(bottleLeftImg, { scale: 1, rotation: -8, opacity: 1, duration: 0.65, ease: 'back.out(1.2)' });
+406:             if (heroGlow && colors[item.bottle]) {
+407:                 gsap.to(heroGlow, { background: colors[item.bottle].glow, duration: 0.8 });
+411:             spawnHeroParticles(item.bottle);
+444:             if (sliderWrapper) sliderWrapper.classList.remove('grid-active');
+450:             if (sliderWrapper) sliderWrapper.classList.add('grid-active');
+488:             if (sliderWrapper) sliderWrapper.classList.remove('grid-active');
+491:                 const isActive = idx === 0 && !searchQuery;
+492:                 const card = createCardElement(item, isActive);
+542:                 categoryTabBtns.forEach(b => b.classList.remove('active'));
+543:                 btn.classList.add('active');
+554:             const activeTab = document.querySelector('.category-tab-btn.active');
+555:             const category = activeTab ? activeTab.getAttribute('data-category') : 'dear-self';
+582:             const activeTabBtn = document.querySelector('.category-tab-btn.active');
+583:             if (activeTabBtn) {
+584:                 const activeCat = activeTabBtn.getAttribute('data-category');
+585:                 lightboxImg.src = menuBoardImages[activeCat];
+635:         // Hero bottles entrance reveal and floating loop
+637:         const bottleLeftWrap = document.getElementById('bottle-left-wrap');
+638:         const bottleRightWrap = document.getElementById('bottle-right-wrap');
+639:         const shadowLeft = document.querySelector('.shadow-left');
+640:         const shadowRight = document.querySelector('.shadow-right');
+643:         if (dualWrapper && bottleLeftWrap && bottleRightWrap) {
+645:             gsap.set([bottleLeftWrap, bottleRightWrap], { scale: 0.4, opacity: 0, y: 80 });
+647:             // Left/Back bottle entrance
+648:             gsap.to(bottleLeftWrap, {
+656:                     // Left bottle infinite float
+657:                     gsap.to(bottleLeftWrap, {
+667:             // Right/Front bottle entrance
+668:             gsap.to(bottleRightWrap, {
+676:                     // Right bottle infinite float
+677:                     gsap.to(bottleRightWrap, {
+688:             if (shadowLeft) {
+689:                 gsap.fromTo(shadowLeft, 
+701:             if (shadowRight) {
+702:                 gsap.fromTo(shadowRight, 
+818:             // Blob 1 (Orange glow moving top-left)
+828:             // Blob 2 (Pink/Magenta glow moving bottom-right)

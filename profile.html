@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile & Loyalty | Fruit Lab</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Base Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=70">
+    
+    <style>
+        .profile-container {
+            min-height: 100vh;
+            padding: 120px 20px 80px;
+            background-color: var(--color-bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-glow {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(255, 79, 121, 0.08) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .profile-grid-custom {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        @media (max-width: 991px) {
+            .profile-grid-custom {
+                grid-template-columns: 1fr;
+            }
+        }
+        .profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .profile-card-custom {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: var(--shadow-premium);
+        }
+        .user-info {
+            text-align: center;
+        }
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff4f79, #ff7b9a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 15px rgba(255, 79, 121, 0.3);
+        }
+        .user-name {
+            font-size: 24px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .user-role {
+            font-size: 13px;
+            color: #ff4f79;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .loyalty-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .points-label {
+            font-size: 12px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .points-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            font-family: var(--font-sans);
+        }
+        .points-level {
+            font-size: 14px;
+            color: #2ed573;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        .level-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        .level-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4f79, #2ed573);
+            width: 0%;
+            transition: width 1s ease-out;
+        }
+        .logout-btn {
+            background: none;
+            border: 1px solid rgba(255, 79, 121, 0.3);
+            color: #ff4f79;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .logout-btn:hover {
+            background: rgba(255, 79, 121, 0.08);
+            border-color: #ff4f79;
+        }
+        .admin-panel-link-btn {
+            background: linear-gradient(135deg, #1e90ff, #00c2ff);
+            border: none;
+            color: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.2);
+        }
+        .admin-panel-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.35);
+        }
+        .order-history-header {
+            font-size: 20px;
+            font-family: var(--font-sans);
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .order-history-header i {
+            color: #ff4f79;
+        }
+        .order-table-wrapper {
+            overflow-x: auto;
+        }
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .order-table th {
+            padding: 14px 16px;
+            color: #888;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .order-table td {
+            padding: 16px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #eee;
+            vertical-align: middle;
+        }
+        .order-table tr:last-child td {
+            border-bottom: none;
+        }
+        .order-id {
+            font-family: monospace;
+            color: #aaa;
+        }
+        .order-price {
+            font-weight: 600;
+            color: #fff;
+        }
+        .order-points {
+            color: #2ed573;
+            font-weight: 600;
+        }
+        .no-orders-msg {
+            text-align: center;
+            color: #888;
+            padding: 40px 20px;
+        }
+        .no-orders-msg i {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.05);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Order Simulator */
+        .simulator-section {
+            margin-top: 30px;
+        }
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        @media (max-width: 576px) {
+            .sim-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .sim-select {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .sim-select option {
+            background-color: #1a0a10;
+            color: #fff;
+        }
+        .sim-submit-btn {
+            background: linear-gradient(135deg, #2ed573, #7bed9f);
+            border: none;
+            color: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 213, 115, 0.2);
+        }
+        .sim-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 213, 115, 0.35);
+        }
+        .sim-info-txt {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <!-- Premium Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="index.html#menu-section" class="nav-link ">Menu</a></li>
+                <li class="nav-item"><a href="subscriptions.html" class="nav-link ">Subscriptions</a></li>
+                <li class="nav-item dropdown">
+                    <a href="about.html" class="nav-link dropdown-toggle ">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="franchises.html" class="dropdown-link"><i class="fa-solid fa-store dropdown-link-icon"></i> Franchises</a></li>
+                        <li><a href="contact.html" class="dropdown-link"><i class="fa-solid fa-paper-plane dropdown-link-icon"></i> Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <a href="profile.html" class="nav-link active" id="nav-auth-link">My Profile</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="profile-container">
+        <div class="profile-glow"></div>
+        
+        <div class="profile-grid-custom">
+            
+            <!-- Sidebar: User & Loyalty Info -->
+            <div class="profile-sidebar">
+                <div class="profile-card-custom user-info">
+                    <div class="user-avatar" id="avatar-char">U</div>
+                    <h2 class="user-name" id="profile-name">Loading...</h2>
+                    <p class="user-role" id="profile-role">Customer</p>
+                    
+                    <div class="loyalty-badge">
+                        <p class="points-label">Loyalty Points</p>
+                        <p class="points-value" id="profile-points">0</p>
+                        <p class="points-level" id="profile-level">Novice Juicer</p>
+                        <div class="level-progress-bar">
+                            <div class="level-progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Panel Link Button (hidden by default) -->
+                    <div id="admin-panel-link-wrapper" style="margin-top: 20px; display: none;">
+                        <a href="admin.html" class="admin-panel-link-btn"><i class="fa-solid fa-gauge"></i> Go to Admin CMS</a>
+                    </div>
+                    
+                    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
+                </div>
+
+                <!-- Loyalty Program Info Card -->
+                <div class="profile-card-custom">
+                    <h3 style="font-size:16px; margin-bottom:15px; color:#fff;"><i class="fa-solid fa-circle-info" style="color:#ff4f79; margin-right:8px;"></i>Loyalty Benefits</h3>
+                    <p style="font-size:13px; color:#ccc; line-height:1.6; margin-bottom:12px;">
+                        Earn <strong>10 points for every ₹100 spent</strong> at Fruit Lab. Points can be accumulated to unlock exclusive brand levels:
+                    </p>
+                    <ul style="font-size:12px; color:#aaa; line-height:1.8; list-style:none; padding:0;">
+                        <li>🌱 <strong>0 - 150 pts</strong>: Novice Juicer (Standard member)</li>
+                        <li>🍊 <strong>151 - 500 pts</strong>: Citrus Crafter (5% disc. on orders)</li>
+                        <li>🌟 <strong>501+ pts</strong>: Master Juicer (10% disc. + free birthday cup)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Content Area: Order History & Mock Order Builder -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                
+                <!-- Order History -->
+                <div class="profile-card-custom">
+                    <div class="order-history-header">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Order History</span>
+                    </div>
+                    
+                    <div class="order-table-wrapper">
+                        <table class="order-table" id="orders-table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Items Ordered</th>
+                                    <th>Total Paid</th>
+                                    <th>Points Gained</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-list">
+                                <!-- Appended dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="no-orders-msg" id="no-orders">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <span>No orders placed yet. Try our ordering simulator below to earn points!</span>
+                    </div>
+                </div>
+
+                <!-- Mock Order Simulator (Admin/Testing utility) -->
+                <div class="profile-card-custom simulator-section">
+                    <div class="order-history-header">
+                        <i class="fa-solid fa-gamepad" style="color:#2ed573;"></i>
+                        <span>Mock Ordering Simulator</span>
+                    </div>
+                    <p style="font-size:13px; color:#ccc; line-height:1.6;">
+                        Simulate ordering directly from the store to test the points system. Your profile loyalty points will update instantly.
+                    </p>
+                    
+                    <form id="simulator-form" onsubmit="submitMockOrder(event)">
+                        <div class="sim-grid">
+                            <select id="sim-product-select" class="sim-select" required>
+                                <option value="" disabled selected>Select juice or smoothie...</option>
+                                <!-- Loaded dynamically -->
+                            </select>
+                            <button type="submit" class="sim-submit-btn"><i class="fa-solid fa-cart-arrow-down"></i> Place Test Order</button>
+                        </div>
+                    </form>
+                    <p class="sim-info-txt">
+                        * Note: Placing a mock order will calculate points (e.g., a ₹169 drink yields 16 points) and add the transaction to your profile history.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer remains identical to login.html -->
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Col 1: About -->
+                <div class="footer-col footer-about">
+                    <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="footer-logo">
+                    <p class="footer-desc">Crafting the science of pure vitality. We serve 100% cold-pressed raw juices, active smoothies, and clean wellness bowls with zero sugar, zero additives, and maximum nutrients.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-partners">
+                        <h4 class="partner-title">Order & Dine</h4>
+                        <div class="partner-grid">
+                            <a href="https://www.swiggy.com/city/hyderabad/fruit-lab-manikonda-rest879626" target="_blank" rel="noopener noreferrer" class="partner-link swiggy-partner">Swiggy</a>
+                            <a href="http://zoma.to/r/21187495" target="_blank" rel="noopener noreferrer" class="partner-link zomato-partner">Zomato</a>
+                            <a href="https://www.district.in/dining/hyderabad/fruit-lab-narsingi" target="_blank" rel="noopener noreferrer" class="partner-link district-partner">District</a>
+                            <a href="https://magicpin.in/Hyderabad/Puppalaguda/Restaurant/Fruit-Lab/store/1685699?srsltid=AfmBOoqYAHvDbG200MtRlV8aRiWFD3CBIN0pWFLi0cCI0IJhMi8UE6sz" target="_blank" rel="noopener noreferrer" class="partner-link magicpin-partner">Magicpin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="footer-col footer-links">
+                    <h3 class="footer-title">Navigation</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu-section">Our Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="franchises.html">Franchises</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div class="footer-col footer-contact">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="footer-contact-details">
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, 500089</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+91 98859 91989</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>info@fruitlab.in</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Daily: 06:00 AM - 11:30 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Map -->
+                <div class="footer-col footer-map">
+                    <h3 class="footer-title">Our Location</h3>
+                    <div class="footer-map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Fruit Lab Location Map">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fruit Lab India. All rights reserved. | Re-vitalize. Energize. Harmonize.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        let menuItemsLookup = [];
+
+        // Check authentication
+        function loadProfile() {
+            fetch('/api/auth/session')
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.loggedIn) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+
+                    const user = data.user;
+                    document.getElementById('profile-name').innerText = user.username;
+                    document.getElementById('profile-role').innerText = user.role;
+                    document.getElementById('avatar-char').innerText = user.username.charAt(0).toUpperCase();
+                    
+                    // Show admin button if role is admin
+                    if (user.role === 'admin') {
+                        document.getElementById('admin-panel-link-wrapper').style.display = 'block';
+                    }
+
+                    updateLoyaltyInfo(user.points);
+                    loadOrdersList();
+                    loadProductSelectOptions();
+                });
+        }
+
+        function updateLoyaltyInfo(points) {
+            document.getElementById('profile-points').innerText = points;
+            
+            const levelEl = document.getElementById('profile-level');
+            const fillEl = document.getElementById('progress-fill');
+            
+            let level = 'Novice Juicer';
+            let percentage = 0;
+
+            if (points <= 150) {
+                level = '🌱 Novice Juicer';
+                percentage = (points / 150) * 100;
+            } else if (points <= 500) {
+                level = '🍊 Citrus Crafter (5% Disc.)';
+                percentage = ((points - 150) / 350) * 100;
+            } else {
+                level = '🌟 Master Juicer (10% Disc. + Gifts)';
+                percentage = 100;
+            }
+
+            levelEl.innerText = level;
+            fillEl.style.width = `${percentage}%`;
+        }
+
+        function loadOrdersList() {
+            fetch('/api/profile/orders')
+                .then(res => res.json())
+                .then(orders => {
+                    const table = document.getElementById('orders-table');
+                    const noOrders = document.getElementById('no-orders');
+                    const list = document.getElementById('orders-list');
+                    list.innerHTML = '';
+
+                    if (orders.length === 0) {
+                        table.style.display = 'none';
+                        noOrders.style.display = 'block';
+                    } else {
+                        table.style.display = 'table';
+                        noOrders.style.display = 'none';
+
+                        orders.forEach(order => {
+                            const dateStr = new Date(order.date).toLocaleDateString('en-IN', {
+                                day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                            });
+                            
+                            const itemsStr = order.items.map(i => `${i.name} (${i.qty})`).join(', ');
+
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td class="order-id">${order.id}</td>
+                                <td>${dateStr}</td>
+                                <td>${itemsStr}</td>
+                                <td class="order-price">₹${order.totalPrice}</td>
+                                <td class="order-points">+${order.pointsEarned}</td>
+                            `;
+                            list.appendChild(tr);
+                        });
+                    }
+                });
+        }
+
+        function loadProductSelectOptions() {
+            fetch('/api/menu')
+                .then(res => res.json())
+                .then(menu => {
+                    const select = document.getElementById('sim-product-select');
+                    select.innerHTML = '<option value="" disabled selected>Select juice or smoothie...</option>';
+                    menuItemsLookup = [];
+
+                    Object.keys(menu).forEach(cat => {
+                        menu[cat].forEach(item => {
+                            menuItemsLookup.push(item);
+                            const opt = document.createElement('option');
+                            opt.value = item.name;
+                            opt.innerText = `${item.name} - ₹${item.price}`;
+                            select.appendChild(opt);
+                        });
+                    });
+                });
+        }
+
+        function submitMockOrder(e) {
+            e.preventDefault();
+            const select = document.getElementById('sim-product-select');
+            const productName = select.value;
+            if (!productName) return;
+
+            const product = menuItemsLookup.find(i => i.name === productName);
+            if (!product) return;
+
+            const cleanPrice = parseFloat(product.price.replace(/[^\d.]/g, ''));
+            const orderPayload = {
+                items: [{ name: product.name, price: cleanPrice, qty: 1 }],
+                totalPrice: cleanPrice
+            };
+
+            fetch('/api/profile/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderPayload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Update layout
+                    loadOrdersList();
+                    
+                    // Fetch updated profile for point count animation
+                    fetch('/api/auth/session')
+                        .then(res => res.json())
+                        .then(d => {
+                            if (d.loggedIn) {
+                                updateLoyaltyInfo(d.user.points);
+                            }
+                        });
+                    
+                    select.selectedIndex = 0;
+                }
+            })
+            .catch(err => console.error(err));
+        }
+
+        function logout() {
+            fetch('/api/auth/logout', { method: 'POST' })
+                .then(() => {
+                    window.location.href = 'login.html';
+                });
+        }
+
+        // Initialize page
+        loadProfile();
+    </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Fruit Lab</title>
+    <meta name="description" content="Reach out to the Fruit Lab team for orders, queries, or franchise opportunities. We are here to help.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=70">
+    <style>
+        .contact-page-hero {
+            padding: 160px 0 100px 0;
+            background-color: var(--color-bg-dark);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .contact-page-hero .section-title {
+            color: #fff;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .contact-page-hero .con-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 79, 121, 0.12) 0%, rgba(0,0,0,0) 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .contact-page-content {
+            padding: 80px 0;
+            background-color: var(--color-bg-dark);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <!-- Premium Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="index.html#menu-section" class="nav-link ">Menu</a></li>
+                <li class="nav-item"><a href="subscriptions.html" class="nav-link ">Subscriptions</a></li>
+                <li class="nav-item dropdown">
+                    <a href="about.html" class="nav-link dropdown-toggle active">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="franchises.html" class="dropdown-link"><i class="fa-solid fa-store dropdown-link-icon"></i> Franchises</a></li>
+                        <li><a href="contact.html" class="dropdown-link active"><i class="fa-solid fa-paper-plane dropdown-link-icon"></i> Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">2</span>
+                </button>
+                <a href="login.html" class="nav-link " id="nav-auth-link">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="contact-page-hero">
+        <div class="con-glow"></div>
+        <div class="container">
+            <span class="section-subtitle">Get In Touch</span>
+            <h1 class="section-title">Contact Us</h1>
+            <div class="section-divider"></div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="contact-page-content">
+        <div class="container">
+            
+            <div class="contact-grid">
+                <!-- Form Side -->
+                <div class="contact-form-wrapper">
+                    <h3>Send Us a Message</h3>
+                    <form action="#" class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out to Fruit Lab! We will contact you soon.');">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" required placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" placeholder="Franchise Query / Product Question">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required placeholder="Tell us how we can help..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit magnetic">Submit Request</button>
+                    </form>
+                </div>
+
+                <!-- Info & Map Side -->
+                <div class="contact-info-wrapper">
+                    <div class="info-block">
+                        <h3>Headquarters</h3>
+                        <p class="info-text"><i class="fa-solid fa-location-dot"></i> Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, Telangana 500089</p>
+                        <p class="info-text"><i class="fa-solid fa-phone"></i> +91 98859 91989</p>
+                        <p class="info-text"><i class="fa-solid fa-envelope"></i> contact@fruitlab.com</p>
+                    </div>
+
+                                        <div class="info-block">
+                        <h3>Follow The Lab</h3>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+
+                    <!-- Map Placeholder -->
+                    <div class="footer-map-container" style="height: 250px;"><iframe src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Fruit Lab Location Map"></iframe></div>
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>Interactive Map Placeholder</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                                <!-- Col 1: About -->
+                <div class="footer-col footer-about">
+                    <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="footer-logo">
+                    <p class="footer-desc">Crafting the science of pure vitality. We serve 100% cold-pressed raw juices, active smoothies, and clean wellness bowls with zero sugar, zero additives, and maximum nutrients.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/fruitlab_hyd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@FruitLab_hyd" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-partners">
+                        <h4 class="partner-title">Order & Dine</h4>
+                        <div class="partner-grid">
+                            <a href="https://www.swiggy.com/city/hyderabad/fruit-lab-manikonda-rest879626" target="_blank" rel="noopener noreferrer" class="partner-link swiggy-partner">Swiggy</a>
+                            <a href="http://zoma.to/r/21187495" target="_blank" rel="noopener noreferrer" class="partner-link zomato-partner">Zomato</a>
+                            <a href="https://www.district.in/dining/hyderabad/fruit-lab-narsingi" target="_blank" rel="noopener noreferrer" class="partner-link district-partner">District</a>
+                            <a href="https://magicpin.in/Hyderabad/Puppalaguda/Restaurant/Fruit-Lab/store/1685699?srsltid=AfmBOoqYAHvDbG200MtRlV8aRiWFD3CBIN0pWFLi0cCI0IJhMi8UE6sz" target="_blank" rel="noopener noreferrer" class="partner-link magicpin-partner">Magicpin</a>
+                        </div>
+                    </div>
+                </div>
+<!-- Col 2: Quick Links -->
+                <div class="footer-col footer-links-col">
+                    <h3 class="footer-title">Explore</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu-board">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="franchises.html">Franchises</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Contact & Details -->
+                <div class="footer-col footer-contact">
+                    <h3 class="footer-title">Visit The Lab</h3>
+                    <div class="footer-contact-info">
+                        <p><i class="fa-solid fa-location-dot"></i> <span>Anjmama Residency, Road No. 10, Alkapoor Township, Puppalguda, Hyderabad, Telangana 500089</span></p>
+                        <p><i class="fa-solid fa-phone"></i> <span>+91 98859 91989</span></p>
+                        <p><i class="fa-solid fa-envelope"></i> <span>contact@fruitlab.com</span></p>
+                        <p><i class="fa-solid fa-clock"></i> <span>Mon - Sun: 8:00 AM - 10:00 PM</span></p>
+                    </div>
+                </div>
+                <!-- Col 4: Map -->
+                <div class="footer-col footer-map">
+                    <h3 class="footer-title">Our Location</h3>
+                    <div class="footer-map-container">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Fruit%20Lab%20-%20Smoothies,%20Cold%20pressed%20Juices,%20Alkapoor%20Township,%20Hyderabad&t=k&z=16&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Fruit Lab Location Map">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fruit Lab India. All rights reserved. | Re-vitalize. Energize. Harmonize.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Libraries (Local) -->
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <!-- Main JS Code -->
+    <script src="script.js?v=70"></script>
+    <script>
+        // Page specific entrance animation
+        if (typeof gsap !== 'undefined') {
+            gsap.from('.contact-form-wrapper', {
+                opacity: 0,
+                x: -100,
+                duration: 1.2,
+                ease: 'power3.out'
+            });
+            gsap.from('.contact-info-wrapper', {
+                opacity: 0,
+                x: 100,
+                duration: 1.2,
+                ease: 'power3.out',
+                delay: 0.2
+            });
+        }
+    </script>
+</body>
+</html>
