@@ -4,10 +4,6 @@
     {
       "source": "/api/:path*",
       "destination": "/api/index.js"
-    },
-    {
-      "source": "/(about|contact|franchises|login|profile|admin|subscriptions)",
-      "destination": "/api/index.js"
     }
   ]
 }

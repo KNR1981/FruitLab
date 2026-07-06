@@ -318,17 +318,7 @@ app.get('/api/admin/users', requireAdmin, async (req, res) => {
    STATIC PAGES SERVING
    ========================================================================== */
 
-// Explicit handlers using res.sendFile to support static file tracing on Vercel
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
-app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
-app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
-app.get('/franchises', (req, res) => res.sendFile(path.join(__dirname, 'franchises.html')));
-app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
-app.get('/profile', (req, res) => res.sendFile(path.join(__dirname, 'profile.html')));
-app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
-app.get('/subscriptions', (req, res) => res.sendFile(path.join(__dirname, 'subscriptions.html')));
-
-// Serve standard assets and scripts (local fallback)
+// Serve standard static files (HTML, CSS, JS, images, videos) locally
 app.use(express.static(__dirname));
 
 module.exports = app;
