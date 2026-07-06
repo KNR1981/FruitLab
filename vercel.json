@@ -1,28 +1,13 @@
 {
-  "version": 2,
   "cleanUrls": true,
-  "builds": [
+  "rewrites": [
     {
-      "src": "api/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "api/index.js"
+      "source": "/api/:path*",
+      "destination": "/api/index.js"
     },
     {
-      "src": "/(about|contact|franchises|login|profile|admin|subscriptions)",
-      "dest": "api/index.js"
-    },
-    {
-      "src": "/",
-      "dest": "index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/(about|contact|franchises|login|profile|admin|subscriptions)",
+      "destination": "/api/index.js"
     }
   ]
 }
