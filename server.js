@@ -318,34 +318,27 @@ app.get('/api/admin/users', requireAdmin, async (req, res) => {
    STATIC PAGES SERVING
    ========================================================================== */
 
-// Helper to serve HTML files directly using fs stream, bypassing Express sendfile sandbox/symlink issues
-function serveHTML(res, filename) {
-    const filePath = path.join(__dirname, filename);
-    res.setHeader('Content-Type', 'text/html');
-    const stream = fs.createReadStream(filePath);
-    stream.on('error', (err) => {
-        console.error(`Error streaming ${filename}:`, err);
-        res.status(404).send('Not Found');
-    });
-    stream.pipe(res);
-}
+// Explicit handlers using res.sendFile to support static file tracing on Vercel
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
+app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
+app.get('/franchises', (req, res) => res.sendFile(path.join(__dirname, 'franchises.html')));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
+app.get('/profile', (req, res) => res.sendFile(path.join(__dirname, 'profile.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
+app.get('/subscriptions', (req, res) => res.sendFile(path.join(__dirname, 'subscriptions.html')));
 
-// Explicit overrides to ensure html endpoints work cleanly without the extension
-app.get('/about', (req, res) => serveHTML(res, 'about.html'));
-app.get('/contact', (req, res) => serveHTML(res, 'contact.html'));
-app.get('/franchises', (req, res) => serveHTML(res, 'franchises.html'));
-app.get('/login', (req, res) => serveHTML(res, 'login.html'));
-app.get('/profile', (req, res) => serveHTML(res, 'profile.html'));
-app.get('/admin', (req, res) => serveHTML(res, 'admin.html'));
-app.get('/subscriptions', (req, res) => serveHTML(res, 'subscriptions.html'));
-
-// Serve standard assets and scripts
+// Serve standard assets and scripts (local fallback)
 app.use(express.static(__dirname));
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`\n==================================================`);
-    console.log(`  Fruit Lab Premium Backend Server Running!`);
-    console.log(`  Local URL: http://localhost:${PORT}`);
-    console.log(`==================================================\n`);
-});
+module.exports = app;
+
+// Start server locally (ignored during Vercel serverless runs)
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`\n==================================================`);
+        console.log(`  Fruit Lab Premium Backend Server Running!`);
+        console.log(`  Local URL: http://localhost:${PORT}`);
+        console.log(`==================================================\n`);
+    });
+}

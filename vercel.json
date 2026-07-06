@@ -1,19 +1,24 @@
 {
   "version": 2,
+  "cleanUrls": true,
   "builds": [
     {
-      "src": "server.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "server.js"
+      "dest": "api/index.js"
     },
     {
       "src": "/(about|contact|franchises|login|profile|admin|subscriptions)",
-      "dest": "server.js"
+      "dest": "api/index.js"
+    },
+    {
+      "src": "/",
+      "dest": "index.html"
     },
     {
       "src": "/(.*)",
