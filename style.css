@@ -3331,10 +3331,15 @@ body.dark-mode .btn-transparent-highlight:hover {
 
 /* --- Subscriptions Spotlight Banner --- */
 .subs-spotlight-banner {
-    background: linear-gradient(135deg, #38000A 0%, #F62440 60%, #ff7b9a 100%);
-    padding: 70px 20px;
+    background: linear-gradient(135deg, #1f0104 0%, #d81b37 50%, #ff4b68 100%);
+    padding: 80px 20px;
+    border-radius: 40px;
+    margin: 60px auto;
+    max-width: 1200px;
+    box-shadow: 0 20px 50px rgba(216, 27, 55, 0.2);
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .subs-spotlight-banner::before {
     content: '';
@@ -3351,7 +3356,7 @@ body.dark-mode .btn-transparent-highlight:hover {
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
 }
 .subs-spotlight-left {
@@ -3362,7 +3367,7 @@ body.dark-mode .btn-transparent-highlight:hover {
     align-items: center;
     gap: 8px;
     background: rgba(255,255,255,0.2);
-    color: #fff;
+    color: #ffffff !important;
     font-size: 13px;
     font-weight: 700;
     padding: 6px 16px;
@@ -3374,14 +3379,14 @@ body.dark-mode .btn-transparent-highlight:hover {
 .subs-spotlight-title {
     font-size: 36px;
     font-weight: 800;
-    color: #fff;
+    color: #ffffff !important;
     line-height: 1.25;
     margin-bottom: 14px;
     font-family: var(--font-serif, 'Playfair Display', serif);
 }
 .subs-spotlight-desc {
     font-size: 15px;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.9) !important;
     margin-bottom: 22px;
     line-height: 1.6;
 }
@@ -3395,7 +3400,7 @@ body.dark-mode .btn-transparent-highlight:hover {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #fff;
+    color: #ffffff !important;
     font-size: 14px;
     font-weight: 600;
 }
@@ -3407,21 +3412,21 @@ body.dark-mode .btn-transparent-highlight:hover {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: #fff;
-    color: #F62440;
+    background: #ffffff;
+    color: #d81b37;
     padding: 14px 32px;
     border-radius: 50px;
     font-size: 16px;
     font-weight: 800;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 .subs-spotlight-btn:hover {
     background: #FFE5BF;
-    color: #38000A;
+    color: #1f0104;
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
 }
 .subs-spotlight-right {
     flex-shrink: 0;
@@ -3429,11 +3434,20 @@ body.dark-mode .btn-transparent-highlight:hover {
 .subs-badge-ring {
     width: 160px;
     height: 160px;
-    border-radius: 50%;
-    border: 3px dashed rgba(255,255,255,0.4);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.subs-badge-ring::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    border: 3px dashed rgba(255,255,255,0.4);
     animation: rotateBadge 12s linear infinite;
 }
 .subs-badge-inner {
@@ -3448,17 +3462,19 @@ body.dark-mode .btn-transparent-highlight:hover {
     align-items: center;
     justify-content: center;
     gap: 4px;
+    position: relative;
+    z-index: 2;
 }
 .subs-badge-pct {
     font-size: 42px;
     font-weight: 900;
-    color: #fff;
+    color: #ffffff !important;
     line-height: 1;
 }
 .subs-badge-label {
     font-size: 11px;
     font-weight: 700;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255,255,255,0.9) !important;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
@@ -3469,6 +3485,10 @@ body.dark-mode .btn-transparent-highlight:hover {
     to { transform: rotate(360deg); }
 }
 @media (max-width: 768px) {
+    .subs-spotlight-banner {
+        border-radius: 0;
+        margin: 40px 0;
+    }
     .subs-spotlight-inner { flex-direction: column; text-align: center; }
     .subs-spotlight-perks { justify-content: center; }
     .subs-badge-ring { width: 120px; height: 120px; }
@@ -3476,6 +3496,7 @@ body.dark-mode .btn-transparent-highlight:hover {
     .subs-badge-pct { font-size: 32px; }
     .subs-spotlight-title { font-size: 28px; }
 }
+
 
 /* ==========================================================================
    INSTAGRAM REELS SYSTEM
