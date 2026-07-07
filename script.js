@@ -1283,3 +1283,514 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+
+/* ==========================================================================
+   GLOBAL SHOPPING CART & WHATSAPP CHECKOUT SYSTEM
+   ========================================================================== */
+
+(function() {
+    // 1. Inject Styles
+    const style = document.createElement('style');
+    style.innerHTML = `
+        /* Cart Drawer CSS */
+        .cart-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .cart-drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 450px;
+            height: 100%;
+            background-color: #FFFAF3; /* Matching page background */
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cart-drawer-overlay.active .cart-drawer {
+            right: 0;
+        }
+        .cart-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(246, 36, 64, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-header h3 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            color: #38000A;
+            margin: 0;
+        }
+        .cart-close-btn {
+            font-size: 28px;
+            cursor: pointer;
+            color: #38000A;
+            transition: transform 0.2s ease;
+        }
+        .cart-close-btn:hover {
+            transform: scale(1.1);
+        }
+        .cart-items-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .cart-empty-state {
+            text-align: center;
+            padding: 40px 0;
+            color: #777;
+        }
+        .cart-empty-state i {
+            font-size: 48px;
+            color: rgba(246, 36, 64, 0.2);
+            margin-bottom: 16px;
+        }
+        .cart-item {
+            background: #fff;
+            border: 1px solid rgba(246, 36, 64, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        .cart-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .cart-item-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #38000A;
+            margin: 0;
+        }
+        .cart-item-option {
+            font-size: 13px;
+            color: #777;
+            margin: 2px 0 0 0;
+        }
+        .cart-item-meta {
+            font-size: 12px;
+            background: #FDF2F4;
+            color: #F62440;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+        .cart-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+        .cart-item-price {
+            font-weight: 700;
+            color: #F62440;
+        }
+        .cart-qty-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .cart-qty-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .cart-qty-btn:hover {
+            background-color: #f5f5f5;
+        }
+        .cart-qty-val {
+            width: 30px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid rgba(246, 36, 64, 0.08);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .cart-subtotal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #38000A;
+        }
+        .cart-subtotal-price {
+            color: #F62440;
+            font-size: 22px;
+        }
+        .cart-checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .cart-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            background: #fafafa;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .cart-input:focus {
+            border-color: #F62440;
+            background: #fff;
+        }
+        .cart-checkout-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 30px;
+            border: none;
+            background: #25D366; /* WhatsApp Green */
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+        .cart-checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.45);
+            background-color: #20ba59;
+        }
+        
+        /* Floating Toast CSS */
+        .cart-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #38000A;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 10002;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+        }
+        .cart-toast.active {
+            transform: translateX(-50%) translateY(0);
+        }
+        .cart-toast-btn {
+            background: #FF9F1C;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: background-color 0.2s;
+        }
+        .cart-toast-btn:hover {
+            background: #e08500;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 2. Inject HTML Structure
+    const drawerOverlay = document.createElement('div');
+    drawerOverlay.id = 'global-cart-drawer';
+    drawerOverlay.className = 'cart-drawer-overlay';
+    drawerOverlay.innerHTML = `
+        <div class="cart-drawer">
+            <div class="cart-header">
+                <h3>My Subscriptions</h3>
+                <i class="fa-solid fa-xmark cart-close-btn" id="cart-close-trigger"></i>
+            </div>
+            <div class="cart-items-container" id="cart-items-list">
+                <!-- Dynamic Items -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-subtotal">
+                    <span>Subtotal:</span>
+                    <span class="cart-subtotal-price" id="cart-subtotal-val">₹0</span>
+                </div>
+                <form class="cart-checkout-form" id="cart-checkout-form" onsubmit="event.preventDefault();">
+                    <input type="text" id="checkout-name" class="cart-input" placeholder="Your Name" required>
+                    <input type="tel" id="checkout-phone" class="cart-input" placeholder="WhatsApp Number" required>
+                    <input type="text" id="checkout-address" class="cart-input" placeholder="Delivery Address" required>
+                    <button type="submit" class="cart-checkout-btn" id="whatsapp-checkout-btn">
+                        <i class="fa-brands fa-whatsapp"></i> Checkout via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(drawerOverlay);
+
+    // Inject Toast
+    const toast = document.createElement('div');
+    toast.id = 'global-cart-toast';
+    toast.className = 'cart-toast';
+    toast.innerHTML = `
+        <span>Added to subscription cart!</span>
+        <button class="cart-toast-btn" id="cart-toast-view-btn">View Cart</button>
+    `;
+    document.body.appendChild(toast);
+
+    // 3. LocalStorage Operations
+    function getCart() {
+        try {
+            return JSON.parse(localStorage.getItem('fruitlab_cart')) || [];
+        } catch(e) {
+            return [];
+        }
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem('fruitlab_cart', JSON.stringify(cart));
+        updateCartBadges();
+    }
+
+    function updateCartBadges() {
+        const cart = getCart();
+        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+        const badges = document.querySelectorAll('.cart-count');
+        badges.forEach(b => {
+            b.textContent = totalQty;
+            b.style.display = totalQty > 0 ? 'flex' : 'none';
+        });
+    }
+
+    // Exported function for page triggers
+    window.addToGlobalCart = function(item) {
+        const cart = getCart();
+        const existing = cart.find(i => i.id === item.id);
+        if (existing) {
+            existing.qty += item.qty;
+        } else {
+            cart.push(item);
+        }
+        saveCart(cart);
+        updateCartUI();
+        
+        // Trigger Toast
+        toast.classList.add('active');
+        setTimeout(() => toast.classList.remove('active'), 4000);
+    };
+
+    function updateQty(index, delta) {
+        const cart = getCart();
+        cart[index].qty += delta;
+        if (cart[index].qty <= 0) {
+            cart.splice(index, 1);
+        }
+        saveCart(cart);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const cart = getCart();
+        const list = document.getElementById('cart-items-list');
+        const subtotalVal = document.getElementById('cart-subtotal-val');
+        
+        if (!list || !subtotalVal) return;
+        
+        list.innerHTML = '';
+        
+        if (cart.length === 0) {
+            list.innerHTML = `
+                <div class="cart-empty-state">
+                    <i class="fa-solid fa-shopping-basket"></i>
+                    <p>Your subscription cart is empty</p>
+                    <p style="font-size: 13px; color: #aaa; margin-top: 5px;">Choose a wellness plan to get started</p>
+                </div>
+            `;
+            subtotalVal.textContent = '₹0';
+            document.getElementById('cart-checkout-form').style.display = 'none';
+            return;
+        }
+        
+        document.getElementById('cart-checkout-form').style.display = 'flex';
+        let subtotal = 0;
+        
+        cart.forEach((item, index) => {
+            subtotal += item.price * item.qty;
+            
+            const itemElement = document.createElement('div');
+            itemElement.className = 'cart-item';
+            itemElement.innerHTML = `
+                <div class="cart-item-header">
+                    <div>
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <p class="cart-item-option">${item.option}</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="cart-item-meta">${item.size}</span>
+                    <span class="cart-item-meta" style="background: #E8F5E9; color: #2E7D32;">${item.frequency}</span>
+                </div>
+                <div class="cart-item-footer">
+                    <span class="cart-item-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+                    <div class="cart-qty-controls">
+                        <button class="cart-qty-btn minus-btn" data-index="${index}">-</button>
+                        <span class="cart-qty-val">${item.qty}</span>
+                        <button class="cart-qty-btn plus-btn" data-index="${index}">+</button>
+                    </div>
+                </div>
+            `;
+            list.appendChild(itemElement);
+        });
+        
+        subtotalVal.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+
+        // Bind Qty Buttons
+        list.querySelectorAll('.minus-btn').forEach(btn => {
+            btn.onclick = () => updateQty(parseInt(btn.getAttribute('data-index')), -1);
+        });
+        list.querySelectorAll('.plus-btn').forEach(btn => {
+            btn.onclick = () => updateQty(parseInt(btn.getAttribute('data-index')), 1);
+        });
+    }
+
+    // 4. WhatsApp Checkout Logic
+    function handleCheckout() {
+        const name = document.getElementById('checkout-name').value.trim();
+        const phone = document.getElementById('checkout-phone').value.trim();
+        const address = document.getElementById('checkout-address').value.trim();
+        
+        if (!name || !phone || !address) return;
+        
+        const cart = getCart();
+        let itemsSummary = '';
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+            total += item.price * item.qty;
+            itemsSummary += `*${index + 1}. ${item.name}*\n`;
+            itemsSummary += `   • Option: ${item.option}\n`;
+            itemsSummary += `   • Size: ${item.size}\n`;
+            itemsSummary += `   • Freq: ${item.frequency}\n`;
+            itemsSummary += `   • Price: ₹${item.price.toLocaleString('en-IN')} x ${item.qty}\n\n`;
+        });
+        
+        const message = 
+`*New Subscription Order - Fruit Lab* 🍒
+
+*Customer Details:*
+• Name: ${name}
+• Phone: ${phone}
+• Address: ${address}
+
+*Order Summary:*
+${itemsSummary}*Total Subscription Amount: ₹${total.toLocaleString('en-IN')}*
+
+Please confirm my subscription order. Thank you!`;
+
+        const whatsappUrl = `https://wa.me/918639247573?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Reset Cart
+        saveCart([]);
+        updateCartUI();
+        drawerOverlay.classList.remove('active');
+        
+        // Success notification
+        alert("Redirecting to WhatsApp to send order details. Thank you!");
+    }
+
+    // 5. DOM Event Bindings
+    function setupEvents() {
+        updateCartBadges();
+        updateCartUI();
+        
+        // Open/Close bindings
+        const cartButtons = document.querySelectorAll('.nav-cart-btn');
+        cartButtons.forEach(btn => {
+            btn.onclick = (e) => {
+                e.preventDefault();
+                drawerOverlay.classList.add('active');
+                updateCartUI();
+            };
+        });
+        
+        const closeBtn = document.getElementById('cart-close-trigger');
+        if (closeBtn) {
+            closeBtn.onclick = () => drawerOverlay.classList.remove('active');
+        }
+        
+        drawerOverlay.onclick = (e) => {
+            if (e.target === drawerOverlay) drawerOverlay.classList.remove('active');
+        };
+
+        const viewCartBtn = document.getElementById('cart-toast-view-btn');
+        if (viewCartBtn) {
+            viewCartBtn.onclick = () => {
+                toast.classList.remove('active');
+                drawerOverlay.classList.add('active');
+                updateCartUI();
+            };
+        }
+
+        const checkoutForm = document.getElementById('cart-checkout-form');
+        if (checkoutForm) {
+            checkoutForm.onsubmit = (e) => {
+                e.preventDefault();
+                handleCheckout();
+            };
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupEvents);
+    } else {
+        setupEvents();
+    }
+})();

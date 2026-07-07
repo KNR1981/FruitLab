@@ -1203,7 +1203,7 @@
             
             <div class="cta-buttons-container">
                 <a href="contact.html" class="btn btn-contact-cta">Contact FruitLab</a>
-                <a href="https://wa.me/919885991989" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp" style="font-size:18px; margin-right:8px;"></i> WhatsApp Us</a>
+                <a href="https://wa.me/918639247573" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp" style="font-size:18px; margin-right:8px;"></i> WhatsApp Us</a>
             </div>
         </div>
     </section>
@@ -1253,7 +1253,7 @@
                         </li>
                         <li>
                             <i class="fa-solid fa-phone"></i>
-                            <span>+91 98859 91989</span>
+                            <span>+91 8639247573</span>
                         </li>
                         <li>
                             <i class="fa-solid fa-envelope"></i>
@@ -1575,8 +1575,40 @@
 
         // Subscribe Now button handler
         function handleSubscribe(planName) {
-            alert(`Thank you for choosing the ${planName}! Redirecting to customer support...`);
-            window.location.href = "contact.html?subject=" + encodeURIComponent(`Subscription Request: ${planName}`);
+            const isDetox = planName.toLowerCase().includes('detox');
+            const type = isDetox ? 'detox' : 'bowls';
+            const size = activeSizes[type]; // 24 or 48
+            const freq = document.getElementById(`freq-${type}-1`).classList.contains('active') ? 1 : 2; // 1 month or 2 months
+            const data = prices[type];
+            const price = size === 24 ? data.pay24 : data.pay48;
+            
+            // Get selected flavor or bundle
+            let selectedOption = 'All 5 Bottles Bundle';
+            if (type === 'bowls') selectedOption = 'All 5 Bowls Bundle';
+            
+            const activeCircle = document.querySelector(`#details-${type} .option-circle.active`);
+            if (activeCircle) {
+                const labelElement = activeCircle.querySelector('span');
+                if (labelElement) selectedOption = labelElement.innerText;
+            }
+
+            const item = {
+                id: `${type}-${size}-${freq}-${selectedOption.replace(/\s+/g, '-').toLowerCase()}`,
+                name: isDetox ? "Detox Juices Subscription" : "Fruit Bowl & Chia Subscription",
+                option: selectedOption,
+                size: `${size} Pack (${size} x 250ml bottles)`,
+                frequency: `${freq} Month${freq > 1 ? 's' : ''} Delivery`,
+                price: price,
+                qty: 1
+            };
+
+            // Call global cart add function
+            if (window.addToGlobalCart) {
+                window.addToGlobalCart(item);
+            } else {
+                alert(`Thank you for choosing the ${planName}! Redirecting to customer support...`);
+                window.location.href = "contact.html?subject=" + encodeURIComponent(`Subscription Request: ${planName}`);
+            }
         }
 
         // Initialize page
