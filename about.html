@@ -90,7 +90,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 48px;
-            margin-bottom: 100px;
+            margin-bottom: 40px;
             backdrop-filter: var(--glass-blur);
         }
         .lab-philosophy h3 {
@@ -194,19 +194,12 @@
         }
 
         /* ===== REELS SECTION STYLING ===== */
-        .about-reels-wrapper {
-            background-color: #FAF6F0; /* Warm light cream/beige background breakout */
-            padding: 100px 0;
-            position: relative;
-            z-index: 2;
-            box-shadow: inset 0 20px 40px rgba(0,0,0,0.03), inset 0 -20px 40px rgba(0,0,0,0.03);
-            border-top: 1px solid rgba(0,0,0,0.03);
-            border-bottom: 1px solid rgba(0,0,0,0.03);
-        }
         .about-reels-section {
             display: grid;
             grid-template-columns: 1.2fr 2.8fr;
             gap: 40px;
+            margin-top: 40px; /* Seamless spacing after pillars */
+            margin-bottom: 80px; /* Safe padding from footer */
         }
         .reels-intro-card {
             background: linear-gradient(135deg, #FF6F4E 0%, #FF3D3D 100%); /* Orange-to-red premium gradient */
@@ -559,15 +552,10 @@
                         <h4>No Artificial Additives</h4>
                         <p>Real fruits transformed into premium juices and smoothies with complete transparency. No preservatives, artificial colors, flavors, or chemicals.</p>
                     </div>
-                </div>
-            </section>
-        </div>
-    </main>
+                            </section>
 
-    <!-- Full-Width Warm Cream Reels Breakout Section -->
-    <section class="about-reels-wrapper">
-        <div class="container">
-            <div class="about-reels-section">
+            <!-- Reels Showcase Section -->
+            <section class="about-reels-section">
                 <!-- Intro Card -->
                 <div class="reels-intro-card">
                     <div class="reels-intro-top">
@@ -622,9 +610,10 @@
                         <p class="reel-caption">"perfect detox"</p>
                     </div>
                 </div>
-            </div>
+            </section>
+
         </div>
-    </section>
+    </main>
 
     <!-- Video Reels Lightbox Modal -->
     <div class="reel-modal" id="reelModal">
