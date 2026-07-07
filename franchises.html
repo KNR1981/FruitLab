@@ -124,8 +124,8 @@
         }
         /* ===== GOOGLE REVIEWS CAROUSEL ===== */
         .reviews-section-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             border-radius: 32px;
             padding: 54px 0;
             text-align: center;
@@ -135,13 +135,13 @@
         }
         .reviews-section-box h3 {
             font-size: 36px;
-            color: #fff;
+            color: #1a1a1a;
             margin-bottom: 12px;
             font-family: var(--font-serif);
         }
         .reviews-section-box p.reviews-subtitle {
             font-size: 16px;
-            color: #ccc;
+            color: #555;
             max-width: 600px;
             margin: 0 auto 40px auto;
         }
@@ -168,8 +168,8 @@
             animation-play-state: paused;
         }
         .review-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 24px;
             padding: 24px;
             min-width: 320px;
@@ -180,13 +180,14 @@
             gap: 14px;
             text-align: left;
             white-space: normal;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
             transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
         }
         .review-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(246, 195, 0, 0.3);
-            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 79, 48, 0.3);
+            background: #ffffff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
         }
         .review-user-info {
             display: flex;
@@ -197,19 +198,18 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #F62440, #ff4f79);
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 16px;
+            background: #eee;
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
         .review-avatar.avatar-alt {
-            background: linear-gradient(135deg, #FF9F1C, #FFD000);
+            background: #eee;
         }
         .review-avatar.avatar-third {
-            background: linear-gradient(135deg, #00B48A, #10B981);
+            background: #eee;
         }
         .review-user-meta {
             display: flex;
@@ -219,7 +219,7 @@
         .review-name {
             font-weight: 700;
             font-size: 15px;
-            color: #fff;
+            color: #1a1a1a;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -230,7 +230,7 @@
         }
         .review-time {
             font-size: 11px;
-            color: #aaa;
+            color: #666;
         }
         .review-stars {
             color: #FFC107;
@@ -240,7 +240,7 @@
         }
         .review-text {
             font-size: 14px;
-            color: #ccc;
+            color: #333;
             line-height: 1.6;
             margin: 0;
             display: -webkit-box;
@@ -248,18 +248,6 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             font-style: italic;
-        }
-        .review-photo {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-top: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: transform 0.3s ease;
-        }
-        .review-card:hover .review-photo {
-            transform: scale(1.03);
         }
         @media (max-width: 991px) {
             .why-partner-section {
@@ -427,7 +415,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"I recently visited the Fruit Lab shop and tried their Apple Flair smoothie. It was absolutely delightful! The smoothie was fresh, with a perfect blend of apple and other complementary flavors. The atmosphere in the shop was vibrant and welcoming, making it a great place to relax and enjoy a healthy treat. The staff were friendly and knowledgeable about their products. I would highly recommend visiting if you're looking for delicious and refreshing smoothies or juices."</p>
-                            <img src="assets/reviews/photo_nachiketh.png" alt="Store Interior Photo" class="review-photo">
                         </div>
                         
                         <!-- Review 3 -->
@@ -445,7 +432,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"The atmosphere is bright, clean, and full of positive energy, and the staff are incredibly friendly and passionate about what they do. It's so refreshing to find a place that makes eating healthy feel exciting and delicious. If you're looking for a spot that truly cares about health, flavor, and sustainability, Fruit Lab is the place to go. I always leave feeling energized 😄."</p>
-                            <img src="assets/reviews/photo_narva.png" alt="Juice Bottles Photo" class="review-photo">
                         </div>
                         
                         <!-- Review 4 -->
@@ -463,7 +449,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"Fruit Lab in Hyderabad is a distinctive culinary experience worth exploring. Known for its innovative approach to fruit-based dishes, the restaurant offers a refreshing twist on traditional dining. The ambiance is vibrant and modern, providing a lively setting for both casual and special occasions."</p>
-                            <img src="assets/reviews/photo_sathya.png" alt="Fruit Lab Front Facade Photo" class="review-photo">
                         </div>
                         
                         <!-- Review 5 -->
@@ -481,7 +466,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"Looking for a healthy and delicious drink? Head to Fruit Lab at Shaikpet, Sri Ram Nagar Colony. Their drinks are made with real fruits, no added sugars, artificial flavors, colors, or preservatives. They offer whey shakes for gym enthusiasts, gluten-free and lactose-free options, and a variety of oatmeal and chia puddings."</p>
-                            <img src="assets/reviews/photo_asthana.png" alt="Healthy Bites and Puddings Photo" class="review-photo">
                         </div>
                     </div>
                     
@@ -519,7 +503,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"I recently visited the Fruit Lab shop and tried their Apple Flair smoothie. It was absolutely delightful! The smoothie was fresh, with a perfect blend of apple and other complementary flavors. The atmosphere in the shop was vibrant and welcoming, making it a great place to relax and enjoy a healthy treat. The staff were friendly and knowledgeable about their products. I would highly recommend visiting if you're looking for delicious and refreshing smoothies or juices."</p>
-                            <img src="assets/reviews/photo_nachiketh.png" alt="Store Interior Photo" class="review-photo">
                         </div>
                         
                         <!-- Review 3 -->
@@ -537,7 +520,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"The atmosphere is bright, clean, and full of positive energy, and the staff are incredibly friendly and passionate about what they do. It's so refreshing to find a place that makes eating healthy feel exciting and delicious. If you're looking for a spot that truly cares about health, flavor, and sustainability, Fruit Lab is the place to go. I always leave feeling energized 😄."</p>
-                            <img src="assets/reviews/photo_narva.png" alt="Juice Bottles Photo" class="review-photo">
                         </div>
                         
                         <!-- Review 4 -->
@@ -555,7 +537,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"Fruit Lab in Hyderabad is a distinctive culinary experience worth exploring. Known for its innovative approach to fruit-based dishes, the restaurant offers a refreshing twist on traditional dining. The ambiance is vibrant and modern, providing a lively setting for both casual and special occasions."</p>
-                            <img src="assets/reviews/photo_sathya.png" alt="Fruit Lab Front Facade Photo" class="review-photo">
                         </div>
                         
                         <!-- Review 5 -->
@@ -573,7 +554,6 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="review-text">"Looking for a healthy and delicious drink? Head to Fruit Lab at Shaikpet, Sri Ram Nagar Colony. Their drinks are made with real fruits, no added sugars, artificial flavors, colors, or preservatives. They offer whey shakes for gym enthusiasts, gluten-free and lactose-free options, and a variety of oatmeal and chia puddings."</p>
-                            <img src="assets/reviews/photo_asthana.png" alt="Healthy Bites and Puddings Photo" class="review-photo">
                         </div>
                     </div>
                 </div>
