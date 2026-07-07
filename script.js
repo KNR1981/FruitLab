@@ -163,17 +163,47 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            // Reset open dropdowns on close
+            if (!navMenu.classList.contains('active')) {
+                const parent = document.querySelector('.nav-item.dropdown');
+                if (parent) parent.classList.remove('open');
+            }
         });
     }
 
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
+            // Dropdown Toggle Logic for mobile viewport
+            if (link.classList.contains('dropdown-toggle')) {
+                if (window.innerWidth <= 768) {
+                    const parent = link.parentElement;
+                    if (!parent.classList.contains('open')) {
+                        e.preventDefault();
+                        parent.classList.add('open');
+                        return; // Stop here so it doesn't close the menu
+                    }
+                }
+            }
+
             if (hamburger) hamburger.classList.remove('active');
             if (navMenu) navMenu.classList.remove('active');
+            
+            const parent = document.querySelector('.nav-item.dropdown');
+            if (parent) parent.classList.remove('open');
 
             // Set active class
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
+        });
+    });
+
+    const dropdownLinks = document.querySelectorAll('.dropdown-link');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (hamburger) hamburger.classList.remove('active');
+            if (navMenu) navMenu.classList.remove('active');
+            const parent = document.querySelector('.nav-item.dropdown');
+            if (parent) parent.classList.remove('open');
         });
     });
 
