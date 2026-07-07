@@ -192,6 +192,243 @@
             position: relative;
             z-index: 2;
         }
+
+        /* ===== REELS SECTION STYLING ===== */
+        .about-reels-section {
+            display: grid;
+            grid-template-columns: 1.2fr 2.8fr;
+            gap: 40px;
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+        .reels-intro-card {
+            background-color: #ff4f30; /* Coral-red matching screenshot */
+            border-radius: 32px;
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            min-height: 480px;
+            box-shadow: 0 20px 40px rgba(255, 79, 48, 0.15);
+        }
+        .reels-intro-card::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .reels-intro-top {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .reels-badge {
+            align-self: flex-start;
+            background-color: #2bb5e8; /* Blue pill matching screenshot */
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+        }
+        .reels-title {
+            font-family: var(--font-sans);
+            font-size: 58px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+            margin: 0;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+        }
+        .reels-rating {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .reels-stars {
+            color: #fff;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        .reels-rating-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        .reels-promo-btn {
+            align-self: flex-start;
+            background-color: #2bb5e8;
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px 14px 0 14px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(43, 181, 232, 0.35);
+            transition: all 0.3s ease;
+            text-transform: lowercase;
+        }
+        .reels-promo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(43, 181, 232, 0.55);
+            background-color: #1aa2d5;
+        }
+        .reels-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .reel-card {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 32px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: transform;
+        }
+        .reel-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 79, 121, 0.35);
+            box-shadow: 0 25px 50px rgba(255, 79, 121, 0.15);
+        }
+        .reel-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+        .reel-card:hover video {
+            filter: brightness(0.9);
+        }
+        .reel-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            color: #ff4f30;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            transition: all 0.3s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .reel-card:hover .reel-play-btn {
+            transform: translate(-50%, -50%) scale(1.12);
+            background-color: #ff4f30;
+            color: #fff;
+        }
+        .reel-caption {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.7);
+            z-index: 2;
+            pointer-events: none;
+            margin: 0;
+            opacity: 0.9;
+        }
+        .reel-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 12, 0.94);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(16px);
+        }
+        .reel-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .reel-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 420px;
+            aspect-ratio: 9/16;
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reel-modal.active .reel-modal-content {
+            transform: scale(1);
+        }
+        .reel-modal-content video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .reel-modal-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: #fff;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .reel-modal-close:hover {
+            transform: scale(1.15) rotate(90deg);
+            color: #ff4f79;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 991px) {
+            .about-reels-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .reels-intro-card {
+                min-height: auto;
+                gap: 40px;
+            }
+        }
+        @media (max-width: 768px) {
+            .reels-gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
     </style>
 </head>
 <body class="dark-mode">
@@ -313,6 +550,64 @@
                 </div>
             </section>
 
+            <!-- Reels Showcase Section -->
+            <section class="about-reels-section">
+                <div class="reels-intro-card">
+                    <div class="reels-intro-top">
+                        <span class="reels-badge">customer reviews</span>
+                        <h2 class="reels-title">squeeze the day</h2>
+                        <div class="reels-rating">
+                            <div class="reels-stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="reels-rating-text">10,000+ 5-star reviews on Swiggy & Zomato</span>
+                        </div>
+                    </div>
+                    <button class="reels-promo-btn">get 15% off</button>
+                </div>
+                
+                <div class="reels-gallery">
+                    <!-- Reel 1 -->
+                    <div class="reel-card" data-video="assets/reels/Video-239.mp4">
+                        <video src="assets/reels/Video-239.mp4" loop muted playsinline preload="auto"></video>
+                        <div class="reel-play-btn">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <p class="reel-caption">"squeeze for energy"</p>
+                    </div>
+                    
+                    <!-- Reel 2 -->
+                    <div class="reel-card" data-video="assets/reels/Video-298.mp4">
+                        <video src="assets/reels/Video-298.mp4" loop muted playsinline preload="auto"></video>
+                        <div class="reel-play-btn">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <p class="reel-caption">"wfh snack idea"</p>
+                    </div>
+                    
+                    <!-- Reel 3 -->
+                    <div class="reel-card" data-video="assets/reels/Video-958.mp4">
+                        <video src="assets/reels/Video-958.mp4" loop muted playsinline preload="auto"></video>
+                        <div class="reel-play-btn">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <p class="reel-caption">"perfect detox"</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Reels Lightbox Modal -->
+            <div class="reel-modal" id="reelModal">
+                <i class="fa-solid fa-xmark reel-modal-close" id="closeReelModal"></i>
+                <div class="reel-modal-content">
+                    <video id="modalVideo" controls playsinline></video>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -422,6 +717,49 @@
                 ease: 'power3.out'
             });
         }
+
+        // Video Reels Interactivity (Hover autoplay, Click to expand with audio)
+        const reelCards = document.querySelectorAll('.reel-card');
+        const reelModal = document.getElementById('reelModal');
+        const modalVideo = document.getElementById('modalVideo');
+        const closeReelModal = document.getElementById('closeReelModal');
+
+        reelCards.forEach(card => {
+            const video = card.querySelector('video');
+            
+            // Hover play effect
+            card.addEventListener('mouseenter', () => {
+                video.play().catch(e => console.log('Autoplay blocked:', e));
+            });
+            card.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
+
+            // Click to open in full modal with audio
+            card.addEventListener('click', () => {
+                const videoSrc = card.getAttribute('data-video');
+                modalVideo.src = videoSrc;
+                reelModal.classList.add('active');
+                modalVideo.play().catch(e => console.log('Modal video play blocked:', e));
+            });
+        });
+
+        // Close modal
+        closeReelModal.addEventListener('click', () => {
+            reelModal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.src = '';
+        });
+
+        // Close modal on background click
+        reelModal.addEventListener('click', (e) => {
+            if (e.target === reelModal) {
+                reelModal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.src = '';
+            }
+        });
     </script>
 </body>
 </html>
