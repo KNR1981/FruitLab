@@ -194,15 +194,22 @@
         }
 
         /* ===== REELS SECTION STYLING ===== */
+        .about-reels-wrapper {
+            background-color: #FAF6F0; /* Warm light cream/beige background breakout */
+            padding: 100px 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: inset 0 20px 40px rgba(0,0,0,0.03), inset 0 -20px 40px rgba(0,0,0,0.03);
+            border-top: 1px solid rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
         .about-reels-section {
             display: grid;
             grid-template-columns: 1.2fr 2.8fr;
             gap: 40px;
-            margin-top: 80px;
-            margin-bottom: 80px;
         }
         .reels-intro-card {
-            background-color: #ff4f30; /* Coral-red matching screenshot */
+            background: linear-gradient(135deg, #FF6F4E 0%, #FF3D3D 100%); /* Orange-to-red premium gradient */
             border-radius: 32px;
             padding: 48px 40px;
             display: flex;
@@ -211,7 +218,7 @@
             position: relative;
             overflow: hidden;
             min-height: 480px;
-            box-shadow: 0 20px 40px rgba(255, 79, 48, 0.15);
+            box-shadow: 0 20px 50px rgba(255, 61, 61, 0.22);
         }
         .reels-intro-card::before {
             content: '';
@@ -220,7 +227,7 @@
             right: -40px;
             width: 180px;
             height: 180px;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -239,6 +246,7 @@
             font-weight: 600;
             text-transform: lowercase;
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(43, 181, 232, 0.2);
         }
         .reels-title {
             font-family: var(--font-sans);
@@ -262,7 +270,7 @@
             letter-spacing: 1px;
         }
         .reels-rating-text {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             font-size: 14px;
             font-weight: 600;
             line-height: 1.4;
@@ -292,21 +300,29 @@
             gap: 24px;
         }
         .reel-card {
-            position: relative;
-            background-color: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background-color: #fff; /* Polaroid white background card */
+            padding: 12px;
+            padding-bottom: 24px;
             border-radius: 32px;
-            overflow: hidden;
-            aspect-ratio: 9/16;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
             cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             will-change: transform;
         }
         .reel-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(255, 79, 121, 0.35);
-            box-shadow: 0 25px 50px rgba(255, 79, 121, 0.15);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+        }
+        .reel-card-video-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            background-color: #000;
         }
         .reel-card video {
             width: 100%;
@@ -325,34 +341,30 @@
             width: 60px;
             height: 60px;
             background-color: #fff;
-            color: #ff4f30;
+            color: #ff3d3d; /* Coral-red play triangle in center */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 18px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
             transition: all 0.3s ease;
             z-index: 3;
             pointer-events: none;
         }
         .reel-card:hover .reel-play-btn {
             transform: translate(-50%, -50%) scale(1.12);
-            background-color: #ff4f30;
+            background-color: #ff3d3d;
             color: #fff;
         }
         .reel-caption {
-            position: absolute;
-            bottom: 24px;
-            left: 24px;
-            right: 24px;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 600;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.7);
-            z-index: 2;
-            pointer-events: none;
-            margin: 0;
+            color: #1a1a1a; /* Dark charcoal text for caption */
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            text-transform: lowercase;
+            margin: 12px 0 0 0;
             opacity: 0.9;
         }
         .reel-modal {
@@ -424,7 +436,7 @@
         @media (max-width: 768px) {
             .reels-gallery {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 24px;
                 max-width: 400px;
                 margin: 0 auto;
             }
@@ -549,9 +561,14 @@
                     </div>
                 </div>
             </section>
+        </div>
+    </main>
 
-            <!-- Reels Showcase Section -->
-            <section class="about-reels-section">
+    <!-- Full-Width Warm Cream Reels Breakout Section -->
+    <section class="about-reels-wrapper">
+        <div class="container">
+            <div class="about-reels-section">
+                <!-- Intro Card -->
                 <div class="reels-intro-card">
                     <div class="reels-intro-top">
                         <span class="reels-badge">customer reviews</span>
@@ -570,46 +587,52 @@
                     <button class="reels-promo-btn">get 15% off</button>
                 </div>
                 
+                <!-- Gallery Grid -->
                 <div class="reels-gallery">
                     <!-- Reel 1 -->
                     <div class="reel-card" data-video="assets/reels/Video-239.mp4">
-                        <video src="assets/reels/Video-239.mp4" loop muted playsinline preload="auto"></video>
-                        <div class="reel-play-btn">
-                            <i class="fa-solid fa-play"></i>
+                        <div class="reel-card-video-wrapper">
+                            <video src="assets/reels/Video-239.mp4" loop muted playsinline preload="auto"></video>
+                            <div class="reel-play-btn">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
                         </div>
                         <p class="reel-caption">"squeeze for energy"</p>
                     </div>
                     
                     <!-- Reel 2 -->
                     <div class="reel-card" data-video="assets/reels/Video-298.mp4">
-                        <video src="assets/reels/Video-298.mp4" loop muted playsinline preload="auto"></video>
-                        <div class="reel-play-btn">
-                            <i class="fa-solid fa-play"></i>
+                        <div class="reel-card-video-wrapper">
+                            <video src="assets/reels/Video-298.mp4" loop muted playsinline preload="auto"></video>
+                            <div class="reel-play-btn">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
                         </div>
                         <p class="reel-caption">"wfh snack idea"</p>
                     </div>
                     
                     <!-- Reel 3 -->
                     <div class="reel-card" data-video="assets/reels/Video-958.mp4">
-                        <video src="assets/reels/Video-958.mp4" loop muted playsinline preload="auto"></video>
-                        <div class="reel-play-btn">
-                            <i class="fa-solid fa-play"></i>
+                        <div class="reel-card-video-wrapper">
+                            <video src="assets/reels/Video-958.mp4" loop muted playsinline preload="auto"></video>
+                            <div class="reel-play-btn">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
                         </div>
                         <p class="reel-caption">"perfect detox"</p>
                     </div>
                 </div>
-            </section>
-
-            <!-- Video Reels Lightbox Modal -->
-            <div class="reel-modal" id="reelModal">
-                <i class="fa-solid fa-xmark reel-modal-close" id="closeReelModal"></i>
-                <div class="reel-modal-content">
-                    <video id="modalVideo" controls playsinline></video>
-                </div>
             </div>
-
         </div>
-    </main>
+    </section>
+
+    <!-- Video Reels Lightbox Modal -->
+    <div class="reel-modal" id="reelModal">
+        <i class="fa-solid fa-xmark reel-modal-close" id="closeReelModal"></i>
+        <div class="reel-modal-content">
+            <video id="modalVideo" controls playsinline></video>
+        </div>
+    </div>
 
         <!-- Footer -->
     <footer class="footer">
