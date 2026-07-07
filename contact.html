@@ -98,7 +98,7 @@
                 <!-- Form Side -->
                 <div class="contact-form-wrapper">
                     <h3>Send Us a Message</h3>
-                    <form action="#" class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out to Fruit Lab! We will contact you soon.');">
+                    <form action="#" class="contact-form" id="fruitlab-contact-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Your Name</label>
@@ -243,6 +243,50 @@
                 duration: 1.2,
                 ease: 'power3.out',
                 delay: 0.2
+            });
+        }
+
+        // WhatsApp Contact Form Submission & Query Params Pre-fill
+        const contactForm = document.getElementById('fruitlab-contact-form');
+        if (contactForm) {
+            // 1. Pre-fill Subject from URL Query Param
+            const urlParams = new URLSearchParams(window.location.search);
+            const subjectParam = urlParams.get('subject');
+            if (subjectParam) {
+                const subjectInput = document.getElementById('subject');
+                if (subjectInput) {
+                    subjectInput.value = subjectParam;
+                }
+            }
+
+            // 2. Submit Event Handler
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim() || 'General Query';
+                const message = document.getElementById('message').value.trim();
+                
+                const text = 
+`*New Message - Fruit Lab Contact Form* 🍒
+
+*Sender Details:*
+• Name: ${name}
+• Email: ${email}
+• Subject: ${subject}
+
+*Message:*
+${message}
+
+Please get back to me. Thank you!`;
+
+                const whatsappUrl = `https://wa.me/918639247573?text=${encodeURIComponent(text)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                // Clear fields
+                contactForm.reset();
+                alert("Redirecting to WhatsApp to send your message. Thank you!");
             });
         }
     </script>
