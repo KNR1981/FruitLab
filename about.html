@@ -300,11 +300,11 @@
             gap: 24px;
         }
         .reel-card {
-            background-color: #fff; /* Polaroid white background card */
+            background-color: #ff4f30; /* Polaroid red background card matching left card */
             padding: 12px;
             padding-bottom: 24px;
             border-radius: 32px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            box-shadow: 0 15px 35px rgba(255, 79, 48, 0.15);
             display: flex;
             flex-direction: column;
             align-items: stretch;
@@ -315,7 +315,7 @@
         }
         .reel-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+            box-shadow: 0 25px 50px rgba(255, 79, 48, 0.3);
         }
         .reel-card-video-wrapper {
             position: relative;
@@ -341,7 +341,7 @@
             width: 60px;
             height: 60px;
             background-color: #fff;
-            color: #ff3d3d; /* Coral-red play triangle in center */
+            color: #2bb5e8; /* Blue play triangle in center to match mockup */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -354,18 +354,18 @@
         }
         .reel-card:hover .reel-play-btn {
             transform: translate(-50%, -50%) scale(1.12);
-            background-color: #ff3d3d;
+            background-color: #2bb5e8;
             color: #fff;
         }
         .reel-caption {
-            color: #1a1a1a; /* Dark charcoal text for caption */
+            color: #fff; /* White text for caption on red bottom */
             font-family: var(--font-sans);
             font-size: 15px;
             font-weight: 700;
             text-align: center;
             text-transform: lowercase;
             margin: 12px 0 0 0;
-            opacity: 0.9;
+            opacity: 0.95;
         }
         .reel-modal {
             position: fixed;
