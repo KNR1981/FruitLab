@@ -231,7 +231,7 @@
         }
         .reels-badge {
             align-self: flex-start;
-            background-color: #2bb5e8; /* Blue pill matching screenshot */
+            background-color: #FF9F1C; /* Premium gold matching rating stars */
             color: #fff;
             padding: 8px 18px;
             border-radius: 30px;
@@ -239,7 +239,7 @@
             font-weight: 600;
             text-transform: lowercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(43, 181, 232, 0.2);
+            box-shadow: 0 4px 10px rgba(255, 159, 28, 0.25);
         }
         .reels-title {
             font-family: var(--font-sans);
@@ -250,6 +250,16 @@
             margin: 0;
             text-transform: lowercase;
             letter-spacing: -1px;
+        }
+        .reels-title-long {
+            font-family: var(--font-serif);
+            font-size: 38px !important;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            margin: 0;
+            text-transform: none; /* Keep original casing */
+            letter-spacing: -0.5px;
         }
         .reels-rating {
             display: flex;
@@ -270,7 +280,7 @@
         }
         .reels-promo-btn {
             align-self: flex-start;
-            background-color: #2bb5e8;
+            background-color: #FF9F1C;
             color: #fff;
             border: none;
             padding: 14px 28px;
@@ -278,14 +288,14 @@
             font-weight: 700;
             font-size: 14px;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(43, 181, 232, 0.35);
+            box-shadow: 0 8px 24px rgba(255, 159, 28, 0.4);
             transition: all 0.3s ease;
             text-transform: lowercase;
         }
         .reels-promo-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(43, 181, 232, 0.55);
-            background-color: #1aa2d5;
+            box-shadow: 0 12px 30px rgba(255, 159, 28, 0.6);
+            background-color: #E08500;
         }
         .reels-gallery {
             display: grid;
@@ -334,7 +344,7 @@
             width: 60px;
             height: 60px;
             background-color: #fff;
-            color: #2bb5e8; /* Blue play triangle in center to match mockup */
+            color: #FF9F1C; /* Gold play triangle in center to match accent color */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -347,7 +357,7 @@
         }
         .reel-card:hover .reel-play-btn {
             transform: translate(-50%, -50%) scale(1.12);
-            background-color: #2bb5e8;
+            background-color: #FF9F1C;
             color: #fff;
         }
         .reel-caption {
@@ -560,7 +570,7 @@
                 <div class="reels-intro-card">
                     <div class="reels-intro-top">
                         <span class="reels-badge">customer reviews</span>
-                        <h2 class="reels-title">squeeze the day</h2>
+                        <h2 class="reels-title reels-title-long">Revitalize. Energize. Harmonize.</h2>
                         <div class="reels-rating">
                             <div class="reels-stars">
                                 <i class="fa-solid fa-star"></i>
@@ -569,7 +579,7 @@
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                             </div>
-                            <span class="reels-rating-text">10,000+ 5-star reviews on Swiggy & Zomato</span>
+                            <span class="reels-rating-text">100+ 5-Star Reviews</span>
                         </div>
                     </div>
                     <button class="reels-promo-btn">get 15% off</button>
