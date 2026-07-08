@@ -1120,14 +1120,14 @@ body.dark-mode .category-tab-btn {
 .cfp-5 { top: 90px; left: 38%; }
 .cfp-6 { top: 90px; left: 38%; }
 
-.menu-card:hover .cfp-1 {
+.menu-card:hover .cfp-1, .menu-card.active .cfp-1 {
     top: -40px;
     left: 10px;
     transform: scale(1.1) rotate(-15deg);
     opacity: 1;
 }
 
-.menu-card:hover .cfp-2 {
+.menu-card:hover .cfp-2, .menu-card.active .cfp-2 {
     top: -30px;
     left: auto;
     right: 10px;
@@ -1135,14 +1135,14 @@ body.dark-mode .category-tab-btn {
     opacity: 1;
 }
 
-.menu-card:hover .cfp-3 {
+.menu-card:hover .cfp-3, .menu-card.active .cfp-3 {
     top: 45px;
     left: -35px;
     transform: scale(1.0) rotate(-35deg);
     opacity: 1;
 }
 
-.menu-card:hover .cfp-4 {
+.menu-card:hover .cfp-4, .menu-card.active .cfp-4 {
     top: 55px;
     left: auto;
     right: -35px;
@@ -1150,14 +1150,14 @@ body.dark-mode .category-tab-btn {
     opacity: 1;
 }
 
-.menu-card:hover .cfp-5 {
+.menu-card:hover .cfp-5, .menu-card.active .cfp-5 {
     top: 125px;
     left: -20px;
     transform: scale(0.9) rotate(15deg);
     opacity: 1;
 }
 
-.menu-card:hover .cfp-6 {
+.menu-card:hover .cfp-6, .menu-card.active .cfp-6 {
     top: 135px;
     left: auto;
     right: -20px;

@@ -612,6 +612,17 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.add('active');
             
             swapHeroBottles(item.bottle);
+            spawnHeroParticles(item.bottle);
+
+            if (window.innerWidth <= 768) {
+                const sliderViewport = document.getElementById('slider-viewport');
+                if (sliderViewport) {
+                    sliderViewport.scrollTo({
+                        left: card.offsetLeft - (sliderViewport.clientWidth - card.clientWidth) / 2,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
 
         return card;
@@ -801,6 +812,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const dimVal = Math.min(0.45, ax * 0.35); // Max opacity of 45%
                                 dimOverlay.style.opacity = dimVal;
                             }
+                        });
+                        
+                        // Toggle active class on cards to trigger fruit animations on mobile
+                        cards.forEach((card, idx) => {
+                            card.classList.toggle('active', idx === closestIdx);
                         });
                         
                         dotsContainer.querySelectorAll('.menu-dot').forEach((d, dIdx) => {
