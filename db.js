@@ -257,7 +257,10 @@ class Database {
     async getUser(username) {
         if (useSupabase) {
             const { data, error } = await supabase.from('users').select('*').eq('username', username).maybeSingle();
-            if (error) console.error("Supabase getUser error:", error);
+            if (error) {
+                console.error("Supabase getUser error:", error);
+                return this.data.users.find(u => u.username.toLowerCase() === username.toLowerCase());
+            }
             return data;
         }
         return this.data.users.find(u => u.username.toLowerCase() === username.toLowerCase());
@@ -266,7 +269,10 @@ class Database {
     async getUserById(id) {
         if (useSupabase) {
             const { data, error } = await supabase.from('users').select('*').eq('id', id).maybeSingle();
-            if (error) console.error("Supabase getUserById error:", error);
+            if (error) {
+                console.error("Supabase getUserById error:", error);
+                return this.data.users.find(u => u.id === id);
+            }
             return data;
         }
         return this.data.users.find(u => u.id === id);
@@ -289,7 +295,10 @@ class Database {
             const { error } = await supabase.from('users').insert([newUser]);
             if (error) {
                 console.error("Supabase createUser error:", error);
-                return null;
+                // Fallback to local
+                this.data.users.push(newUser);
+                this.saveLocal();
+                return newUser;
             }
             return newUser;
         }
