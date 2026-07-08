@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Berry Treasure', price: '₹169', bottle: 'new_red', fruits: ['orange', 'strawberry', 'blueberry', 'watermelon'], rating: '4.8', reviews: '+33', ingredients: 'Blueberry, Strawberry, Watermelon, Orange', subCategory: 'fruit-juices' },
             { name: 'Easy Tropical', price: '₹169', bottle: 'new_orange', fruits: ['apple', 'banana', 'pineapple', 'mango'], rating: '4.9', reviews: '+19', ingredients: 'Pineapple, Apple, Mango, Banana', subCategory: 'fruit-juices' },
             { name: 'Apple Flair', price: '₹169', bottle: 'orig_yellow', fruits: ['apple', 'pineapple', 'mint'], rating: '4.7', reviews: '+9', ingredients: 'Pineapple, Apple, Mint', subCategory: 'fruit-juices' },
-            { name: 'Hawaiian Orange', price: '₹169', bottle: 'new_orange', fruits: ['banana', 'orange', 'mango'], rating: '4.8', reviews: '+14', ingredients: 'Orange, Mango, Banana', subCategory: 'fruit-juices', image: 'hawaiian_orange_bottle.png' },
+            { name: 'Hawaiian Orange', price: '₹169', bottle: 'new_orange', fruits: ['banana', 'orange', 'mango'], rating: '4.8', reviews: '+14', ingredients: 'Orange, Mango, Banana', subCategory: 'fruit-juices' },
  
             // Column 2: Smoothies
             { name: 'Tropical Banana', price: '₹169', bottle: 'smoothie', fruits: ['banana', 'honey', 'milk'], rating: '4.8', reviews: '+12', ingredients: 'Banana, Milk, Honey', subCategory: 'smoothies' },
