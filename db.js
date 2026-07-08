@@ -578,6 +578,49 @@ class Database {
         }
         return false;
     }
+
+    async addLoginLog(username, method, status) {
+        const log = {
+            id: 'log-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+            username: username,
+            method: method,
+            status: status,
+            timestamp: new Date().toISOString()
+        };
+
+        if (useSupabase) {
+            try {
+                const { error } = await supabase.from('logins').insert([log]);
+                if (error) {
+                    if (!this.data.logins) this.data.logins = [];
+                    this.data.logins.push(log);
+                    this.saveLocal();
+                }
+            } catch (e) {
+                if (!this.data.logins) this.data.logins = [];
+                this.data.logins.push(log);
+                this.saveLocal();
+            }
+        } else {
+            if (!this.data.logins) this.data.logins = [];
+            this.data.logins.push(log);
+            this.saveLocal();
+        }
+        return log;
+    }
+
+    async getLoginLogs() {
+        if (useSupabase) {
+            try {
+                const { data, error } = await supabase.from('logins').select('*').order('timestamp', { ascending: false });
+                if (!error && data) return data;
+            } catch (e) {
+                // Fallback to local
+            }
+        }
+        if (!this.data.logins) this.data.logins = [];
+        return [...this.data.logins].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    }
 }
 
 module.exports = new Database();

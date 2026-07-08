@@ -93,6 +93,7 @@ app.post('/api/auth/register', async (req, res) => {
         }
         // Automatically log in user
         req.session.userId = user.id;
+        await db.addLoginLog(username.trim(), 'Standard Registration', 'Success');
         res.json({ success: true, user: { username: user.username, role: user.role, points: user.points } });
     } catch (err) {
         console.error(err);
@@ -108,13 +109,37 @@ app.post('/api/auth/login', async (req, res) => {
     try {
         const user = await db.getUser(username.trim());
         if (!user || user.password !== hashPassword(password)) {
+            await db.addLoginLog(username.trim(), 'Standard Login', 'Failed');
             return res.status(400).json({ error: 'Invalid username or password' });
         }
         req.session.userId = user.id;
+        await db.addLoginLog(username.trim(), 'Standard Login', 'Success');
         res.json({ success: true, user: { username: user.username, role: user.role, points: user.points } });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Login failed' });
+    }
+});
+
+app.post('/api/auth/google-signin', async (req, res) => {
+    const { email, name } = req.body;
+    if (!email) {
+        return res.status(400).json({ error: 'Google Email is required' });
+    }
+    try {
+        let user = await db.getUser(email.trim());
+        let isNew = false;
+        if (!user) {
+            // Create a new user using Google details
+            user = await db.createUser(email.trim(), 'google-oauth-dummy-pw', 'customer');
+            isNew = true;
+        }
+        req.session.userId = user.id;
+        await db.addLoginLog(email.trim(), isNew ? 'Google Registration' : 'Google Sign In', 'Success');
+        res.json({ success: true, user: { username: user.username, role: user.role, points: user.points } });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Google Sign In failed' });
     }
 });
 
@@ -311,6 +336,16 @@ app.get('/api/admin/users', requireAdmin, async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to fetch users' });
+    }
+});
+
+app.get('/api/admin/logins', requireAdmin, async (req, res) => {
+    try {
+        const logs = await db.getLoginLogs();
+        res.json(logs);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch login logs' });
     }
 });
 

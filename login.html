@@ -187,7 +187,210 @@
             font-weight: 600;
             text-decoration: underline;
         }
-    </style>
+    
+        /* ===== GOOGLE SIGN IN BUTTON & PICKER MODAL ===== */
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+            color: #888;
+            font-size: 13px;
+        }
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(246, 36, 64, 0.15);
+        }
+        .auth-divider:not(:empty)::before {
+            margin-right: .5em;
+        }
+        .auth-divider:not(:empty)::after {
+            margin-left: .5em;
+        }
+        .google-auth-btn {
+            width: 100%;
+            padding: 13px;
+            background: #ffffff;
+            border: 1.5px solid rgba(56, 0, 10, 0.15);
+            border-radius: 12px;
+            color: #38000A;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+        }
+        .google-auth-btn:hover {
+            background: #fdfaf6;
+            border-color: #F62440;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(246, 36, 64, 0.15);
+        }
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .google-picker-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100002; /* Above subscription popup */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .google-picker-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .google-picker-card {
+            background: #ffffff;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 420px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            text-align: left;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        .google-picker-overlay.active .google-picker-card {
+            transform: scale(1);
+        }
+        .google-logo-picker {
+            width: 75px;
+            height: auto;
+            display: block;
+            margin: 0 auto 16px auto;
+        }
+        .google-picker-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .google-picker-header h2 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #202124;
+            margin: 0 0 8px 0;
+        }
+        .google-picker-header p {
+            font-size: 16px;
+            color: #5f6368;
+            margin: 0;
+        }
+        .google-accounts-list {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .google-account-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 10px;
+            cursor: pointer;
+            border-top: 1px solid #e0e0e0;
+            transition: background 0.2s;
+            border-radius: 4px;
+        }
+        .google-account-item:hover {
+            background: #f7f9fa;
+        }
+        .google-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1a73e8;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .google-account-item:last-child .google-avatar {
+            background: #f1f3f4;
+            color: #5f6368;
+            font-size: 14px;
+        }
+        .google-acc-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .google-acc-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3c4043;
+        }
+        .google-acc-email {
+            font-size: 12px;
+            color: #5f6368;
+        }
+        .google-custom-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #202124;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .google-custom-input:focus {
+            border-color: #1a73e8;
+        }
+        .google-btn-primary {
+            background: #1a73e8;
+            color: #ffffff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .google-btn-primary:hover {
+            background: #1557b0;
+        }
+        .google-btn-secondary {
+            background: transparent;
+            color: #1a73e8;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .google-picker-footer p {
+            font-size: 12px;
+            color: #5f6368;
+            line-height: 1.5;
+            margin: 15px 0 0 0;
+        }
+</style>
 </head>
 <body class="dark-mode">
     <!-- Page Loader -->
@@ -306,6 +509,14 @@
                 <button type="submit" class="auth-submit-btn">Create Account</button>
                 <p class="auth-switch-prompt">Already have an account? <span onclick="switchTab('login')">Sign In here</span></p>
             </form>
+            <div class="auth-divider">
+                <span>or</span>
+            </div>
+            <button type="button" class="google-auth-btn" onclick="handleGoogleSignIn()">
+                <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google Logo" class="google-icon">
+                Sign in with Google
+            </button>
+
         </div>
     </div>
 
@@ -400,6 +611,70 @@
     <!-- Scripts -->
     <script src="script.js?v=70"></script>
     <script>
+        // Google Sign In Mock Logic
+        function handleGoogleSignIn() {
+            document.getElementById('google-picker-popup').classList.add('active');
+        }
+
+        function closeGooglePicker() {
+            document.getElementById('google-picker-popup').classList.remove('active');
+            hideGoogleAnotherAccount();
+        }
+
+        function showGoogleAnotherAccount() {
+            document.getElementById('google-another-form').style.display = 'block';
+        }
+
+        function hideGoogleAnotherAccount() {
+            document.getElementById('google-another-form').style.display = 'none';
+            document.getElementById('google-custom-email').value = '';
+            document.getElementById('google-custom-name').value = '';
+        }
+
+        function submitGoogleCustomAccount() {
+            const email = document.getElementById('google-custom-email').value.trim();
+            const name = document.getElementById('google-custom-name').value.trim();
+            if (!email || !name) {
+                alert('Please fill out both email and name.');
+                return;
+            }
+            loginWithGoogleMock(email, name);
+        }
+
+        function loginWithGoogleMock(email, name) {
+            closeGooglePicker();
+            
+            // Show page loader while authentication is simulated
+            const loader = document.getElementById('page-loader');
+            if (loader) loader.classList.remove('fade-out');
+
+            fetch('/api/auth/google-signin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, name: name })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (loader) loader.classList.add('fade-out');
+                if (data.error) {
+                    document.getElementById('error-text').innerText = data.error;
+                    document.getElementById('auth-error').style.display = 'flex';
+                } else {
+                    document.getElementById('success-text').innerText = `Google login successful! Welcome, ${name}`;
+                    document.getElementById('auth-success').style.display = 'flex';
+                    setTimeout(() => {
+                        window.location.href = 'profile.html';
+                    }, 1000);
+                }
+            })
+            .catch(err => {
+                if (loader) loader.classList.add('fade-out');
+                console.error(err);
+                document.getElementById('error-text').innerText = 'Google Sign In failed.';
+                document.getElementById('auth-error').style.display = 'flex';
+            });
+        }
+
         // Check current session
         fetch('/api/auth/session')
             .then(res => res.json())
@@ -474,5 +749,53 @@
             });
         }
     </script>
+
+    <!-- Google Sign In simulated modal chooser -->
+    <div id="google-picker-popup" class="google-picker-overlay">
+        <div class="google-picker-card">
+            <button class="sub-popup-close" onclick="closeGooglePicker()" style="top: 14px; right: 18px;">&times;</button>
+            <div class="google-picker-header">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Color_Logo.svg/1000px-Google_Color_Logo.svg.png" alt="Google Logo" class="google-logo-picker">
+                <h2>Choose an account</h2>
+                <p>to continue to <strong>Fruit Lab</strong></p>
+            </div>
+            <div class="google-accounts-list">
+                <div class="google-account-item" onclick="loginWithGoogleMock('nithin.reddy@gmail.com', 'Nithin Reddy')">
+                    <span class="google-avatar">N</span>
+                    <div class="google-acc-details">
+                        <span class="google-acc-name">Nithin Reddy</span>
+                        <span class="google-acc-email">nithin.reddy@gmail.com</span>
+                    </div>
+                </div>
+                <div class="google-account-item" onclick="loginWithGoogleMock('knr1981@gmail.com', 'K.N.R.')">
+                    <span class="google-avatar">K</span>
+                    <div class="google-acc-details">
+                        <span class="google-acc-name">K.N.R.</span>
+                        <span class="google-acc-email">knr1981@gmail.com</span>
+                    </div>
+                </div>
+                <div class="google-account-item" onclick="showGoogleAnotherAccount()">
+                    <span class="google-avatar"><i class="fa-solid fa-user-plus"></i></span>
+                    <div class="google-acc-details">
+                        <span class="google-acc-name" style="color: #1a73e8; font-weight: 700;">Use another account</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Another Account Form (hidden by default) -->
+            <div id="google-another-form" style="display: none; padding-top: 15px; border-top: 1px solid #e0e0e0; margin-top: 15px;">
+                <input type="email" id="google-custom-email" class="google-custom-input" placeholder="Email (e.g. user@gmail.com)" required>
+                <input type="text" id="google-custom-name" class="google-custom-input" placeholder="Full name" style="margin-top: 10px;" required>
+                <div class="google-picker-actions" style="margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" class="google-btn-secondary" onclick="hideGoogleAnotherAccount()">Back</button>
+                    <button type="button" class="google-btn-primary" onclick="submitGoogleCustomAccount()">Next</button>
+                </div>
+            </div>
+            
+            <div class="google-picker-footer">
+                <p>To continue, Google will share your name, email address, and profile picture with Fruit Lab.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

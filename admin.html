@@ -271,7 +271,26 @@
             background: rgba(255,255,255,0.1);
             color: #fff;
         }
-    </style>
+    
+        /* ===== ADMIN LOGIN AUDIT BADGES ===== */
+        .admin-status-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .status-active {
+            background-color: rgba(46, 213, 115, 0.15);
+            color: #2ed573;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+        }
+        .status-inactive {
+            background-color: rgba(226, 55, 68, 0.15);
+            color: #ff6b76;
+            border: 1px solid rgba(226, 55, 68, 0.3);
+        }
+</style>
 </head>
 <body class="dark-mode">
     <!-- Page Loader -->
@@ -315,6 +334,7 @@
                 <button class="admin-menu-btn" id="menu-btn-menu" onclick="showSection('menu')"><i class="fa-solid fa-mug-hot"></i> Menu CMS</button>
                 <button class="admin-menu-btn" id="menu-btn-blogs" onclick="showSection('blogs')"><i class="fa-solid fa-newspaper"></i> Blogs CMS</button>
                 <button class="admin-menu-btn" id="menu-btn-users" onclick="showSection('users')"><i class="fa-solid fa-users"></i> Users Audit</button>
+                <button class="admin-menu-btn" id="menu-btn-logins" onclick="showSection('logins')"><i class="fa-solid fa-clock-rotate-left"></i> Login Logs</button>
             </div>
 
             <!-- Content Workspace -->
@@ -432,6 +452,29 @@
                         </table>
                     </div>
                 </div>
+                <!-- SECTION: LOGIN LOGS -->
+                <div class="admin-section" id="section-logins" style="display: none;">
+                    <div class="admin-section-header">
+                        <span>User Login Audit Activity Logs</span>
+                    </div>
+                    
+                    <div style="overflow-x:auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Username</th>
+                                    <th>Authentication Method</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-logins-list">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
 
                 <!-- SECTION: BLOGS CMS -->
                 <div class="admin-section" id="section-blogs" style="display: none;">
@@ -517,7 +560,7 @@
 
         // Tab routing logic
         function showSection(sectionName) {
-            const sections = ['dashboard', 'menu', 'blogs', 'users'];
+            const sections = ['dashboard', 'menu', 'blogs', 'users', 'logins'];
             sections.forEach(s => {
                 document.getElementById(`section-${s}`).style.display = s === sectionName ? 'block' : 'none';
                 document.getElementById(`menu-btn-${s}`).classList.toggle('active', s === sectionName);
@@ -527,6 +570,7 @@
             if (sectionName === 'menu') loadMenuManager();
             if (sectionName === 'blogs') loadBlogManager();
             if (sectionName === 'users') loadUsersAudit();
+            if (sectionName === 'logins') loadLoginLogs();
         }
 
         // Dashboard Stats Loader
@@ -726,6 +770,39 @@
                 });
         }
 
+        // Login Logs Loader
+        function loadLoginLogs() {
+            fetch('/api/admin/logins')
+                .then(res => res.json())
+                .then(logs => {
+                    const tbody = document.getElementById('admin-logins-list');
+                    tbody.innerHTML = '';
+                    if (logs.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color: #888;">No logins logged yet.</td></tr>';
+                        return;
+                    }
+                    logs.forEach(log => {
+                        const tr = document.createElement('tr');
+                        const dateStr = new Date(log.timestamp).toLocaleString();
+                        const statusClass = log.status === 'Success' ? 'status-active' : 'status-inactive';
+                        const statusBadge = `<span class="admin-status-badge ${statusClass}">${log.status}</span>`;
+                        
+                        tr.innerHTML = `
+                            <td>${dateStr}</td>
+                            <td style="font-weight: 700;">${log.username}</td>
+                            <td><i class="${log.method.includes('Google') ? 'fa-brands fa-google' : 'fa-solid fa-key'}" style="margin-right: 6px; color: ${log.method.includes('Google') ? '#4285F4' : '#F62440'}"></i> ${log.method}</td>
+                            <td>${statusBadge}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('admin-logins-list').innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color: #f62440;">Failed to load logins.</td></tr>';
+                });
+        }
+    </script>
+
         // Add Blog Post Submit
         function handleCreateBlogPost(e) {
             e.preventDefault();
@@ -864,6 +941,5 @@
         </div>
     </div>
 
-    </script>
-</body>
+    </body>
 </html>
