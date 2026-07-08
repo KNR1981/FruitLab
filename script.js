@@ -1863,3 +1863,57 @@ Please confirm my subscription order. Thank you!`;
 
     // Safety timeout fallback (1.5 seconds)
     setTimeout(hidePageLoader, 1500);
+
+
+    // --- Subscription Popup Modal System ---
+    if (!window.location.pathname.includes('subscriptions.html')) {
+        const popupOverlay = document.createElement('div');
+        popupOverlay.id = 'subscription-popup';
+        popupOverlay.className = 'sub-popup-overlay';
+        popupOverlay.innerHTML = `
+            <div class="sub-popup-content">
+                <button class="sub-popup-close" id="sub-popup-close-btn">&times;</button>
+                <div class="sub-popup-badge"><i class="fa-solid fa-repeat"></i> Subscribe & Save</div>
+                <h3>Revitalize. Energize. Harmonize.</h3>
+                <p>Get fresh cold-pressed juices and wellness bowls delivered daily directly to your doorstep. Save 10% on every order!</p>
+                <div class="sub-popup-benefits">
+                    <span><i class="fa-solid fa-check"></i> Free Daily Delivery</span>
+                    <span><i class="fa-solid fa-check"></i> 100+ 5-Star Reviews</span>
+                </div>
+                <a href="subscriptions.html" class="sub-popup-cta">Explore Wellness Plans <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        `;
+        document.body.appendChild(popupOverlay);
+
+        let hasScrolled = false;
+        let lastDismissedTime = 0;
+
+        const closeBtn = document.getElementById('sub-popup-close-btn');
+        if (closeBtn) {
+            closeBtn.onclick = () => {
+                popupOverlay.classList.remove('active');
+                lastDismissedTime = Date.now();
+            };
+        }
+        popupOverlay.onclick = (e) => {
+            if (e.target === popupOverlay) {
+                popupOverlay.classList.remove('active');
+                lastDismissedTime = Date.now();
+            }
+        };
+
+        window.addEventListener('scroll', () => {
+            hasScrolled = true;
+        }, { passive: true });
+
+        // Check every 20 seconds (20000ms)
+        setInterval(() => {
+            const timeSinceDismiss = Date.now() - lastDismissedTime;
+            
+            // Only trigger if user is scrolling, popup is closed, and at least 20 seconds have elapsed since page load or last dismiss
+            if (hasScrolled && !popupOverlay.classList.contains('active') && timeSinceDismiss >= 20000) {
+                popupOverlay.classList.add('active');
+                hasScrolled = false; // Reset scroll flag
+            }
+        }, 20000);
+    }
