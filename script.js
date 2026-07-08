@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Berry Treasure', price: '₹169', bottle: 'new_red', fruits: ['orange', 'strawberry', 'blueberry', 'watermelon'], rating: '4.8', reviews: '+33', ingredients: 'Blueberry, Strawberry, Watermelon, Orange', subCategory: 'fruit-juices' },
             { name: 'Easy Tropical', price: '₹169', bottle: 'new_orange', fruits: ['apple', 'banana', 'pineapple', 'mango'], rating: '4.9', reviews: '+19', ingredients: 'Pineapple, Apple, Mango, Banana', subCategory: 'fruit-juices' },
             { name: 'Apple Flair', price: '₹169', bottle: 'orig_yellow', fruits: ['apple', 'pineapple', 'mint'], rating: '4.7', reviews: '+9', ingredients: 'Pineapple, Apple, Mint', subCategory: 'fruit-juices' },
-            { name: 'Hawaiian Orange', price: '₹169', bottle: 'new_orange', fruits: ['banana', 'orange', 'mango'], rating: '4.8', reviews: '+14', ingredients: 'Orange, Mango, Banana', subCategory: 'fruit-juices' },
+            { name: 'Hawaiian Orange', price: '₹169', bottle: 'new_orange', fruits: ['banana', 'orange', 'mango'], rating: '4.8', reviews: '+14', ingredients: 'Orange, Mango, Banana', subCategory: 'fruit-juices', image: 'hawaiian_orange_bottle.png' },
  
             // Column 2: Smoothies
             { name: 'Tropical Banana', price: '₹169', bottle: 'smoothie', fruits: ['banana', 'honey', 'milk'], rating: '4.8', reviews: '+12', ingredients: 'Banana, Milk, Honey', subCategory: 'smoothies' },
@@ -560,8 +560,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="card-image-wrapper">
                 ${item.image 
-                    ? `<img src="assets/${item.image}?v=70" alt="${item.name}" class="card-product-image card-food-image">`
-                    : `<img src="assets/card_${item.bottle}_bottle.png?v=70" alt="${item.name}" class="card-product-image">`
+                    ? `<img src="assets/${item.image}?v=80" alt="${item.name}" class="card-product-image ${item.image.includes('bottle') ? '' : 'card-food-image'}">`
+                    : `<img src="assets/card_${item.bottle}_bottle.png?v=80" alt="${item.name}" class="card-product-image">`
                 }
                 <button class="card-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
