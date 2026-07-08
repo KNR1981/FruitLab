@@ -1875,10 +1875,13 @@ Please confirm my subscription order. Thank you!`;
                 <button class="sub-popup-close" id="sub-popup-close-btn">&times;</button>
                 <div class="sub-popup-grid">
                     <div class="sub-popup-media">
-                        <img src="assets/all_five_bottles.png" alt="Fruit Lab Bottles" class="sub-popup-img">
+                        <img src="assets/all_five_bottles_real.jpg" alt="Fruit Lab Bottles" class="sub-popup-img-real">
                     </div>
                     <div class="sub-popup-info">
-                        <div class="sub-popup-badge"><i class="fa-solid fa-repeat"></i> Subscribe & Save</div>
+                        <div class="sub-popup-header-row">
+                            <img src="assets/new_logo_1.png" alt="Fruit Lab Logo" class="sub-popup-logo">
+                            <div class="sub-popup-badge"><i class="fa-solid fa-repeat"></i> Subscribe & Save</div>
+                        </div>
                         <h3>Revitalize. Energize. Harmonize.</h3>
                         <p>Get fresh cold-pressed juices and wellness bowls delivered daily directly to your doorstep. Save 10% on every order!</p>
                         <div class="sub-popup-benefits">
