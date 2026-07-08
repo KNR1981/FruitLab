@@ -603,6 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="card-price-badge">${item.price}</div>
             </div>
+            <div class="card-dim-overlay"></div>
         `;
 
         // Click handler to select and update active card & hero theme
@@ -752,7 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     dotsContainer.appendChild(dot);
                 });
 
-                // Scroll snap indicator tracker
+                // Scroll snap indicator tracker & 3D Coverflow animation
                 if (sliderViewport) {
                     if (sliderViewport._scrollListener) {
                         sliderViewport.removeEventListener('scroll', sliderViewport._scrollListener);
@@ -766,12 +767,39 @@ document.addEventListener('DOMContentLoaded', () => {
                         let closestIdx = 0;
                         let minDiff = Infinity;
                         
-                        Array.from(track.children).forEach((card, idx) => {
+                        const cards = Array.from(track.children);
+                        if (cards.length === 0) return;
+                        
+                        const cardWidth = cards[0].clientWidth || 280;
+                        
+                        cards.forEach((card, idx) => {
                             const cardCenter = card.offsetLeft + (card.clientWidth / 2);
-                            const diff = Math.abs(viewportCenter - cardCenter);
-                            if (diff < minDiff) {
-                                minDiff = diff;
+                            const diff = cardCenter - viewportCenter;
+                            const absDiff = Math.abs(diff);
+                            
+                            if (absDiff < minDiff) {
+                                minDiff = absDiff;
                                 closestIdx = idx;
+                            }
+                            
+                            // Normalized distance from center (-1 to 1)
+                            const rel = diff / (cardWidth + 20); // card width + gap
+                            const ax = Math.abs(rel);
+                            
+                            // 3D Coverflow transformations (scale, tilt, depth)
+                            const sc = Math.max(0.75, 1 - ax * 0.12); // Scale down slightly when off-center
+                            const tz = -ax * 120; // Push back in 3D space
+                            const ry = -rel * 22; // Rotate Y (tilt towards center)
+                            const rz = rel * 3; // Rotate Z (subtle side angle)
+                            
+                            // Apply CSS styles
+                            card.style.transform = `translateZ(${tz}px) rotateY(${ry}deg) rotateZ(${rz}deg) scale(${sc})`;
+                            
+                            // Dim inactive cards via overlay opacity
+                            const dimOverlay = card.querySelector('.card-dim-overlay');
+                            if (dimOverlay) {
+                                const dimVal = Math.min(0.45, ax * 0.35); // Max opacity of 45%
+                                dimOverlay.style.opacity = dimVal;
                             }
                         });
                         
@@ -782,6 +810,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     sliderViewport.addEventListener('scroll', onScroll);
                     sliderViewport._scrollListener = onScroll;
+                    
+                    // Trigger once initially to set the 3D transforms right away
+                    setTimeout(onScroll, 50);
                 }
             } else {
                 if (dotsContainer) dotsContainer.style.display = 'none';
