@@ -40,9 +40,9 @@
             gap: 10px;
         }
         .admin-menu-btn {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            color: #ccc;
+            background: #ffffff;
+            border: 1px solid rgba(246, 36, 64, 0.08);
+            color: #555;
             padding: 14px 20px;
             border-radius: 12px;
             text-align: left;
@@ -61,20 +61,19 @@
             box-shadow: 0 4px 15px rgba(255, 79, 121, 0.2);
         }
         .admin-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #ffffff;
+            border: 1px solid rgba(246, 36, 64, 0.08);
             border-radius: 20px;
             padding: 30px;
-            backdrop-filter: var(--glass-blur);
-            box-shadow: var(--shadow-premium);
+            box-shadow: 0 10px 30px rgba(56, 0, 10, 0.04);
         }
         .admin-section-header {
             font-size: 24px;
             font-family: var(--font-sans);
-            color: #fff;
+            color: #2b1115;
             margin-bottom: 25px;
             font-weight: 700;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(246, 36, 64, 0.08);
             padding-bottom: 15px;
             display: flex;
             justify-content: space-between;
@@ -94,8 +93,8 @@
             }
         }
         .stat-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 229, 191, 0.12);
+            border: 1px solid rgba(255, 229, 191, 0.3);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
@@ -108,7 +107,7 @@
         }
         .stat-lbl {
             font-size: 12px;
-            color: #aaa;
+            color: #666;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -133,13 +132,13 @@
         }
         .admin-field label {
             font-size: 13px;
-            color: #ccc;
-            font-weight: 500;
+            color: #444;
+            font-weight: 600;
         }
         .admin-input, .admin-select, .admin-textarea {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
+            background: #ffffff;
+            border: 1px solid rgba(246, 36, 64, 0.15);
+            color: #2b1115;
             padding: 12px;
             border-radius: 10px;
             outline: none;
@@ -148,6 +147,7 @@
         }
         .admin-input:focus, .admin-select:focus, .admin-textarea:focus {
             border-color: #ff4f79;
+            box-shadow: 0 0 0 3px rgba(255, 79, 121, 0.1);
         }
         .admin-submit-btn {
             background: linear-gradient(135deg, #2ed573, #7bed9f);
@@ -172,13 +172,14 @@
         }
         .admin-table th, .admin-table td {
             padding: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(246, 36, 64, 0.08);
             font-size: 14px;
-            color: #ccc;
+            color: #333;
         }
         .admin-table th {
-            color: #888;
-            font-weight: 600;
+            color: #555;
+            background: rgba(255, 229, 191, 0.1);
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 12px;
         }
@@ -205,24 +206,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
             padding: 20px;
         }
         .edit-modal.open {
             display: flex;
         }
         .edit-modal-content {
-            background: rgba(25, 10, 15, 0.95);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: #ffffff;
+            border: 1px solid rgba(246, 36, 64, 0.12);
             border-radius: 24px;
             width: 100%;
             max-width: 650px;
             padding: 35px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 40px rgba(56, 0, 10, 0.1);
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
@@ -233,18 +234,18 @@
             right: 20px;
             background: none;
             border: none;
-            color: #aaa;
+            color: #555;
             font-size: 24px;
             cursor: pointer;
             transition: color 0.3s ease;
         }
         .edit-modal-close:hover {
-            color: #fff;
+            color: #ff4f79;
         }
         .edit-modal-title {
             font-size: 22px;
             font-weight: 700;
-            color: #fff;
+            color: #2b1115;
             margin-bottom: 25px;
             font-family: var(--font-sans);
             display: flex;
@@ -258,9 +259,9 @@
             margin-top: 25px;
         }
         .btn-cancel {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #ccc;
+            background: rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.08);
+            color: #555;
             padding: 12px 24px;
             border-radius: 10px;
             font-weight: 600;
@@ -268,8 +269,8 @@
             transition: all 0.3s ease;
         }
         .btn-cancel:hover {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
+            background: rgba(0,0,0,0.08);
+            color: #2b1115;
         }
     
         /* ===== ADMIN LOGIN AUDIT BADGES ===== */
@@ -361,8 +362,8 @@
                         </div>
                     </div>
 
-                    <h3 style="color:#fff; margin-bottom:15px;">Admin Guidelines</h3>
-                    <p style="font-size:14px; color:#aaa; line-height:1.7;">
+                    <h3 style="color:#2b1115; margin-bottom:15px;">Admin Guidelines</h3>
+                    <p style="font-size:14px; color:#555; line-height:1.7;">
                         Welcome to the Fruit Lab Content Management System (CMS). From this dashboard, you can add, modify, and delete products that appear on the homepage menu slider. You can also publish new wellness blogs and audit customer accounts and loyalty points.
                     </p>
                 </div>
@@ -374,7 +375,7 @@
                     </div>
                     
                     <!-- Add Item Form -->
-                    <h3 style="color:#fff; margin-bottom:15px;"><i class="fa-solid fa-plus-circle" style="color:#2ed573; margin-right:8px;"></i>Add New Menu Item</h3>
+                    <h3 style="color:#2b1115; margin-bottom:15px;"><i class="fa-solid fa-plus-circle" style="color:#2ed573; margin-right:8px;"></i>Add New Menu Item</h3>
                     <form onsubmit="handleAddMenuItem(event)">
                         <div class="admin-form-row">
                             <div class="admin-field">
@@ -434,7 +435,7 @@
                     </form>
                     
                     <!-- Products Audit List -->
-                    <h3 style="color:#fff; margin-top:40px; margin-bottom:15px;"><i class="fa-solid fa-list" style="color:#ff4f79; margin-right:8px;"></i>Current Active Menu</h3>
+                    <h3 style="color:#2b1115; margin-top:40px; margin-bottom:15px;"><i class="fa-solid fa-list" style="color:#ff4f79; margin-right:8px;"></i>Current Active Menu</h3>
                     <div style="overflow-x:auto;">
                         <table class="admin-table">
                             <thead>
@@ -483,7 +484,7 @@
                     </div>
 
                     <!-- Add Blog Form -->
-                    <h3 style="color:#fff; margin-bottom:15px;"><i class="fa-solid fa-feather" style="color:#2ed573; margin-right:8px;"></i>Write New Blog Post</h3>
+                    <h3 style="color:#2b1115; margin-bottom:15px;"><i class="fa-solid fa-feather" style="color:#2ed573; margin-right:8px;"></i>Write New Blog Post</h3>
                     <form onsubmit="handleCreateBlogPost(event)">
                         <div class="admin-field">
                             <label>Blog Title</label>
@@ -497,7 +498,7 @@
                     </form>
 
                     <!-- Blogs Audit List -->
-                    <h3 style="color:#fff; margin-top:40px; margin-bottom:15px;"><i class="fa-solid fa-list" style="color:#ff4f79; margin-right:8px;"></i>Published Blogs List</h3>
+                    <h3 style="color:#2b1115; margin-top:40px; margin-bottom:15px;"><i class="fa-solid fa-list" style="color:#ff4f79; margin-right:8px;"></i>Published Blogs List</h3>
                     <div style="overflow-x:auto;">
                         <table class="admin-table">
                             <thead>
@@ -610,7 +611,7 @@
                             tr.innerHTML = `
                                 <td><strong>${cat}</strong></td>
                                 <td>${item.name}</td>
-                                <td><span style="font-family:monospace; color:#aaa;">${item.subCategory}</span></td>
+                                <td><span style="font-family:monospace; color:#666;">${item.subCategory}</span></td>
                                 <td>₹${item.price}</td>
                                 <td>
                                     <button class="action-icon-btn btn-edit" onclick="openEditModal('${cat}', '${item.name}')" title="Edit Product" style="color: #1e90ff; margin-right: 12px;">
@@ -778,7 +779,7 @@
                     const tbody = document.getElementById('admin-logins-list');
                     tbody.innerHTML = '';
                     if (logs.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color: #888;">No logins logged yet.</td></tr>';
+                        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color: #555;">No logins logged yet.</td></tr>';
                         return;
                     }
                     logs.forEach(log => {
