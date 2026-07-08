@@ -634,27 +634,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Bottle tap → toggle fruit particle visibility
+        // Bottle tap → toggle fruit particle visibility via CSS class only
         const bottleImg = card.querySelector('.card-product-image');
         if (bottleImg) {
             bottleImg.addEventListener('click', (e) => {
-                e.stopPropagation(); // don't trigger card click
-                const fruitsLayer = card.querySelector('.card-fruits-background');
-                if (!fruitsLayer) return;
-                const hidden = card.classList.toggle('fruits-hidden');
-                // Animate: fly out on hide, fly in on show
-                fruitsLayer.querySelectorAll('.card-fruit-particle').forEach((p, i) => {
-                    p.style.transition = `opacity 0.3s ease ${i * 0.04}s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.04}s`;
-                    if (hidden) {
-                        p.style.opacity = '0';
-                        p.style.transform = 'scale(0.3) translateY(-30px)';
-                        p.style.pointerEvents = 'none';
-                    } else {
-                        p.style.opacity = '';
-                        p.style.transform = '';
-                        p.style.pointerEvents = '';
-                    }
-                });
+                e.stopPropagation(); // don't trigger card-level click
+                card.classList.toggle('fruits-hidden');
             });
         }
 

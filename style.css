@@ -1165,6 +1165,18 @@ body.dark-mode .category-tab-btn {
     opacity: 1;
 }
 
+/* Bottle tap: hide all fruits (overrides hover + active) */
+.menu-card.fruits-hidden .card-fruit-particle,
+.menu-card.fruits-hidden:hover .card-fruit-particle,
+.menu-card.fruits-hidden.active .card-fruit-particle {
+    top: 90px !important;
+    left: 38% !important;
+    right: auto !important;
+    transform: scale(0.1) rotate(0deg) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 /* --- Recreated Menu Card --- */
 .menu-card {
     position: relative;
