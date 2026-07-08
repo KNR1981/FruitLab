@@ -4416,3 +4416,61 @@ body.dark-mode #nav-auth-link::after,
     font-size: 9px;
     color: #38000A;
 }
+
+
+/* ===== PAGE LOADER ===== */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFAF3; /* Warm cream background matching Fruit Lab */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000; /* Highest priority overlay */
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.5s;
+    opacity: 1;
+    visibility: visible;
+}
+.page-loader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.loader-bottle {
+    width: 70px;
+    height: auto;
+    animation: rotateBottle 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    filter: drop-shadow(0 8px 16px rgba(56, 0, 10, 0.12));
+}
+.loader-text {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 16px;
+    color: #38000A;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    animation: pulseText 1.5s ease-in-out infinite alternate;
+}
+@keyframes rotateBottle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes pulseText {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

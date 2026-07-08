@@ -1845,3 +1845,21 @@ Please confirm my subscription order. Thank you!`;
         setupEvents();
     }
 })();
+
+
+    // --- Page Loader Hide Action ---
+    const hidePageLoader = () => {
+        const loader = document.getElementById('page-loader');
+        if (loader && !loader.classList.contains('fade-out')) {
+            loader.classList.add('fade-out');
+        }
+    };
+
+    if (document.readyState === 'complete') {
+        hidePageLoader();
+    } else {
+        window.addEventListener('load', hidePageLoader);
+    }
+
+    // Safety timeout fallback (1.5 seconds)
+    setTimeout(hidePageLoader, 1500);
