@@ -611,13 +611,13 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.add('active');
             
             swapHeroBottles(item.bottle);
-            spawnHeroParticles(item.bottle);
         });
 
         return card;
     }
 
-    // Render Menu Cards dynamically
+    let activeSubCategory = null;
+
     function renderMenuCards(category, searchQuery = '') {
         const track = document.getElementById('slider-track');
         if (!track) return;
@@ -630,9 +630,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const sliderViewport = document.getElementById('slider-viewport');
         const sliderWrapper = document.querySelector('.featured-slider-wrapper');
+        const subBar = document.getElementById('sub-category-bar');
+        const dotsContainer = document.getElementById('menu-dots');
 
+        const isMobile = window.innerWidth <= 768;
+
+        // Configuration mapping category to its columns layout
+        const categoryCols = {
+            'juices-smoothies': {
+                'fruit-juices': { title: 'Fruit Juices' },
+                'smoothies': { title: 'Smoothies' },
+                'whey-shakes': { title: 'Whey Protein Shakes' }
+            },
+            'dear-self': {
+                'detox-cleanse': { title: 'Detox & Cleanse' },
+                'glow-energy': { title: 'Glow & Energy' },
+                'blood-vitality': { title: 'Blood & Vitality' }
+            },
+            'bowls-puddings': {
+                'oats-bowls': { title: 'Rolled Oats Bowls' },
+                'pure-juices': { title: 'Just Nature' },
+                'chia-puddings': { title: 'Superfood Chia Puddings' }
+            },
+            'healthy-bites': {
+                'sandwiches-toasts': { title: 'Sandwiches & Toasts' },
+                'plant-milks-bowls': { title: 'Fruit Bowls' },
+                'energy-protein-bars': { title: 'Energy & Protein Bars' }
+            }
+        };
+
+        const cols = categoryCols[category];
+
+        // 1. Handle mobile sub-category tabs population
+        if (isMobile && !searchQuery) {
+            if (cols) {
+                const validKeys = Object.keys(cols);
+                if (!activeSubCategory || !validKeys.includes(activeSubCategory)) {
+                    activeSubCategory = validKeys[0];
+                }
+
+                if (subBar) {
+                    subBar.innerHTML = '';
+                    subBar.style.display = 'flex';
+                    validKeys.forEach(key => {
+                        const btn = document.createElement('button');
+                        btn.className = `sub-category-btn ${key === activeSubCategory ? 'active' : ''}`;
+                        btn.innerText = cols[key].title;
+                        btn.addEventListener('click', () => {
+                            activeSubCategory = key;
+                            renderMenuCards(category);
+                        });
+                        subBar.appendChild(btn);
+                    });
+                }
+            } else {
+                if (subBar) subBar.style.display = 'none';
+            }
+        } else {
+            if (subBar) subBar.style.display = 'none';
+            if (dotsContainer) dotsContainer.style.display = 'none';
+        }
+
+        // Get raw items
         let items = fullMenuData[category] || [];
         
+        // Filter by subcategory on mobile when not searching
+        if (isMobile && !searchQuery && cols && activeSubCategory) {
+            items = items.filter(item => item.subCategory === activeSubCategory);
+        }
+
+        // Filter by search query
         if (searchQuery) {
             const query = searchQuery.toLowerCase().trim();
             items = items.filter(item => 
@@ -645,76 +712,137 @@ document.addEventListener('DOMContentLoaded', () => {
             track.innerHTML = `<div class="no-results-msg" style="padding: 40px; color: #888; font-size: 18px; font-weight: 600; width: 100%; text-align: center;">No items found matching "${searchQuery}"</div>`;
             if (sliderViewport) sliderViewport.classList.remove('grid-layout');
             if (sliderWrapper) sliderWrapper.classList.remove('grid-active');
+            if (dotsContainer) dotsContainer.style.display = 'none';
             return;
         }
 
-        // Configuration mapping category to its columns layout
-        const categoryCols = {
-            'juices-smoothies': {
-                'fruit-juices': { title: 'Fruit Juices', element: document.createElement('div') },
-                'smoothies': { title: 'Smoothies', element: document.createElement('div') },
-                'whey-shakes': { title: 'Whey Protein Shakes', element: document.createElement('div') }
-            },
-            'dear-self': {
-                'detox-cleanse': { title: 'Detox & Cleanse', element: document.createElement('div') },
-                'glow-energy': { title: 'Glow & Energy', element: document.createElement('div') },
-                'blood-vitality': { title: 'Blood & Vitality', element: document.createElement('div') }
-            },
-            'bowls-puddings': {
-                'oats-bowls': { title: 'Rolled Oats Bowls', element: document.createElement('div') },
-                'pure-juices': { title: 'Just Nature', element: document.createElement('div') },
-                'chia-puddings': { title: 'Superfood Chia Puddings', element: document.createElement('div') }
-            },
-            'healthy-bites': {
-                'sandwiches-toasts': { title: 'Sandwiches & Toasts', element: document.createElement('div') },
-                'plant-milks-bowls': { title: 'Fruit Bowls', element: document.createElement('div') },
-                'energy-protein-bars': { title: 'Energy & Protein Bars', element: document.createElement('div') }
+        if (isMobile) {
+            // Flat list layout for native snap carousel scroll
+            if (sliderViewport) {
+                sliderViewport.classList.add('grid-layout');
+                sliderViewport.scrollLeft = 0; // Reset scroll position
             }
-        };
-
-        const cols = categoryCols[category];
-
-        if (cols) {
-            if (sliderViewport) sliderViewport.classList.add('grid-layout');
             if (sliderWrapper) sliderWrapper.classList.add('grid-active');
-
-            for (const key in cols) {
-                cols[key].element.className = 'menu-column';
-                cols[key].element.id = `col-${key}`;
-                
-                const header = document.createElement('div');
-                header.className = 'column-header';
-                header.innerText = cols[key].title;
-                cols[key].element.appendChild(header);
-            }
-
-            let renderedCount = 0;
-            items.forEach((item) => {
-                const subCat = item.subCategory;
-                if (!cols[subCat]) return;
-
-                const card = createCardElement(item, renderedCount === 0 && !searchQuery);
-                cols[subCat].element.appendChild(card);
-                renderedCount++;
-            });
-
-            // Append columns that have items
-            for (const key in cols) {
-                const cardCount = cols[key].element.querySelectorAll('.menu-card').length;
-                if (cardCount > 0 || !searchQuery) {
-                    track.appendChild(cols[key].element);
-                }
-            }
-        } else {
-            // Fallback horizontal layout
-            if (sliderViewport) sliderViewport.classList.remove('grid-layout');
-            if (sliderWrapper) sliderWrapper.classList.remove('grid-active');
 
             items.forEach((item, idx) => {
                 const isActive = idx === 0 && !searchQuery;
                 const card = createCardElement(item, isActive);
                 track.appendChild(card);
             });
+
+            // Mobile Pagination Dots
+            if (dotsContainer && !searchQuery) {
+                dotsContainer.innerHTML = '';
+                dotsContainer.style.display = 'flex';
+                items.forEach((_, idx) => {
+                    const dot = document.createElement('div');
+                    dot.className = `menu-dot ${idx === 0 ? 'active' : ''}`;
+                    dot.addEventListener('click', () => {
+                        const card = track.children[idx];
+                        if (card && sliderViewport) {
+                            sliderViewport.scrollTo({
+                                left: card.offsetLeft - (sliderViewport.clientWidth - card.clientWidth) / 2,
+                                behavior: 'smooth'
+                            });
+                            dotsContainer.querySelectorAll('.menu-dot').forEach((d, dIdx) => {
+                                d.classList.toggle('active', dIdx === idx);
+                            });
+                        }
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+
+                // Scroll snap indicator tracker
+                if (sliderViewport) {
+                    if (sliderViewport._scrollListener) {
+                        sliderViewport.removeEventListener('scroll', sliderViewport._scrollListener);
+                    }
+                    
+                    const onScroll = () => {
+                        const scrollLeft = sliderViewport.scrollLeft;
+                        const viewportWidth = sliderViewport.clientWidth;
+                        const viewportCenter = scrollLeft + (viewportWidth / 2);
+                        
+                        let closestIdx = 0;
+                        let minDiff = Infinity;
+                        
+                        Array.from(track.children).forEach((card, idx) => {
+                            const cardCenter = card.offsetLeft + (card.clientWidth / 2);
+                            const diff = Math.abs(viewportCenter - cardCenter);
+                            if (diff < minDiff) {
+                                minDiff = diff;
+                                closestIdx = idx;
+                            }
+                        });
+                        
+                        dotsContainer.querySelectorAll('.menu-dot').forEach((d, dIdx) => {
+                            d.classList.toggle('active', dIdx === closestIdx);
+                        });
+                    };
+                    
+                    sliderViewport.addEventListener('scroll', onScroll);
+                    sliderViewport._scrollListener = onScroll;
+                }
+            } else {
+                if (dotsContainer) dotsContainer.style.display = 'none';
+            }
+        } else {
+            // Desktop columns structure
+            if (sliderViewport) {
+                if (sliderViewport._scrollListener) {
+                    sliderViewport.removeEventListener('scroll', sliderViewport._scrollListener);
+                    sliderViewport._scrollListener = null;
+                }
+            }
+
+            if (cols) {
+                if (sliderViewport) sliderViewport.classList.add('grid-layout');
+                if (sliderWrapper) sliderWrapper.classList.add('grid-active');
+
+                // Re-create columns DOM wrappers
+                const colsDom = {};
+                for (const key in cols) {
+                    colsDom[key] = {
+                        title: cols[key].title,
+                        element: document.createElement('div')
+                    };
+                    colsDom[key].element.className = 'menu-column';
+                    colsDom[key].element.id = `col-${key}`;
+                    
+                    const header = document.createElement('div');
+                    header.className = 'column-header';
+                    header.innerText = cols[key].title;
+                    colsDom[key].element.appendChild(header);
+                }
+
+                let renderedCount = 0;
+                items.forEach((item) => {
+                    const subCat = item.subCategory;
+                    if (!colsDom[subCat]) return;
+
+                    const card = createCardElement(item, renderedCount === 0 && !searchQuery);
+                    colsDom[subCat].element.appendChild(card);
+                    renderedCount++;
+                });
+
+                // Append columns that have items
+                for (const key in colsDom) {
+                    const cardCount = colsDom[key].element.querySelectorAll('.menu-card').length;
+                    if (cardCount > 0 || !searchQuery) {
+                        track.appendChild(colsDom[key].element);
+                    }
+                }
+            } else {
+                // Fallback horizontal layout
+                if (sliderViewport) sliderViewport.classList.remove('grid-layout');
+                if (sliderWrapper) sliderWrapper.classList.remove('grid-active');
+
+                items.forEach((item, idx) => {
+                    const isActive = idx === 0 && !searchQuery;
+                    const card = createCardElement(item, isActive);
+                    track.appendChild(card);
+                });
+            }
         }
 
         // Stagger fade-in animation using GSAP
@@ -725,8 +853,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { opacity: 1, scale: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'power2.out', clearProps: 'all' }
             );
         }
-
-        // Diagnostic Logging
         const allCards = document.querySelectorAll('.menu-card');
         fetch(`/log-error?msg=${encodeURIComponent(`DOM Diagnosis: Category: ${category}, Total cards=${allCards.length}`)}`);
     }

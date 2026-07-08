@@ -12,7 +12,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=75">
+    <link rel="stylesheet" href="style.css?v=76">
 </head>
 <body class="home-page">
     <!-- Page Loader -->
@@ -211,6 +211,9 @@
                 <button class="category-tab-btn" data-category="healthy-bites">Healthy Bites</button>
             </div>
 
+            <!-- Sub-Category Navigation Bar (Mobile only) -->
+            <div class="sub-category-navigation-bar" id="sub-category-bar"></div>
+
             <!-- Menu Search Bar -->
             <div class="menu-section-search">
                 <div class="menu-search-wrapper">
@@ -230,12 +233,15 @@
 
                 <div class="slider-viewport" id="slider-viewport">
                     <div class="slider-track" id="slider-track">
-                        <!-- Cards are dynamically spawned by script.js?v=70 -->
+                        <!-- Cards are dynamically spawned by script.js?v=76 -->
                     </div>
                 </div>
 
                 <button class="slider-btn next-btn" id="slider-next"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
+
+            <!-- Mobile Pagination Dots -->
+            <div class="menu-dots-container" id="menu-dots"></div>
 
         </div>
     </section>
@@ -578,6 +584,6 @@
     <script src="assets/js/gsap.min.js"></script>
     <script src="assets/js/ScrollTrigger.min.js"></script>
     <!-- Main JS Code -->
-    <script src="script.js?v=70"></script>
+    <script src="script.js?v=76"></script>
 </body>
 </html>
