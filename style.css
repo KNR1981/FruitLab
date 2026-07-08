@@ -2695,8 +2695,8 @@ body.dark-mode .partner-title {
 @media (max-width: 768px) {
     /* Scale down and reposition floating fruits to the sides on mobile */
     .fl-1, .fl-2, .fl-3, .fl-4, .fl-5, .fl-6, .fl-7, .fl-8, .fl-9, .fl-10, .fl-11, .fl-12 {
-        width: 65px !important;
-        height: 65px !important;
+        width: 95px !important;
+        height: 95px !important;
     }
     .fl-1 { top: 5% !important; left: -10px !important; right: auto !important; }
     .fl-2 { bottom: 5% !important; left: -10px !important; right: auto !important; }
