@@ -2711,8 +2711,8 @@ body.dark-mode .partner-title {
     .fl-11 { bottom: 5% !important; right: -10px !important; left: auto !important; }
     .fl-12 { bottom: 25% !important; left: -10px !important; right: auto !important; }
 
-    .navbar {
-        height: 70px;
+    .navbar, .navbar.scrolled {
+        height: 80px !important;
     }
     
     .hamburger {
@@ -2734,21 +2734,22 @@ body.dark-mode .partner-title {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 80px;
         flex-direction: column;
-        background-color: var(--color-bg-light);
+        background-color: #FFFAF3 !important;
         width: 100%;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 80px);
         text-align: center;
         transition: 0.3s;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         padding: 40px 0;
         gap: 24px;
         z-index: 999;
+        backdrop-filter: none !important;
     }
     
     body.dark-mode .nav-menu {
-        background-color: var(--color-bg-dark);
+        background-color: #FFFAF3 !important;
     }
     
     .nav-menu.active {
