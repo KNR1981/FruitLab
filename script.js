@@ -1866,7 +1866,7 @@ Please confirm my subscription order. Thank you!`;
 
 
     // --- Subscription Popup Modal System ---
-    if (!window.location.pathname.includes('subscriptions.html')) {
+    if (!window.location.pathname.includes('subscriptions.html') && localStorage.getItem('fruit-lab-popup-shown') !== 'true') {
         const popupOverlay = document.createElement('div');
         popupOverlay.id = 'subscription-popup';
         popupOverlay.className = 'sub-popup-overlay';
@@ -1888,7 +1888,7 @@ Please confirm my subscription order. Thank you!`;
                             <span><i class="fa-solid fa-check"></i> Free Daily Delivery</span>
                             <span><i class="fa-solid fa-check"></i> 100+ 5-Star Reviews</span>
                         </div>
-                        <a href="subscriptions.html" class="sub-popup-cta">Subscription Plans <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="subscriptions.html" class="sub-popup-cta" id="sub-popup-cta-btn">Subscription Plans <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -1896,34 +1896,42 @@ Please confirm my subscription order. Thank you!`;
         document.body.appendChild(popupOverlay);
 
         let hasScrolled = false;
-        let lastDismissedTime = 0;
 
         const closeBtn = document.getElementById('sub-popup-close-btn');
         if (closeBtn) {
             closeBtn.onclick = () => {
                 popupOverlay.classList.remove('active');
-                lastDismissedTime = Date.now();
+                localStorage.setItem('fruit-lab-popup-shown', 'true');
+                if (window.popupInterval) clearInterval(window.popupInterval);
             };
         }
         popupOverlay.onclick = (e) => {
             if (e.target === popupOverlay) {
                 popupOverlay.classList.remove('active');
-                lastDismissedTime = Date.now();
+                localStorage.setItem('fruit-lab-popup-shown', 'true');
+                if (window.popupInterval) clearInterval(window.popupInterval);
             }
         };
+
+        const ctaBtn = document.getElementById('sub-popup-cta-btn');
+        if (ctaBtn) {
+            ctaBtn.onclick = () => {
+                localStorage.setItem('fruit-lab-popup-shown', 'true');
+                if (window.popupInterval) clearInterval(window.popupInterval);
+            };
+        }
 
         window.addEventListener('scroll', () => {
             hasScrolled = true;
         }, { passive: true });
 
         // Check every 20 seconds (20000ms)
-        setInterval(() => {
-            const timeSinceDismiss = Date.now() - lastDismissedTime;
-            
-            // Only trigger if user is scrolling, popup is closed, and at least 20 seconds have elapsed since page load or last dismiss
-            if (hasScrolled && !popupOverlay.classList.contains('active') && timeSinceDismiss >= 20000) {
+        window.popupInterval = setInterval(() => {
+            // Only trigger if user is scrolling and popup is closed
+            if (hasScrolled && !popupOverlay.classList.contains('active')) {
                 popupOverlay.classList.add('active');
-                hasScrolled = false; // Reset scroll flag
+                localStorage.setItem('fruit-lab-popup-shown', 'true');
+                clearInterval(window.popupInterval);
             }
         }, 20000);
     }
