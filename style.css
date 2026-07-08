@@ -4674,3 +4674,55 @@ body.dark-mode #nav-auth-link::after,
         justify-content: center;
     }
 }
+
+/* ==========================================================================
+   FRUIT LAB - GLOBAL PROMO TICKER SYSTEM
+   ========================================================================== */
+.promo-ticker-container {
+    display: block;
+    width: 100%;
+    background-color: var(--color-primary-orange);
+    color: #ffffff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(246, 36, 64, 0.15);
+    z-index: 999;
+    position: sticky;
+    top: 80px;
+    margin-top: 80px;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.promo-ticker-container:hover {
+    background-color: #d81b35 !important;
+}
+
+.promo-ticker-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee-infinite 30s linear infinite;
+}
+
+.promo-ticker-item {
+    display: inline-block;
+    padding: 0 30px;
+    color: #ffffff !important;
+}
+
+.promo-ticker-item span {
+    color: #FFE5BF !important;
+    margin-left: 20px;
+}
+
+@keyframes marquee-infinite {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
