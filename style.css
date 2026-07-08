@@ -4695,10 +4695,14 @@ body.dark-mode #nav-auth-link::after,
     z-index: 999;
     position: sticky;
     top: 80px;
-    margin-top: 80px;
+    margin-top: 0;
     text-decoration: none !important;
     cursor: pointer;
     transition: var(--transition-fast);
+}
+
+.promo-ticker-container.ticker-top {
+    margin-top: 80px;
 }
 
 .promo-ticker-container:hover {
