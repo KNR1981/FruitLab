@@ -3005,7 +3005,7 @@ body.dark-mode .partner-title {
         scrollbar-width: none !important;
         width: 100vw !important;
         margin-left: -20px !important;
-        padding: 20px 0 !important;
+        padding: 60px 0 20px 0 !important; /* Increased top padding to show overflowing bottle heads */
     }
     .slider-viewport.grid-layout::-webkit-scrollbar {
         display: none !important;
@@ -3034,7 +3034,7 @@ body.dark-mode .partner-title {
         scroll-snap-align: center !important;
         flex: 0 0 74vw !important;
         max-width: 290px !important;
-        margin: 0 !important;
+        margin: 50px 0 20px 0 !important; /* Restored top margin for bottle heads and added bottom margin */
         box-shadow: 0 10px 25px rgba(56, 0, 10, 0.06) !important;
     }
 
