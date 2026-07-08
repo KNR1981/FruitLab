@@ -4693,8 +4693,7 @@ body.dark-mode #nav-auth-link::after,
     text-transform: uppercase;
     box-shadow: 0 4px 10px rgba(246, 36, 64, 0.15);
     z-index: 999;
-    position: sticky;
-    top: 80px;
+    position: relative;
     margin-top: 0;
     text-decoration: none !important;
     cursor: pointer;
