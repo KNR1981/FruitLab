@@ -347,56 +347,92 @@
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Container -->
+            </div>    <!-- Main Container -->
     <div class="profile-container">
         <div class="profile-glow"></div>
         
         <div class="profile-grid-custom">
             
-            <!-- Sidebar: User & Loyalty Info -->
+            <!-- Sidebar: User & Subscription Info -->
             <div class="profile-sidebar">
                 <div class="profile-card-custom user-info">
                     <div class="user-avatar" id="avatar-char">U</div>
                     <h2 class="user-name" id="profile-name">Loading...</h2>
                     <p class="user-role" id="profile-role">Customer</p>
                     
-                    <div class="loyalty-badge">
-                        <p class="points-label">Loyalty Points</p>
-                        <p class="points-value" id="profile-points">0</p>
-                        <p class="points-level" id="profile-level">Novice Juicer</p>
-                        <div class="level-progress-bar">
-                            <div class="level-progress-fill" id="progress-fill"></div>
-                        </div>
+                    <div class="sub-status-sidebar-badge" style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                        <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; margin: 0 0 5px 0;">Subscription Status</p>
+                        <p id="sidebar-sub-status" style="font-size: 14px; font-weight: 700; color: #ff9f43; margin: 0;">Checking...</p>
                     </div>
                     
                     <!-- Admin Panel Link Button (hidden by default) -->
-                    <div id="admin-panel-link-wrapper" style="margin-top: 20px; display: none;">
+                    <div id="admin-panel-link-wrapper" style="margin-top: 10px; display: none;">
                         <a href="admin.html" class="admin-panel-link-btn"><i class="fa-solid fa-gauge"></i> Go to Admin CMS</a>
                     </div>
                     
                     <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
                 </div>
 
-                <!-- Loyalty Program Info Card -->
+                <!-- Subscriptions Quick Help -->
                 <div class="profile-card-custom">
-                    <h3 style="font-size:16px; margin-bottom:15px; color:#fff;"><i class="fa-solid fa-circle-info" style="color:#ff4f79; margin-right:8px;"></i>Loyalty Benefits</h3>
+                    <h3 style="font-size:16px; margin-bottom:15px; color:#fff;"><i class="fa-solid fa-circle-info" style="color:#ff4f79; margin-right:8px;"></i>Subscription Benefits</h3>
                     <p style="font-size:13px; color:#ccc; line-height:1.6; margin-bottom:12px;">
-                        Earn <strong>10 points for every ₹100 spent</strong> at Fruit Lab. Points can be accumulated to unlock exclusive brand levels:
+                        Unlock the science of vitality with our scheduled cold-pressed juice or clean bowl deliveries:
                     </p>
-                    <ul style="font-size:12px; color:#aaa; line-height:1.8; list-style:none; padding:0;">
-                        <li>🌱 <strong>0 - 150 pts</strong>: Novice Juicer (Standard member)</li>
-                        <li>🍊 <strong>151 - 500 pts</strong>: Citrus Crafter (5% disc. on orders)</li>
-                        <li>🌟 <strong>501+ pts</strong>: Master Juicer (10% disc. + free birthday cup)</li>
+                    <ul style="font-size:12px; color:#aaa; line-height:1.8; list-style:none; padding:0; margin:0;">
+                        <li>🌱 <strong>10% Off</strong> on all scheduled subscription packages</li>
+                        <li>📅 <strong>Flexible Delivery</strong>: Delivered fresh at your door weekly</li>
+                        <li>🔄 <strong>Easy Pause/Cancel</strong> directly from customer support</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Content Area: Order History & Mock Order Builder -->
+            <!-- Content Area: Subscription Status & Order History -->
             <div style="display: flex; flex-direction: column; gap: 24px;">
+                
+                <!-- Active Subscription Details Card -->
+                <div class="profile-card-custom" id="subscription-details-card">
+                    <div class="order-history-header">
+                        <i class="fa-solid fa-calendar-check" style="color: #ff9f43;"></i>
+                        <span>Active Subscription Details</span>
+                    </div>
+                    
+                    <div id="sub-active-container" style="display: none; margin-top: 20px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                            <div style="padding: 15px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 11px; color: #888; text-transform: uppercase;">Subscription Plan</span>
+                                <p id="sub-plan-name" style="font-size: 15px; font-weight: 700; color: #fff; margin: 5px 0 0 0;">N/A</p>
+                            </div>
+                            <div style="padding: 15px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 11px; color: #888; text-transform: uppercase;">Selected Bundle / Flavor</span>
+                                <p id="sub-plan-option" style="font-size: 15px; font-weight: 700; color: #fff; margin: 5px 0 0 0;">N/A</p>
+                            </div>
+                            <div style="padding: 15px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 11px; color: #888; text-transform: uppercase;">Package & Size</span>
+                                <p id="sub-plan-size" style="font-size: 15px; font-weight: 700; color: #fff; margin: 5px 0 0 0;">N/A</p>
+                            </div>
+                            <div style="padding: 15px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 11px; color: #888; text-transform: uppercase;">Delivery Frequency</span>
+                                <p id="sub-plan-freq" style="font-size: 15px; font-weight: 700; color: #fff; margin: 5px 0 0 0;">N/A</p>
+                            </div>
+                            <div style="padding: 15px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 11px; color: #888; text-transform: uppercase;">Price</span>
+                                <p id="sub-plan-price" style="font-size: 15px; font-weight: 700; color: #2ed573; margin: 5px 0 0 0;">₹0</p>
+                            </div>
+                            <div style="padding: 15px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 11px; color: #888; text-transform: uppercase;">Next Delivery Date</span>
+                                <p id="sub-plan-next" style="font-size: 15px; font-weight: 700; color: #ff9f43; margin: 5px 0 0 0;">N/A</p>
+                            </div>
+                        </div>
+                        <a href="contact.html?subject=Manage%20My%20Subscription" class="sim-submit-btn" style="display: inline-flex; width: auto; align-items: center; justify-content: center; gap: 8px; text-decoration: none;"><i class="fa-solid fa-gears"></i> Request Changes / Pause Subscription</a>
+                    </div>
+
+                    <div id="sub-inactive-container" style="margin-top: 15px; text-align: center; padding: 20px 0;">
+                        <i class="fa-solid fa-heart-crack" style="font-size: 36px; color: #ff4f79; margin-bottom: 12px; display: block;"></i>
+                        <span style="display: block; font-size: 14px; color: #ccc; margin-bottom: 15px;">No active subscriptions found for this account.</span>
+                        <a href="subscriptions.html" class="sim-submit-btn" style="display: inline-flex; width: auto; align-items: center; justify-content: center; gap: 8px; text-decoration: none;"><i class="fa-solid fa-wand-magic-sparkles"></i> Choose a Subscription Plan</a>
+                    </div>
+                </div>
                 
                 <!-- Order History -->
                 <div class="profile-card-custom">
@@ -413,7 +449,6 @@
                                     <th>Date</th>
                                     <th>Items Ordered</th>
                                     <th>Total Paid</th>
-                                    <th>Points Gained</th>
                                 </tr>
                             </thead>
                             <tbody id="orders-list">
@@ -424,31 +459,31 @@
 
                     <div class="no-orders-msg" id="no-orders">
                         <i class="fa-solid fa-mug-hot"></i>
-                        <span>No orders placed yet. Try our ordering simulator below to earn points!</span>
+                        <span>No orders placed yet. Try placing an order below to start your history!</span>
                     </div>
                 </div>
 
-                <!-- Mock Order Simulator (Admin/Testing utility) -->
+                <!-- Quick Order Simulator (Testing utility) -->
                 <div class="profile-card-custom simulator-section">
                     <div class="order-history-header">
-                        <i class="fa-solid fa-gamepad" style="color:#2ed573;"></i>
-                        <span>Mock Ordering Simulator</span>
+                        <i class="fa-solid fa-cart-shopping" style="color:#2ed573;"></i>
+                        <span>Quick Order Simulator</span>
                     </div>
                     <p style="font-size:13px; color:#ccc; line-height:1.6;">
-                        Simulate ordering directly from the store to test the points system. Your profile loyalty points will update instantly.
+                        Select a cold-pressed beverage, smoothie, or subscription plan below to simulate placing an order.
                     </p>
                     
                     <form id="simulator-form" onsubmit="submitMockOrder(event)">
                         <div class="sim-grid">
                             <select id="sim-product-select" class="sim-select" required>
-                                <option value="" disabled selected>Select juice or smoothie...</option>
+                                <option value="" disabled selected>Select juice, smoothie or subscription...</option>
                                 <!-- Loaded dynamically -->
                             </select>
-                            <button type="submit" class="sim-submit-btn"><i class="fa-solid fa-cart-arrow-down"></i> Place Test Order</button>
+                            <button type="submit" class="sim-submit-btn"><i class="fa-solid fa-cart-arrow-down"></i> Place Order</button>
                         </div>
                     </form>
                     <p class="sim-info-txt">
-                        * Note: Placing a mock order will calculate points (e.g., a ₹169 drink yields 16 points) and add the transaction to your profile history.
+                        * Note: Placing a mock order will record the transaction to your profile history and activate subscription details if a plan is chosen.
                     </p>
                 </div>
 
@@ -459,7 +494,6 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <!-- Footer remains identical to login.html -->
         <div class="container">
             <div class="footer-grid">
                 <!-- Col 1: About -->
@@ -547,7 +581,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=70"></script>
+    <script src="script.js?v=73"></script>
     <script>
         let menuItemsLookup = [];
 
@@ -571,34 +605,59 @@
                         document.getElementById('admin-panel-link-wrapper').style.display = 'block';
                     }
 
-                    updateLoyaltyInfo(user.points);
                     loadOrdersList();
                     loadProductSelectOptions();
                 });
         }
 
-        function updateLoyaltyInfo(points) {
-            document.getElementById('profile-points').innerText = points;
+        function updateSubscriptionDetails(orders) {
+            // Find the latest order containing a subscription item
+            let activeSub = null;
+            let orderDate = null;
             
-            const levelEl = document.getElementById('profile-level');
-            const fillEl = document.getElementById('progress-fill');
-            
-            let level = 'Novice Juicer';
-            let percentage = 0;
-
-            if (points <= 150) {
-                level = '🌱 Novice Juicer';
-                percentage = (points / 150) * 100;
-            } else if (points <= 500) {
-                level = '🍊 Citrus Crafter (5% Disc.)';
-                percentage = ((points - 150) / 350) * 100;
-            } else {
-                level = '🌟 Master Juicer (10% Disc. + Gifts)';
-                percentage = 100;
+            for (let order of orders) {
+                const subItem = order.items.find(item => item.name && item.name.toLowerCase().includes('subscription'));
+                if (subItem) {
+                    activeSub = subItem;
+                    orderDate = new Date(order.date);
+                    break; // Since orders are sorted newest first, this is the latest subscription
+                }
             }
 
-            levelEl.innerText = level;
-            fillEl.style.width = `${percentage}%`;
+            const sidebarStatus = document.getElementById('sidebar-sub-status');
+            const activeContainer = document.getElementById('sub-active-container');
+            const inactiveContainer = document.getElementById('sub-inactive-container');
+
+            if (activeSub) {
+                // We have an active subscription!
+                sidebarStatus.innerText = 'Active ✅';
+                sidebarStatus.style.color = '#2ed573';
+
+                // Parse details from subItem properties
+                document.getElementById('sub-plan-name').innerText = activeSub.name;
+                document.getElementById('sub-plan-option').innerText = activeSub.option || 'All 5 Items Bundle';
+                document.getElementById('sub-plan-size').innerText = activeSub.size || '24 Pack';
+                document.getElementById('sub-plan-freq').innerText = activeSub.frequency || '1 Month Delivery';
+                document.getElementById('sub-plan-price').innerText = `₹${activeSub.price}`;
+
+                // Calculate next delivery date (e.g. orderDate + 7 days)
+                const nextDelivery = new Date(orderDate);
+                nextDelivery.setDate(nextDelivery.getDate() + 7);
+                const nextDeliveryStr = nextDelivery.toLocaleDateString('en-IN', {
+                    day: 'numeric', month: 'short', year: 'numeric'
+                });
+                document.getElementById('sub-plan-next').innerText = nextDeliveryStr;
+
+                activeContainer.style.display = 'block';
+                inactiveContainer.style.display = 'none';
+            } else {
+                // No active subscription
+                sidebarStatus.innerText = 'No Active Plan ❌';
+                sidebarStatus.style.color = '#ff4f79';
+
+                activeContainer.style.display = 'none';
+                inactiveContainer.style.display = 'block';
+            }
         }
 
         function loadOrdersList() {
@@ -609,6 +668,9 @@
                     const noOrders = document.getElementById('no-orders');
                     const list = document.getElementById('orders-list');
                     list.innerHTML = '';
+
+                    // Update subscription details card based on orders
+                    updateSubscriptionDetails(orders);
 
                     if (orders.length === 0) {
                         table.style.display = 'none';
@@ -622,7 +684,12 @@
                                 day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
                             });
                             
-                            const itemsStr = order.items.map(i => `${i.name} (${i.qty})`).join(', ');
+                            const itemsStr = order.items.map(i => {
+                                if (i.size) {
+                                    return `${i.name} - ${i.option} (${i.size})`;
+                                }
+                                return `${i.name} (${i.qty})`;
+                            }).join(', ');
 
                             const tr = document.createElement('tr');
                             tr.innerHTML = `
@@ -630,7 +697,6 @@
                                 <td>${dateStr}</td>
                                 <td>${itemsStr}</td>
                                 <td class="order-price">₹${order.totalPrice}</td>
-                                <td class="order-points">+${order.pointsEarned}</td>
                             `;
                             list.appendChild(tr);
                         });
@@ -643,35 +709,114 @@
                 .then(res => res.json())
                 .then(menu => {
                     const select = document.getElementById('sim-product-select');
-                    select.innerHTML = '<option value="" disabled selected>Select juice or smoothie...</option>';
+                    select.innerHTML = '<option value="" disabled selected>Select juice, smoothie or subscription...</option>';
                     menuItemsLookup = [];
 
+                    // 1. Add standard menu items
                     Object.keys(menu).forEach(cat => {
+                        const optGroup = document.createElement('optgroup');
+                        optGroup.label = cat.toUpperCase();
+                        
                         menu[cat].forEach(item => {
                             menuItemsLookup.push(item);
                             const opt = document.createElement('option');
-                            opt.value = item.name;
+                            opt.value = `menu:${item.name}`;
                             opt.innerText = `${item.name} - ₹${item.price}`;
-                            select.appendChild(opt);
+                            optGroup.appendChild(opt);
+                        });
+                        select.appendChild(optGroup);
+                    });
+
+                    // 2. Add subscription plans as simulation choices
+                    const subGroup = document.createElement('optgroup');
+                    subGroup.label = "SUBSCRIPTION PLANS";
+                    
+                    const subPlans = [
+                        {
+                            name: "Detox Juices Subscription",
+                            option: "All 5 Bottles Bundle",
+                            size: "24 Pack (24 x 250ml bottles)",
+                            frequency: "1 Month Delivery",
+                            price: 3499
+                        },
+                        {
+                            name: "Fruit Bowl & Chia Subscription",
+                            option: "All 5 Bowls Bundle",
+                            size: "24 Pack",
+                            frequency: "1 Month Delivery",
+                            price: 2999
+                        },
+                        {
+                            name: "Detox Juices Subscription",
+                            option: "All 5 Bottles Bundle",
+                            size: "48 Pack (48 x 250ml bottles)",
+                            frequency: "2 Months Delivery",
+                            price: 6499
+                        },
+                        {
+                            name: "Fruit Bowl & Chia Subscription",
+                            option: "All 5 Bowls Bundle",
+                            size: "48 Pack",
+                            frequency: "2 Months Delivery",
+                            price: 5499
+                        }
+                    ];
+
+                    subPlans.forEach((plan, index) => {
+                        const val = `sub:${index}`;
+                        const opt = document.createElement('option');
+                        opt.value = val;
+                        opt.innerText = `${plan.name} (${plan.size.split(' ')[0]}) - ₹${plan.price}`;
+                        subGroup.appendChild(opt);
+                        
+                        // Save in lookup
+                        menuItemsLookup.push({
+                            type: 'sub',
+                            index: index,
+                            ...plan
                         });
                     });
+                    select.appendChild(subGroup);
                 });
         }
 
         function submitMockOrder(e) {
             e.preventDefault();
             const select = document.getElementById('sim-product-select');
-            const productName = select.value;
-            if (!productName) return;
+            const selectVal = select.value;
+            if (!selectVal) return;
 
-            const product = menuItemsLookup.find(i => i.name === productName);
-            if (!product) return;
+            let orderPayload = null;
 
-            const cleanPrice = parseFloat(product.price.replace(/[^\d.]/g, ''));
-            const orderPayload = {
-                items: [{ name: product.name, price: cleanPrice, qty: 1 }],
-                totalPrice: cleanPrice
-            };
+            if (selectVal.startsWith('menu:')) {
+                const name = selectVal.replace('menu:', '');
+                const product = menuItemsLookup.find(i => i.name === name && i.type !== 'sub');
+                if (!product) return;
+                
+                const cleanPrice = parseFloat(product.price.toString().replace(/[^\d.]/g, ''));
+                orderPayload = {
+                    items: [{ name: product.name, price: cleanPrice, qty: 1 }],
+                    totalPrice: cleanPrice
+                };
+            } else if (selectVal.startsWith('sub:')) {
+                const idx = parseInt(selectVal.replace('sub:', ''), 10);
+                const plan = menuItemsLookup.find(i => i.type === 'sub' && i.index === idx);
+                if (!plan) return;
+
+                orderPayload = {
+                    items: [{
+                        name: plan.name,
+                        option: plan.option,
+                        size: plan.size,
+                        frequency: plan.frequency,
+                        price: plan.price,
+                        qty: 1
+                    }],
+                    totalPrice: plan.price
+                };
+            }
+
+            if (!orderPayload) return;
 
             fetch('/api/profile/orders', {
                 method: 'POST',
@@ -681,18 +826,7 @@
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    // Update layout
                     loadOrdersList();
-                    
-                    // Fetch updated profile for point count animation
-                    fetch('/api/auth/session')
-                        .then(res => res.json())
-                        .then(d => {
-                            if (d.loggedIn) {
-                                updateLoyaltyInfo(d.user.points);
-                            }
-                        });
-                    
                     select.selectedIndex = 0;
                 }
             })
