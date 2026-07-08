@@ -1879,7 +1879,7 @@ Please confirm my subscription order. Thank you!`;
                     </div>
                     <div class="sub-popup-info">
                         <div class="sub-popup-header-row">
-                            <img src="assets/new_logo_1.png" alt="Fruit Lab Logo" class="sub-popup-logo">
+                            <img src="assets/logo.png?v=70" alt="Fruit Lab Logo" class="sub-popup-logo">
                             <div class="sub-popup-badge"><i class="fa-solid fa-repeat"></i> Subscribe & Save</div>
                         </div>
                         <h3>Revitalize. Energize. Harmonize.</h3>

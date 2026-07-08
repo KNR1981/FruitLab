@@ -4572,9 +4572,13 @@ body.dark-mode #nav-auth-link::after,
     flex-wrap: wrap;
 }
 .sub-popup-logo {
-    height: 36px;
+    height: 32px;
     width: auto;
     object-fit: contain;
+    background: #38000A; /* Dark brand red wrapper to show white logo */
+    padding: 6px 14px;
+    border-radius: 50px; /* Elegant pill wrapper */
+    box-shadow: 0 4px 10px rgba(56, 0, 10, 0.15);
 }
 .sub-popup-badge {
     display: inline-flex;
