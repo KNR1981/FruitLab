@@ -4730,3 +4730,8 @@ body.dark-mode #nav-auth-link::after,
     0% { transform: translate3d(0, 0, 0); }
     100% { transform: translate3d(-50%, 0, 0); }
 }
+
+/* Remove top spacing/gap on homepage menu when directly preceded by the promo ticker banner */
+.promo-ticker-container + .menu-section-container {
+    padding-top: 45px !important;
+}
