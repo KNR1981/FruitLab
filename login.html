@@ -512,10 +512,9 @@
             <div class="auth-divider">
                 <span>or</span>
             </div>
-            <button type="button" class="google-auth-btn" onclick="handleGoogleSignIn()">
-                <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google Logo" class="google-icon">
-                Sign in with Google
-            </button>
+            <div id="google-signin-button-container" style="min-height: 48px; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+                <!-- Dynamically loaded official Google button or Sandbox mock button -->
+            </div>
 
         </div>
     </div>
@@ -611,7 +610,49 @@
     <!-- Scripts -->
     <script src="script.js?v=70"></script>
     <script>
-        // Google Sign In Mock Logic
+        // Google Sign In Setup (Real SDK + Sandbox Fallback)
+        fetch('/api/auth/google-client-id')
+            .then(res => res.json())
+            .then(data => {
+                if (data.clientId) {
+                    // Load the Google GSI script dynamically
+                    const script = document.createElement('script');
+                    script.src = "https://accounts.google.com/gsi/client";
+                    script.async = true;
+                    script.defer = true;
+                    script.onload = () => {
+                        google.accounts.id.initialize({
+                            client_id: data.clientId,
+                            callback: handleCredentialResponse
+                        });
+                        google.accounts.id.renderButton(
+                            document.getElementById("google-signin-button-container"),
+                            { theme: "outline", size: "large", width: "350", text: "signin_with" }
+                        );
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    // Fallback: render a mock Google button that opens our simulated picker
+                    const container = document.getElementById("google-signin-button-container");
+                    container.innerHTML = `
+                        <button type="button" class="google-auth-btn" onclick="handleGoogleSignIn()">
+                            <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google Logo" class="google-icon">
+                            Sign in with Google (Mock Sandbox Mode)
+                        </button>
+                        <div style="font-size: 11px; color: #ff6b76; margin-top: 8px; text-align: center; font-weight: 600;">
+                            <i class="fa-solid fa-circle-info"></i> To use real Google Sign In, add <strong>GOOGLE_CLIENT_ID</strong> in your <strong>.env</strong> file
+                        </div>
+                    `;
+                }
+            })
+            .catch(err => {
+                console.error("Failed to load Google Client ID configuration:", err);
+            });
+
+        function handleCredentialResponse(response) {
+            loginWithGoogle({ credential: response.credential });
+        }
+
         function handleGoogleSignIn() {
             document.getElementById('google-picker-popup').classList.add('active');
         }
@@ -638,10 +679,10 @@
                 alert('Please fill out both email and name.');
                 return;
             }
-            loginWithGoogleMock(email, name);
+            loginWithGoogle({ email: email, name: name });
         }
 
-        function loginWithGoogleMock(email, name) {
+        function loginWithGoogle(payload) {
             closeGooglePicker();
             
             // Show page loader while authentication is simulated
@@ -651,7 +692,7 @@
             fetch('/api/auth/google-signin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email, name: name })
+                body: JSON.stringify(payload)
             })
             .then(res => res.json())
             .then(data => {
@@ -660,7 +701,7 @@
                     document.getElementById('error-text').innerText = data.error;
                     document.getElementById('auth-error').style.display = 'flex';
                 } else {
-                    document.getElementById('success-text').innerText = `Google login successful! Welcome, ${name}`;
+                    document.getElementById('success-text').innerText = `Google login successful!`;
                     document.getElementById('auth-success').style.display = 'flex';
                     setTimeout(() => {
                         window.location.href = 'profile.html';

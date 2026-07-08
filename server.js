@@ -121,26 +121,57 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
+function decodeJwtPayload(jwt) {
+    try {
+        const parts = jwt.split('.');
+        if (parts.length !== 3) return null;
+        const payloadB64 = parts[1];
+        const base64 = payloadB64.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = Buffer.from(base64, 'base64').toString('utf8');
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        console.error("JWT decoding error:", e);
+        return null;
+    }
+}
+
 app.post('/api/auth/google-signin', async (req, res) => {
-    const { email, name } = req.body;
-    if (!email) {
+    const { credential, email, name } = req.body;
+    let userEmail = email;
+    let userName = name;
+
+    if (credential) {
+        const decoded = decodeJwtPayload(credential);
+        if (!decoded || !decoded.email) {
+            return res.status(400).json({ error: 'Invalid Google credential token' });
+        }
+        userEmail = decoded.email;
+        userName = decoded.name || decoded.email.split('@')[0];
+    }
+
+    if (!userEmail) {
         return res.status(400).json({ error: 'Google Email is required' });
     }
+
     try {
-        let user = await db.getUser(email.trim());
+        let user = await db.getUser(userEmail.trim());
         let isNew = false;
         if (!user) {
             // Create a new user using Google details
-            user = await db.createUser(email.trim(), 'google-oauth-dummy-pw', 'customer');
+            user = await db.createUser(userEmail.trim(), 'google-oauth-dummy-pw', 'customer');
             isNew = true;
         }
         req.session.userId = user.id;
-        await db.addLoginLog(email.trim(), isNew ? 'Google Registration' : 'Google Sign In', 'Success');
+        await db.addLoginLog(userEmail.trim(), isNew ? 'Google Registration' : 'Google Sign In', 'Success');
         res.json({ success: true, user: { username: user.username, role: user.role, points: user.points } });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Google Sign In failed' });
     }
+});
+
+app.get('/api/auth/google-client-id', (req, res) => {
+    res.json({ clientId: process.env.GOOGLE_CLIENT_ID || null });
 });
 
 app.post('/api/auth/logout', (req, res) => {
