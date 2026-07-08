@@ -469,6 +469,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Dynamic Slider (Carousel) State ---
     let currentScrollOffset = 0;
 
+    const starItems = new Set([
+        'Glowing Skin',
+        'Small Waist',
+        'Energy Boost',
+        'Iron Rich',
+        'Super Green',
+        'Oxygen Juice',
+        'Feel good',
+        'Jungle Juice',
+        'Berry Treasure',
+        'Summer Set',
+        'Date Me',
+        'Coffee Smoothie',
+        'Blue Berry Whey Shake',
+        'Mango Banana Whey Shake',
+        'Choco Almond Protein',
+        'Fruit Lab Special Bowl'
+    ]);
+
     function createCardElement(item, isActive) {
         // Calculate dietary/calories dynamically
         let calories = '120 kcal';
@@ -480,6 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nameLower = item.name.toLowerCase();
         const ingLower = item.ingredients.toLowerCase();
         const subCat = item.subCategory || '';
+        const isStar = starItems.has(item.name);
 
         // Calorie logic
         if (subCat === 'whey-shakes') {
@@ -534,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         card.innerHTML = `
+            ${isStar ? `<div class="menu-card-star-badge"><i class="fa-solid fa-crown"></i> Bestseller</div>` : ''}
             <div class="card-fruits-background">
                 ${fruitsHTML}
             </div>

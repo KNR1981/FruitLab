@@ -4386,3 +4386,33 @@ body.dark-mode #nav-auth-link::after,
     background: #ffffff;
     color: #38000A;
 }
+
+
+/* ===== MENU CARD BESTSELLER CROWN BADGE ===== */
+.menu-card {
+    position: relative; /* Ensure parent has position relative for absolute positioning of badge */
+}
+.menu-card-star-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: linear-gradient(135deg, #FF9F1C 0%, #FFC107 100%);
+    color: #38000A !important;
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 4px 12px rgba(255, 159, 28, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: var(--font-sans);
+}
+.menu-card-star-badge i {
+    font-size: 9px;
+    color: #38000A;
+}
