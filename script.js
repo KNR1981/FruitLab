@@ -684,10 +684,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (subBar) {
                     subBar.innerHTML = '';
                     subBar.style.display = 'flex';
+                    
+                    const subCategoryIcons = {
+                        'fruit-juices': '🍊',
+                        'smoothies': '🥤',
+                        'whey-shakes': '⚡',
+                        'detox-cleanse': '🥬',
+                        'glow-energy': '✨',
+                        'blood-vitality': '🍇',
+                        'oats-bowls': '🥣',
+                        'pure-juices': '🌿',
+                        'chia-puddings': '🍮',
+                        'sandwiches-toasts': '🥪',
+                        'plant-milks-bowls': '🍉',
+                        'energy-protein-bars': '🍫'
+                    };
+
                     validKeys.forEach(key => {
                         const btn = document.createElement('button');
                         btn.className = `sub-category-btn ${key === activeSubCategory ? 'active' : ''}`;
-                        btn.innerText = cols[key].title;
+                        const icon = subCategoryIcons[key] || '🥤';
+                        btn.innerHTML = `<span class="sub-cat-icon">${icon}</span> <span>${cols[key].title}</span>`;
                         btn.addEventListener('click', () => {
                             activeSubCategory = key;
                             renderMenuCards(category);

@@ -2963,13 +2963,48 @@ body.dark-mode .partner-title {
 }
 
 @media (max-width: 768px) {
+    /* Mobile main category navigation - horizontal scrolling, no wrap */
+    .category-navigation-bar {
+        display: flex !important;
+        gap: 10px;
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        padding: 5px 20px 15px 20px;
+        margin: 0 -20px 10px -20px; /* Stretch edge to edge */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        justify-content: flex-start;
+        border-bottom: none !important;
+    }
+    .category-navigation-bar::-webkit-scrollbar {
+        display: none;
+    }
+    .category-tab-btn {
+        flex: 0 0 auto;
+        background: #ffffff !important;
+        border: 1px solid rgba(246, 36, 64, 0.08) !important;
+        color: #555 !important;
+        padding: 10px 20px !important;
+        border-radius: 30px !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        box-shadow: 0 2px 8px rgba(56, 0, 10, 0.02) !important;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+    .category-tab-btn.active {
+        background: #38000a !important; /* Premium deep dark brown-black background */
+        color: #ffffff !important;
+        border-color: #38000a !important;
+        box-shadow: 0 6px 15px rgba(56, 0, 10, 0.15) !important;
+    }
+
     /* Mobile sub-category navigation */
     .sub-category-navigation-bar {
         display: flex !important;
-        gap: 12px;
+        gap: 8px;
         overflow-x: auto;
-        padding: 5px 20px 15px 20px;
-        margin: -5px -20px 20px -20px; /* Stretch edge to edge */
+        padding: 0 20px 15px 20px;
+        margin: 0 -20px 15px -20px;
         scrollbar-width: none;
         -ms-overflow-style: none;
         justify-content: flex-start;
@@ -2979,22 +3014,27 @@ body.dark-mode .partner-title {
     }
     .sub-category-btn {
         flex: 0 0 auto;
-        background: #ffffff;
-        border: 1px solid rgba(246, 36, 64, 0.08);
-        color: #666;
-        padding: 10px 20px;
-        border-radius: 25px;
-        font-size: 13px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(56, 0, 10, 0.03);
+        background: transparent !important;
+        border: 1px solid rgba(246, 36, 64, 0.12) !important;
+        color: #555 !important;
+        padding: 8px 16px !important;
+        border-radius: 20px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        box-shadow: none !important;
+        transition: all 0.25s ease !important;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
     .sub-category-btn.active {
-        background: linear-gradient(135deg, #ff4f79, #ff7b9a);
-        color: #fff;
-        border-color: #ff4f79;
-        box-shadow: 0 4px 12px rgba(255, 79, 121, 0.25);
+        background: rgba(246, 36, 64, 0.08) !important;
+        color: #ff4f79 !important;
+        border-color: #ff4f79 !important;
+        box-shadow: none !important;
+    }
+    .sub-cat-icon {
+        font-size: 14px;
     }
 
     /* Redesigned horizontal snap carousel for mobile viewport */
