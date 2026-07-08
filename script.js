@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         yellow: {
             glow: 'radial-gradient(circle, rgba(255, 242, 219, 0.5) 0%, rgba(255, 229, 191, 0.15) 50%, rgba(0,0,0,0) 100%)', theme: '#FFE5BF', button: 'linear-gradient(135deg, #F62440, #FFE5BF)'
+        },
+        blueberry: {
+            glow: 'radial-gradient(circle, rgba(160, 120, 200, 0.45) 0%, rgba(200, 160, 240, 0.15) 50%, rgba(0,0,0,0) 100%)', theme: '#9B59B6', button: 'linear-gradient(135deg, #8E44AD, #C39BD3)'
+        },
+        cocoa_brown: {
+            glow: 'radial-gradient(circle, rgba(180, 120, 60, 0.45) 0%, rgba(210, 160, 90, 0.15) 50%, rgba(0,0,0,0) 100%)', theme: '#8B5E3C', button: 'linear-gradient(135deg, #6B3A1F, #D4956A)'
+        },
+        mango_orange: {
+            glow: 'radial-gradient(circle, rgba(255, 180, 80, 0.45) 0%, rgba(255, 220, 150, 0.15) 50%, rgba(0,0,0,0) 100%)', theme: '#E8890C', button: 'linear-gradient(135deg, #E8890C, #FFD580)'
         }
     };
 
@@ -94,29 +103,29 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Jungle Juice', price: '₹149', bottle: 'orig_orange', fruits: ['banana', 'mango', 'coconut'], rating: '4.7', reviews: '+6', ingredients: 'Mango, Banana, Coconut Water', subCategory: 'fruit-juices' },
             { name: 'Happy Juice', price: '₹169', bottle: 'orig_orange', fruits: ['apple', 'strawberry', 'muskmelon'], rating: '4.8', reviews: '+13', ingredients: 'Apple, Muskmelon, Strawberry', subCategory: 'fruit-juices' },
             { name: 'Berry Delight', price: '₹169', bottle: 'orig_red', fruits: ['apple', 'strawberry', 'cranberry'], rating: '4.9', reviews: '+25', ingredients: 'Apple, Strawberry, Cranberry', subCategory: 'fruit-juices' },
-            { name: 'Berry Treasure', price: '₹169', bottle: 'new_red', fruits: ['orange', 'strawberry', 'blueberry', 'watermelon'], rating: '4.8', reviews: '+33', ingredients: 'Blueberry, Strawberry, Watermelon, Orange', subCategory: 'fruit-juices' },
-            { name: 'Easy Tropical', price: '₹169', bottle: 'new_orange', fruits: ['apple', 'banana', 'pineapple', 'mango'], rating: '4.9', reviews: '+19', ingredients: 'Pineapple, Apple, Mango, Banana', subCategory: 'fruit-juices' },
+            { name: 'Berry Treasure', price: '₹169', bottle: 'blueberry', fruits: ['orange', 'strawberry', 'blueberry', 'watermelon'], rating: '4.8', reviews: '+33', ingredients: 'Blueberry, Strawberry, Watermelon, Orange', subCategory: 'fruit-juices' },
+            { name: 'Easy Tropical', price: '₹169', bottle: 'mango_orange', fruits: ['apple', 'banana', 'pineapple', 'mango'], rating: '4.9', reviews: '+19', ingredients: 'Pineapple, Apple, Mango, Banana', subCategory: 'fruit-juices' },
             { name: 'Apple Flair', price: '₹169', bottle: 'orig_yellow', fruits: ['apple', 'pineapple', 'mint'], rating: '4.7', reviews: '+9', ingredients: 'Pineapple, Apple, Mint', subCategory: 'fruit-juices' },
-            { name: 'Hawaiian Orange', price: '₹169', bottle: 'new_orange', fruits: ['banana', 'orange', 'mango'], rating: '4.8', reviews: '+14', ingredients: 'Orange, Mango, Banana', subCategory: 'fruit-juices' },
+            { name: 'Hawaiian Orange', price: '₹169', bottle: 'mango_orange', fruits: ['banana', 'orange', 'mango'], rating: '4.8', reviews: '+14', ingredients: 'Orange, Mango, Banana', subCategory: 'fruit-juices' },
  
             // Column 2: Smoothies
             { name: 'Tropical Banana', price: '₹169', bottle: 'smoothie', fruits: ['banana', 'honey', 'milk'], rating: '4.8', reviews: '+12', ingredients: 'Banana, Milk, Honey', subCategory: 'smoothies' },
-            { name: 'Paradise', price: '₹169', bottle: 'new_yellow', fruits: ['mango', 'honey', 'milk'], rating: '4.7', reviews: '+18', ingredients: 'Mango, Milk, Honey', subCategory: 'smoothies' },
-            { name: 'Havana', price: '₹169', bottle: 'new_orange', fruits: ['banana', 'mango', 'honey', 'milk'], rating: '4.8', reviews: '+22', ingredients: 'Mango, Banana, Milk, Honey', subCategory: 'smoothies' },
+            { name: 'Paradise', price: '₹169', bottle: 'mango_orange', fruits: ['mango', 'honey', 'milk'], rating: '4.7', reviews: '+18', ingredients: 'Mango, Milk, Honey', subCategory: 'smoothies' },
+            { name: 'Havana', price: '₹169', bottle: 'mango_orange', fruits: ['banana', 'mango', 'honey', 'milk'], rating: '4.8', reviews: '+22', ingredients: 'Mango, Banana, Milk, Honey', subCategory: 'smoothies' },
             { name: 'Summer Set', price: '₹169', bottle: 'new_red', fruits: ['strawberry', 'mango', 'honey', 'milk'], rating: '4.9', reviews: '+28', ingredients: 'Mango, Strawberry, Milk, Honey', subCategory: 'smoothies' },
-            { name: 'Date Me', price: '₹169', bottle: 'smoothie', fruits: ['banana', 'dates', 'honey', 'milk', 'cocoa'], rating: '4.8', reviews: '+15', ingredients: 'Dates, Banana, Cocoa, Milk, Honey', subCategory: 'smoothies' },
-            { name: 'Coffee Smoothie', price: '₹169', bottle: 'new_dark_orange', fruits: ['banana', 'espresso', 'dates', 'honey', 'milk', 'oats'], rating: '4.8', reviews: '+29', ingredients: 'Dates, Coffee, Banana, Oats, Milk, Honey', subCategory: 'smoothies' },
-            { name: 'Blubana', price: '₹189', bottle: 'orig_red', fruits: ['banana', 'blueberry', 'honey', 'milk'], rating: '4.9', reviews: '+31', ingredients: 'Blueberry, Banana, Milk, Honey', subCategory: 'smoothies' },
-            { name: 'Triple Berry', price: '₹189', bottle: 'orig_red', fruits: ['strawberry', 'blueberry', 'cranberry', 'honey', 'milk'], rating: '4.9', reviews: '+40', ingredients: 'Blueberry, Strawberry, Cranberry, Milk, Honey', subCategory: 'smoothies' },
+            { name: 'Date Me', price: '₹169', bottle: 'cocoa_brown', fruits: ['banana', 'dates', 'honey', 'milk', 'cocoa'], rating: '4.8', reviews: '+15', ingredients: 'Dates, Banana, Cocoa, Milk, Honey', subCategory: 'smoothies' },
+            { name: 'Coffee Smoothie', price: '₹169', bottle: 'cocoa_brown', fruits: ['banana', 'espresso', 'dates', 'honey', 'milk', 'oats'], rating: '4.8', reviews: '+29', ingredients: 'Dates, Coffee, Banana, Oats, Milk, Honey', subCategory: 'smoothies' },
+            { name: 'Blubana', price: '₹189', bottle: 'blueberry', fruits: ['banana', 'blueberry', 'honey', 'milk'], rating: '4.9', reviews: '+31', ingredients: 'Blueberry, Banana, Milk, Honey', subCategory: 'smoothies' },
+            { name: 'Triple Berry', price: '₹189', bottle: 'blueberry', fruits: ['strawberry', 'blueberry', 'cranberry', 'honey', 'milk'], rating: '4.9', reviews: '+40', ingredients: 'Blueberry, Strawberry, Cranberry, Milk, Honey', subCategory: 'smoothies' },
  
             // Column 3: Whey Protein Shakes
-            { name: 'Cocoa Whey Shake', price: '₹229', bottle: 'smoothie', fruits: ['banana', 'whey', 'almonds', 'honey', 'milk', 'cocoa'], rating: '4.9', reviews: '+45', ingredients: 'Whey, Cocoa, Banana, Raw Almonds, Milk, Honey', subCategory: 'whey-shakes' },
+            { name: 'Cocoa Whey Shake', price: '₹229', bottle: 'cocoa_brown', fruits: ['banana', 'whey', 'almonds', 'honey', 'milk', 'cocoa'], rating: '4.9', reviews: '+45', ingredients: 'Whey, Cocoa, Banana, Raw Almonds, Milk, Honey', subCategory: 'whey-shakes' },
             { name: 'Banana Whey Shake', price: '₹229', bottle: 'new_yellow', fruits: ['banana', 'whey', 'honey', 'milk'], rating: '4.8', reviews: '+20', ingredients: 'Whey, Banana, Milk, Honey', subCategory: 'whey-shakes' },
-            { name: 'Blue Berry Whey Shake', price: '₹229', bottle: 'orig_red', fruits: ['blueberry', 'whey', 'honey', 'milk'], rating: '4.9', reviews: '+35', ingredients: 'Whey, Blueberry, Milk, Honey', subCategory: 'whey-shakes' },
+            { name: 'Blue Berry Whey Shake', price: '₹229', bottle: 'blueberry', fruits: ['blueberry', 'whey', 'honey', 'milk'], rating: '4.9', reviews: '+35', ingredients: 'Whey, Blueberry, Milk, Honey', subCategory: 'whey-shakes' },
             { name: 'Almond Banana Whey Shake', price: '₹229', bottle: 'smoothie', fruits: ['banana', 'coconut', 'whey', 'almonds'], rating: '4.8', reviews: '+26', ingredients: 'Whey, Banana, Coconut Water, Raw Almonds', subCategory: 'whey-shakes' },
-            { name: 'Big Hit Whey Shake', price: '₹229', bottle: 'new_dark_orange', fruits: ['coconut', 'whey', 'espresso', 'almonds', 'honey'], rating: '4.7', reviews: '+11', ingredients: 'Whey, Espresso, Coconut Water, Raw Almonds, Honey', subCategory: 'whey-shakes' },
+            { name: 'Big Hit Whey Shake', price: '₹229', bottle: 'cocoa_brown', fruits: ['coconut', 'whey', 'espresso', 'almonds', 'honey'], rating: '4.7', reviews: '+11', ingredients: 'Whey, Espresso, Coconut Water, Raw Almonds, Honey', subCategory: 'whey-shakes' },
             { name: 'Girl Power Whey Shake', price: '₹229', bottle: 'new_red', fruits: ['banana', 'strawberry', 'whey', 'honey', 'milk'], rating: '4.8', reviews: '+18', ingredients: 'Whey, Strawberry, Banana, Milk, Honey', subCategory: 'whey-shakes' },
-            { name: 'Mango Banana Whey Shake', price: '₹229', bottle: 'new_orange', fruits: ['banana', 'mango', 'whey', 'honey', 'milk'], rating: '4.9', reviews: '+24', ingredients: 'Whey, Banana, Mango, Milk, Honey', subCategory: 'whey-shakes' },
+            { name: 'Mango Banana Whey Shake', price: '₹229', bottle: 'mango_orange', fruits: ['banana', 'mango', 'whey', 'honey', 'milk'], rating: '4.9', reviews: '+24', ingredients: 'Whey, Banana, Mango, Milk, Honey', subCategory: 'whey-shakes' },
             { name: 'Fruit Lab Special Whey Shake', price: '₹229', bottle: 'new_yellow', fruits: ['banana', 'avocado', 'whey', 'almonds', 'honey'], rating: '4.8', reviews: '+16', ingredients: 'Whey, Avocado, Banana, Raw Almonds, Honey', subCategory: 'whey-shakes' }
         ],
         'bowls-puddings': [
