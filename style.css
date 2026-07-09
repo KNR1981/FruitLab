@@ -3093,7 +3093,52 @@ body.dark-mode .partner-title {
         box-shadow: 0 10px 25px rgba(56, 0, 10, 0.06) !important;
         transform-style: preserve-3d !important; /* Preserve 3D transformations */
         will-change: transform, opacity !important;
-        transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease !important;
+        transition: box-shadow 0.3s ease !important; /* Removed transform from transition to eliminate lag/stutter */
+    }
+
+    /* Mobile specific tight fruit particle offsets to prevent clipping at mobile viewport/screen borders */
+    .slider-viewport.grid-layout .menu-card:hover .cfp-1, 
+    .slider-viewport.grid-layout .menu-card.active .cfp-1 {
+        top: -30px !important;
+        left: 20px !important;
+        transform: scale(0.9) rotate(-15deg) !important;
+    }
+    .slider-viewport.grid-layout .menu-card:hover .cfp-2, 
+    .slider-viewport.grid-layout .menu-card.active .cfp-2 {
+        top: -25px !important;
+        left: auto !important;
+        right: 20px !important;
+        transform: scale(0.9) rotate(20deg) !important;
+    }
+    .slider-viewport.grid-layout .menu-card:hover .cfp-3, 
+    .slider-viewport.grid-layout .menu-card.active .cfp-3 {
+        top: 50px !important;
+        left: -10px !important;
+        transform: scale(0.85) rotate(-35deg) !important;
+    }
+    .slider-viewport.grid-layout .menu-card:hover .cfp-4, 
+    .slider-viewport.grid-layout .menu-card.active .cfp-4 {
+        top: 60px !important;
+        left: auto !important;
+        right: -10px !important;
+        transform: scale(0.85) rotate(25deg) !important;
+    }
+    .slider-viewport.grid-layout .menu-card:hover .cfp-5, 
+    .slider-viewport.grid-layout .menu-card.active .cfp-5 {
+        top: 115px !important;
+        left: -5px !important;
+        transform: scale(0.8) rotate(15deg) !important;
+    }
+    .slider-viewport.grid-layout .menu-card:hover .cfp-6, 
+    .slider-viewport.grid-layout .menu-card.active .cfp-6 {
+        top: 125px !important;
+        left: auto !important;
+        right: -5px !important;
+        transform: scale(0.8) rotate(-20deg) !important;
+    }
+    .slider-viewport.grid-layout .card-fruit-particle {
+        width: 52px !important;
+        height: 52px !important;
     }
 
     /* Mobile pagination dots */

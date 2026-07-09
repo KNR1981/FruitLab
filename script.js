@@ -805,7 +805,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         sliderViewport.removeEventListener('scroll', sliderViewport._scrollListener);
                     }
                     
-                    const onScroll = () => {
+                    let scrollTicking = false;
+                    const updateCoverflow = () => {
                         const scrollLeft = sliderViewport.scrollLeft;
                         const viewportWidth = sliderViewport.clientWidth;
                         const viewportCenter = scrollLeft + (viewportWidth / 2);
@@ -857,6 +858,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         dotsContainer.querySelectorAll('.menu-dot').forEach((d, dIdx) => {
                             d.classList.toggle('active', dIdx === closestIdx);
                         });
+                    };
+
+                    const onScroll = () => {
+                        if (!scrollTicking) {
+                            window.requestAnimationFrame(() => {
+                                updateCoverflow();
+                                scrollTicking = false;
+                            });
+                            scrollTicking = true;
+                        }
                     };
                     
                     sliderViewport.addEventListener('scroll', onScroll);
