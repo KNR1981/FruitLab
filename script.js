@@ -805,11 +805,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         sliderViewport.removeEventListener('scroll', sliderViewport._scrollListener);
                     }
                     
-                    let scrollTicking = false;
-                    const updateCoverflow = () => {
-                        const scrollLeft = sliderViewport.scrollLeft;
-                        const viewportWidth = sliderViewport.clientWidth;
-                        const viewportCenter = scrollLeft + (viewportWidth / 2);
+                    let targetScrollLeft = sliderViewport.scrollLeft;
+                    let currentScrollLeft = sliderViewport.scrollLeft;
+                    let interpolationActive = false;
+                    
+                    let cachedCardPositions = [];
+                    let cachedViewportWidth = sliderViewport.clientWidth;
+                    
+                    const updateCachedPositions = () => {
+                        const cards = Array.from(track.children);
+                        cachedCardPositions = cards.map(card => {
+                            return card.offsetLeft + (card.clientWidth / 2);
+                        });
+                        cachedViewportWidth = sliderViewport.clientWidth;
+                    };
+                    
+                    // Initial caching
+                    updateCachedPositions();
+                    
+                    const renderCoverflow = (scrollLeftVal) => {
+                        const viewportWidth = cachedViewportWidth;
+                        const viewportCenter = scrollLeftVal + (viewportWidth / 2);
                         
                         let closestIdx = 0;
                         let minDiff = Infinity;
@@ -817,10 +833,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         const cards = Array.from(track.children);
                         if (cards.length === 0) return;
                         
+                        if (cachedCardPositions.length !== cards.length) {
+                            updateCachedPositions();
+                        }
+                        
                         const cardWidth = cards[0].clientWidth || 280;
                         
                         cards.forEach((card, idx) => {
-                            const cardCenter = card.offsetLeft + (card.clientWidth / 2);
+                            const cardCenter = cachedCardPositions[idx] || (card.offsetLeft + (card.clientWidth / 2));
                             const diff = cardCenter - viewportCenter;
                             const absDiff = Math.abs(diff);
                             
@@ -859,25 +879,38 @@ document.addEventListener('DOMContentLoaded', () => {
                             d.classList.toggle('active', dIdx === closestIdx);
                         });
                     };
+                    
+                    const animateCoverflow = () => {
+                        const diff = targetScrollLeft - currentScrollLeft;
+                        if (Math.abs(diff) > 0.1) {
+                            currentScrollLeft += diff * 0.16; // Smooth lerping step factor
+                            renderCoverflow(currentScrollLeft);
+                            requestAnimationFrame(animateCoverflow);
+                        } else {
+                            currentScrollLeft = targetScrollLeft;
+                            renderCoverflow(currentScrollLeft);
+                            interpolationActive = false;
+                        }
+                    };
 
                     const onScroll = () => {
-                        if (!scrollTicking) {
-                            window.requestAnimationFrame(() => {
-                                updateCoverflow();
-                                scrollTicking = false;
-                            });
-                            scrollTicking = true;
+                        targetScrollLeft = sliderViewport.scrollLeft;
+                        if (!interpolationActive) {
+                            interpolationActive = true;
+                            animateCoverflow();
                         }
                     };
                     
                     sliderViewport.addEventListener('scroll', onScroll);
                     sliderViewport._scrollListener = onScroll;
                     
-                    // Trigger once initially to set the 3D transforms right away
-                    setTimeout(onScroll, 50);
+                    // Initial render
+                    renderCoverflow(currentScrollLeft);
+                    
+                    // Re-cache positions on resize
+                    window.addEventListener('resize', updateCachedPositions);
                 }
-            } else {
-                if (dotsContainer) dotsContainer.style.display = 'none';
+            } else {  if (dotsContainer) dotsContainer.style.display = 'none';
             }
         } else {
             // Desktop columns structure
