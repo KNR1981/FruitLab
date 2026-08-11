@@ -1015,6 +1015,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Dynamic Session Navbar Link & DB Menu Load ---
     function updateNavbarAndMenu() {
+        // Render instantly using local static data first (prevent 10s delay)
+        const activeTab = document.querySelector('.category-tab-btn.active');
+        const startCat = activeTab ? activeTab.getAttribute('data-category') : 'juices-smoothies';
+        renderMenuCards(startCat);
+
         // 1. Fetch Session Status to update navbar auth link
         fetch('/api/auth/session')
             .then(res => res.json())
@@ -1032,7 +1037,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => console.error("Session check failed:", err));
 
-        // 2. Fetch Menu from database to dynamically overwrite fullMenuData
+        // 2. Fetch Menu from database to dynamically overwrite fullMenuData in background
         fetch('/api/menu')
             .then(res => res.json())
             .then(data => {
@@ -1040,20 +1045,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     Object.keys(data).forEach(key => {
                         fullMenuData[key] = data[key];
                     });
+                    // Re-render only if database returns valid menu items
+                    const currentActiveTab = document.querySelector('.category-tab-btn.active');
+                    const currentCat = currentActiveTab ? currentActiveTab.getAttribute('data-category') : 'juices-smoothies';
+                    renderMenuCards(currentCat);
                 }
-                // Initial render of the active category
-                const activeTab = document.querySelector('.category-tab-btn.active');
-                const startCat = activeTab ? activeTab.getAttribute('data-category') : 'juices-smoothies';
-                renderMenuCards(startCat);
             })
             .catch(err => {
-                console.error("Menu load failed, falling back to static menu:", err);
-                // Fallback rendering
-                renderMenuCards('juices-smoothies');
+                console.error("Background menu fetch failed (using local data):", err);
             });
     }
 
-    // Call updateNavbarAndMenu instead of calling renderMenuCards('juices-smoothies') directly
+    // Call updateNavbarAndMenu to initialize login status and background sync
     updateNavbarAndMenu();
 
     // --- GSAP Entrance Reveals (ScrollTrigger) ---
