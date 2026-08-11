@@ -565,6 +565,12 @@ body.dark-mode .hero-desc {
     z-index: 5;
 }
 
+@media (min-width: 992px) {
+    .dual-product-wrapper {
+        margin-left: -90px; /* Pull the bottles closer to the text on desktop to eliminate the empty gap */
+    }
+}
+
 .bottle-container {
     position: absolute;
     width: 240px;
